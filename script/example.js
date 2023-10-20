@@ -1,4 +1,4 @@
-console.log("================================example file js================================")
+
 function gEncodeToHTML(str) {
     if (typeof str !== 'string')
         return str;
@@ -955,6 +955,7 @@ BaseVertex.prototype.IsUndefinedPosition = function () {
     return this.hasUndefinedPosition;
 }
 
+//todo: comment this
 BaseVertex.prototype.HitTest = function (pos) {
     var shape = this.hasOwnProperty('currentStyle') ? this.currentStyle.GetStyle({}, this).shape : VertexCircleShape;
     var width = this.hasOwnProperty('currentStyle') ? this.currentStyle.GetStyle({}, this).lineWidth : 0;
@@ -1140,6 +1141,7 @@ BaseEdge.prototype.GetPixelLength = function () {
     }
 }
 
+// trả vể trọng số của cạnh, nếu mà không có trọng số trả về khoảng cách mặc định 1
 BaseEdge.prototype.GetWeight = function () {
     return this.useWeight ? this.weight : 1;
 }
@@ -1160,6 +1162,7 @@ BaseEdge.prototype.GetFinishEdgeStyle = function () {
     return (this.arrayStyleFinish != "" ? this.arrayStyleFinish : (this.isDirect ? "arrow" : ""));
 }
 
+//todo: comment this
 BaseEdge.prototype.HitTest = function (pos) {
     var positions = this.GetEdgePositionsShift();
     return this.model.HitTest(positions[0], positions[1], pos);
@@ -1877,6 +1880,7 @@ function BaseEdgeDrawer(context, drawObjects) {
     }
 }
 
+// todo: comment this
 BaseEdgeDrawer.prototype.Draw = function (baseEdge, arcStyle) {
     if (this.drawObject && this.drawObject != this) {
         this.drawObject.Draw(baseEdge, arcStyle);
@@ -2231,9 +2235,15 @@ BaseBackgroundDrawer.prototype.Draw = function (style, width, height, position, 
  */
 
 // Return list of 'vertex = [connected vertices]'
+// trả về res
+// với res[i] = [x,y,z,..] -> x,y,z,... là danh sách các đỉnh liền kề về đỉnh i
 function getVertexToVertexArray(graph, ignoreDirection) {
     res = {};
 
+    // loop qua danh sách cạnh
+    // đánh dấu đỉnh thứ 2 liền kê với đỉnh thứ nhất
+    // nếu cạnh đó không có hướng hoặc ignoreDirection (hướng không ảnh hướng đến kết quả của thuật toán)
+    // đánh dấu đỉnh thứ nhất liên kề với đỉnh thứ 2
     for (var i = 0; i < graph.edges.length; i++) {
         edge = graph.edges[i];
         if (!res.hasOwnProperty(edge.vertex1.id)) {
@@ -2258,9 +2268,9 @@ var g_AlgorithmIds = [];
 
 // Call this function to register your factory algorithm.
 function RegisterAlgorithm(factory) {
+    console.log("RegisterAlgorithm ----------------------------", factory);
     g_Algorithms.push(factory);
     g_AlgorithmIds.push(factory(null).getId());
-    console.log("g_Algorithms", g_Algorithms);
 }
 
 // Base algorithm class.
@@ -2287,16 +2297,12 @@ BaseAlgorithm.prototype.getMessage = function (local) {
 // calls when user select vertex.
 // @return true if you allow to select this object or false.
 BaseAlgorithm.prototype.selectVertex = function (vertex) {
-    console.log("BaseAlgorithm.prototype.selectVertex", vertex);
-
     return false;
 }
 
 // calls when user select edge.
 // @return true if you allow to select this object or false.
 BaseAlgorithm.prototype.selectEdge = function (edge) {
-    console.log("BaseAlgorithm.prototype.selectEdge", edge);
-
     return false;
 }
 
@@ -2368,29 +2374,100 @@ function BaseAlgorithmEx(graph, app) {
 // inheritance.
 BaseAlgorithmEx.prototype = Object.create(BaseAlgorithm.prototype);
 
+/*
+    algorithmName: tên thuật toán
+    otherParams: mảng các tham số đầu vào của thuật toán
+    resultCallback: một hàm callback để xử lý kết quả khi tính toán hoàn thành
+    ignoreSeparateNodes: mặc định là "false" một cờ để xác định xem các đỉnh không ketes nối có nên bị bỏ qua trong tính toán hay không t
+*/
+
 BaseAlgorithmEx.prototype.CalculateAlgorithm = function (algorithmName, otherParams, resultCallback, ignoreSeparateNodes = false) {
-    if (location.hostname === "localhost" || location.hostname === "127.0.0.1")
-        console.log(algorithmName + " " + otherParams);
+    // if (location.hostname === "localhost" || location.hostname === "127.0.0.1")
 
     var graph = this.graph;
-    var ignoreNodes = {};
+    var ignoreNodes = {};   // khởi tạo đối tượng trống để lưu danh sách các đỉnh sẽ bị bỏ qua nếu ignoreSeparateNodes == true
 
     if (ignoreSeparateNodes)
         for (var i = 0; i < graph.vertices.length; i++)
             if (!graph.HasConnectedNodes(graph.vertices[i]))
                 ignoreNodes[graph.vertices[i].id] = 1;
 
+    // khởi tạo đối tượng GraphMLCreator
     var creator = new GraphMLCreator(graph.vertices, graph.edges, ignoreNodes);
     var pathObjects = [];
     var properties = {};
     var result = [];
 
+    // chuyển đối tượng creator sang xml (xml như là json vậy)
     var xml = creator.GetXMLString();
     console.log(xml);
 
     var processResult = function (msg) {
         console.log("====================== processResult ======================");
         console.log(msg);
+        /*  
+            *Ví dụ xml được log ra của thuật toán dijkstra 
+            * start 4, end 6
+            0, 0, 0, 0, 3, 0, 0, 
+            0, 0, 7, 0, 1, 100, 0, 
+            0, 7, 0, 2, 0, 0, 0, 
+            0, 0, 2, 0, 6, 0, 0, 
+            3, 1, 0, 6, 0, 0, 5, 
+            0, 100, 0, 0, 0, 0, 0, 
+            0, 0, 0, 0, 5, 0, 0, 
+            * kết quả của đường đi là 4->5->2->6
+            <?xml version="1.0" encoding="UTF-8"?>
+            <graphml>
+                <graph id="G" edgedefault="undirected">
+                    <result count="5">
+                        <value type="1">107</value>
+                        <value type="4">3</value>
+                        <value type="4">4</value>
+                        <value type="4">1</value>
+                        <value type="4">5</value>
+                    </result>
+
+                    * danh sách các đỉnh của graph
+                    <node id="0">   // đỉnh 1 có id = 0
+                        <data key="lowestDistance">9</data> // 9 là khoảng cách ngắn nhất từ đỉnh 4(start) đến đỉnh 1
+                        <data key="hightlightNode">0</data> // hightlightNode = 0 tức là đỉnh 1 không nằm trên đường đi của kết quả thuật toán
+                    </node>
+                    <node id="1">   // đỉnh 2 có id = 1
+                        <data key="lowestDistance">7</data> // 7 là khoảng cách ngắn nhất từ đỉnh 4(start) đến đỉnh 2
+                        <data key="index">2</data>          // index = 2 là vị trí của đỉnh 2 trên đường đi của thuật toán (4->5->2->6)
+                        <data key="hightlightNode">1</data> // hightlightNode = 1 tức là đỉnh 2 nằm trên đường đi của kết quả thuật toán
+                    </node>
+                        <node id="2">
+                        <data key="lowestDistance">2</data>
+                        <data key="hightlightNode">0</data>
+                    </node>
+                        <node id="3">
+                        <data key="lowestDistance">0</data>
+                        <data key="index">0</data>
+                        <data key="hightlightNode">1</data>
+                    </node>
+                    <node id="4">
+                        <data key="lowestDistance">6</data>
+                        <data key="index">1</data>
+                        <data key="hightlightNode">1</data>
+                    </node>
+                    <node id="5">
+                        <data key="lowestDistance">107</data>
+                        <data key="index">3</data>
+                        <data key="hightlightNode">1</data>
+                    </node>
+                    <node id="6">
+                        <data key="lowestDistance">11</data>
+                        <data key="hightlightNode">0</data>
+                    </node>
+
+                    * danh sách các cạnh đi qua của thuật toán (4->5->2->6)
+                    <edge source="4" target="3" id="10010"/>    // cạnh nối 4 với 5
+                    <edge source="4" target="1" id="10009"/>    // cạnh nối 5 với 2
+                    <edge source="5" target="1" id="10012"/>    // cạnh nối 2 với 6
+                </graph>
+            </graphml>
+        */
         $('#debug').text(msg);
         xmlDoc = $.parseXML(msg);
         var $xml = $(xmlDoc);
@@ -2448,9 +2525,9 @@ BaseAlgorithmEx.prototype.CalculateAlgorithm = function (algorithmName, otherPar
             });
         });
 
-        console.log("pathObjects", pathObjects);
-        console.log("properties", properties);
-        console.log("result", result);
+        console.log("pathObjects", pathObjects);    // danh sách cạnh và danh sách đỉnh
+        console.log("properties", properties);      // lưu lowestDistance, index, highlightNode của tất cả các đỉnh
+        console.log("result", result);              // lưu result
         console.log("====================== end ======================");
 
         resultCallback(pathObjects, properties, result);
@@ -2516,7 +2593,6 @@ BaseAlgorithmEx.prototype.GetNodesEdgesPath = function (array, start, count) {
  */
 
 function BaseHandler(app) {
-    console.log("lộc log baseHandler")
     this.app = app;
     this.app.setRenderPath([]);
 
@@ -2545,11 +2621,15 @@ BaseHandler.prototype.RestRedraw = function (object) {
 BaseHandler.prototype.SetObjects = function (objects) {
     this.objects = objects;
 }
-
+// xác định đối tượng đỉnh được chọn tại vị trí pos
 BaseHandler.prototype.GetSelectedGraph = function (pos) {
     // Selected Graph.
     var res = null;
+
+    // lặp qua các đỉnh của đồ thị
     for (var i = 0; i < this.app.graph.vertices.length; i++) {
+
+        // sử dụng HitTest kiếm tra từng đỉnh có bị hit bởi vị trí pos không ?
         if (this.app.graph.vertices[i].HitTest(pos)) {
             // Select last of them.
             res = this.app.graph.vertices[i];
@@ -2560,11 +2640,15 @@ BaseHandler.prototype.GetSelectedGraph = function (pos) {
     return res;
 }
 
+// xác định đối tượng cạnh được chọn tại vị trí pos 
 BaseHandler.prototype.GetSelectedArc = function (pos) {
     // Selected Arc.
+
+    // lặp qua danh sách các cạnh
     for (var i = 0; i < this.app.graph.edges.length; i++) {
         var edge = this.app.graph.edges[i];
 
+        // sử dụng HitTest để kiểm tra cạnh có bị bit bởi vị trí pos hay không ?
         if (edge.HitTest(new Point(pos.x, pos.y)))
             return edge;
     }
@@ -2572,6 +2656,7 @@ BaseHandler.prototype.GetSelectedArc = function (pos) {
     return null;
 }
 
+// trả về đối tượng (cạnh hoặc đỉnh) đang được chọn tại vị trí pos, hoặc null
 BaseHandler.prototype.GetSelectedObject = function (pos) {
     var graphObject = this.GetSelectedGraph(pos);
     if (graphObject) {
@@ -2607,12 +2692,9 @@ BaseHandler.prototype.GetSelectedGroup = function (object) {
     return 0;
 }
 
+// hàm này xác định 2 đỉnh được nhập trong 2 thẻ input Vertex1, Vertex2 để nối 2 đỉnh với nhau
 BaseHandler.prototype.InitControls = function () {
-    console.log("lộc log InitControls");
-
-
     var vertex1Text = document.getElementById("Vertex1");
-
     if (vertex1Text) {
         var handler = this;
         vertex1Text.onchange = function () {
@@ -2629,11 +2711,9 @@ BaseHandler.prototype.InitControls = function () {
     }
 
     var vertex2Text = document.getElementById("Vertex2");
-
     if (vertex2Text) {
         var handler = this;
         vertex2Text.onchange = function () {
-            console.log("2", vertex2Text.value);
             for (var i = 0; i < handler.app.graph.vertices.length; i++) {
                 if (handler.app.graph.vertices[i].mainText == vertex2Text.value) {
                     handler.SelectSecondVertexMenu(vertex2Text, handler.app.graph.vertices[i]);
@@ -2656,9 +2736,9 @@ BaseHandler.prototype.GetNodesPath = function (array, start, count) {
 }
 
 BaseHandler.prototype.RestoreAll = function () {
-    console.log("buoc 5: BaseHandler.prototype.RestoreAll")
 }
 
+// tạo ô input nhập đỉnh muốn tạo cạnh của đỉnh đó, ô input có các lựa chọn sẵn có là danh sách các đỉnh của graph
 BaseHandler.prototype.GetSelectVertexMenu = function (menuName) {
     var res = "<input list=\"vertexList" + menuName + "\" id=\"" + menuName + "\" class=\"SelectVertexInput\"/>" +
         "<datalist id=\"vertexList" + menuName + "\">";
@@ -2686,15 +2766,15 @@ BaseHandler.prototype.UpdateSecondVertexMenu = function () { }
 BaseHandler.prototype.GetSelectedVertex = function () {
     return null;
 }
-
+// Phương thức này có nhiệm vụ tạo ra và quản lý menu ngữ cảnh (context menu) 
+// cho các đối tượng trên thẻ canvas
+// click chuột phải vào thẻ canvas để sử dụng context menu
 BaseHandler.prototype.addContextMenu = function () {
-    console.log("bước 3.5: addContextMenu");
-    var $contextMenu = $("#contextMenu");
+    var $contextMenu = $("#contextMenu"); // lấy thẻ HTML bởi id = "contextMenu"
 
     var handler = this;
 
     $("#Context_Delete").click(function () {
-        console.log("lộc log Context_delete clicked");
         if (handler.contextMenuObject != null) {
             handler.app.PushToStack("DeleteObject");
             handler.app.DeleteObject(handler.contextMenuObject);
@@ -2743,10 +2823,7 @@ BaseHandler.prototype.addContextMenu = function () {
     });
 
     $("#Context_Add_Vertex").click(function () {
-        console.log("lộc log Context_Add_Vertex clicked");
         handler.app.PushToStack("Add");
-        console.log("x = ", handler.contextMenuPoint.x);
-        console.log("y = ", handler.contextMenuPoint.y);
         handler.app.CreateNewGraph(handler.contextMenuPoint.x, handler.contextMenuPoint.y);
         handler.app.redrawGraph();
     });
@@ -2791,10 +2868,11 @@ BaseHandler.prototype.addContextMenu = function () {
     });
 }
 
+// Hàm removerContextMenu để loại bỏ các sự kiện và xử lý xự kiện liên quan đến context menu
 BaseHandler.prototype.removeContextMenu = function () {
-    $("body").off("contextmenu");
-    $("#Context_Delete").off("click");
-    $("#Context_Rename").off("click");
+    $("body").off("contextmenu"); // loại bỏ sự kiện contextMenu trên phần tử body, đây là sự kiện người dùng click chuột phải
+    $("#Context_Delete").off("click"); // loại bỏ sự kiện click trên phần tử có id là Context_Delete -> khi click sẽ không có gì xảy ra cả
+    $("#Context_Rename").off("click"); // tương tự
     $("#Context_Connect").off("click");
     $("#Context_Delete_Edge").off("click");
     $("#Context_Edit_Edge").off("click");
@@ -2946,16 +3024,16 @@ BaseHandler.prototype.ShowEditEdgeDialog = function (edgeObject) {
  */
 function DefaultHandler(app) {
     this.removeStack = true;
-    BaseHandler.apply(this, arguments);
+    BaseHandler.apply(this, arguments); // extend BaseHandler
     this.message = g_textsSelectAndMove + " <span class=\"hidden-phone\">" + g_selectGroupText + "</span>" + " <span class=\"hidden-phone\">" + g_useContextMenuText + "</span>";
-    this.selectedObjects = [];
-    this.dragObject = null;
-    this.selectedObject = null;
-    this.prevPosition = null;
-    this.groupingSelect = false;
-    this.selectedLogRect = false;
-    this.selectedLogCtrl = false;
-    this.saveUndo = false;
+    this.selectedObjects = []; // mảng chứa các đối tượng được chọn bởi người dùng
+    this.dragObject = null;// đối tượng đang được kéo thả (di chuyển) bởi người dùng
+    this.selectedObject = null;// đối tượng đang được select
+    this.prevPosition = null;    // vị trí trước đó của đối tượng được lựa chọn hoặc kéo, thường được sử dụng để tính toán sự thay đổi vị trí khi di chuyển.
+    this.groupingSelect = false;   // một biến đánh dấu xem người dùng có đang thực hiện việc lựa chọn nhiều đối tượng cùng lúc hay không
+    this.selectedLogRect = false; // các biến đánh dấu việc tương tác với các thành phần cụ thể (như hình chữ nhật)
+    this.selectedLogCtrl = false; // các biến đánh dấu việc tương tác sử dụng phím Ctrl trong quá trình lựa chọn.
+    this.saveUndo = false;      // đánh dấu xem có cần lưu lại hành động không để phục vụ hoàn tác
 
     this.addContextMenu();
 }
@@ -3019,59 +3097,63 @@ DefaultHandler.prototype.MouseMove = function (pos) {
 }
 
 DefaultHandler.prototype.MouseDown = function (pos) {
-    this.dragObject = null;
-    var selectedObject = this.GetSelectedObject(pos);
-    var severalSelect = g_ctrlPressed;
+    this.dragObject = null;                             // biến theo dõi đối tượng đang được kéo
+    var selectedObject = this.GetSelectedObject(pos);   // lấy đối tượng(cạnh hoặc đỉnh) đang được chọn tại vị trí chuột
+    var severalSelect = g_ctrlPressed;                  // việc giữ ctrl sẽ dẫn đến việc chọn nhiều đối tượng cùng lúc
 
+    //*Tiếp theo là kiểm tra và xử lý liên quan đến việc chọn nhiều đối tượng
+
+    // nếu không có đối tượng nào được chọn
+    // hoặc không phải việc chọn nhiều đối tượng và đối tượng hiện tại không nằm trong danh sách đối tượng đã chọn
     if (selectedObject == null || (!severalSelect && !this.selectedObjects.includes(selectedObject))) {
-        this.selectedObject = null;
-        this.selectedObjects = [];
+        this.selectedObject = null;             // thiết lập không đối tượng nào được chọn
+        this.selectedObjects = [];              // thiết lập rỗng cho danh sách đối tượng được chọn
         this.groupingSelect = g_ctrlPressed;
     }
+    // trường hợp trên là: "không chọn object nào cả hoặc đang không giữ ctrl nhưng object được chọn lại không nằm trong danh sách object đã được chọn"
     console.log("this.selectedObjects -----------", this.selectedObjects)
 
-    if ((severalSelect || this.selectedObjects.includes(selectedObject)) && (this.selectedObjects.length > 0 || this.selectedObject != null) && selectedObject != null) {
-        if (this.selectedObjects.length == 0) {
-            console.log("this.selectedObject -----------1", this.selectedObject)
-            console.log("selectedObject -----------1", selectedObject)
-            console.log("this.selectedObjects -----------1", this.selectedObjects)
-
-            this.selectedObjects.push(this.selectedObject);
-            this.selectedObject = null;
-            this.selectedObjects.push(selectedObject);
-            console.log("this.selectedObject -----------2", this.selectedObject)
-            console.log("selectedObject -----------2", selectedObject)
-            console.log("this.selectedObjects -----------2", this.selectedObjects)
-
+    // nếu đã có đối tượng được chọn và không 
+    if ((severalSelect || this.selectedObjects.includes(selectedObject))    // chọn nhiều đối tượng hoặc đối tượng hiện tại nằm trong danh sách đối tượng đã chọn
+        && (this.selectedObjects.length > 0 || this.selectedObject != null) // và danh sách đối tượng đã chọn nhiều hơn 0, đối tương hiện tại khác null
+        && selectedObject != null) {                                        // đối tượng hiện tại khác null
+        if (this.selectedObjects.length == 0) { // "đang ctrl" và "danh sách đã chọn = 0" và "có object đang được chọn" 
+            // ví dụ: chọn đỉnh 1 và ctrl chọn đỉnh 2
+            // this.selectedIndex sẽ là đỉnh 1
+            // selectedIndex sẽ là đỉnh 2
+            // cả 2 đỉnh 1 và 2 sẽ được thêm vào this.selectedObjects
+            this.selectedObjects.push(this.selectedObject); // thêm đỉnh 1 vào danh sách
+            this.selectedObject = null;                     // selectedObject được chọn thành null (tức là không có object nào đang được chọn nữa)
+            this.selectedObjects.push(selectedObject);      // thêm đỉnh 2 vào danh sách
         }
-        else if (!this.selectedObjects.includes(selectedObject)) {
-            this.selectedObjects.push(selectedObject);
+        else if (!this.selectedObjects.includes(selectedObject)) { // "đang ctrl" và "danh sách đã chọn không có object hiện tại"
+            this.selectedObjects.push(selectedObject);      // thêm object hiện tại vào danh sách
         }
-        else if (severalSelect && this.selectedObjects.includes(selectedObject)) {
+        else if (severalSelect && this.selectedObjects.includes(selectedObject)) {  // "đang ctrl" và "danh sách đã chọn có object hiện tại" 
+            //(tức là đã chọn rồi lại click chọn lần nữa) -> xóa bỏ khỏi danh sách chọn
             var index = this.selectedObjects.indexOf(selectedObject);
             this.selectedObjects.splice(index, 1);
         }
         if (!this.selectedLogCtrl) {
-            userAction("GroupSelected.SelectCtrl");
+            userAction("GroupSelected.SelectCtrl"); // log lại hành vi người dùng
             this.selectedLogCtrl = true;
         }
     }
-    else {
-        if (selectedObject != null) {
-            this.selectedObject = selectedObject;
+    else { // nếu đang không ctrl
+        if (selectedObject != null) { // có object được chọn
+            this.selectedObject = selectedObject; // lưu selectedObject (object đang được chọn) this.selectedObject
         }
-        if ((selectedObject instanceof BaseVertex) && selectedObject != null) {
-            this.dragObject = selectedObject;
-            this.message = g_moveCursorForMoving;
+        if ((selectedObject instanceof BaseVertex) && selectedObject != null) { // nếu tồn tại object được chọn mà là đỉnh
+            this.dragObject = selectedObject;       // gán object đang chọn vào dragObject (object được chọn để kéo thả)
+            this.message = g_moveCursorForMoving;   // trả ra lời nhắn "Select and move objects by mouse or move workspace."
         }
     }
 
-    console.log("this.selectedObject -----------end", this.selectedObject)
 
-    this.needRedraw = true;
-    this.pressed = true;
-    this.prevPosition = pos;
-    this.app.canvas.style.cursor = "move";
+    this.needRedraw = true;                 // cờ vẽ lại graph
+    this.pressed = true;                    // mousedown
+    this.prevPosition = pos;                // lưu lại vị trí pos vào this.prevPosition
+    this.app.canvas.style.cursor = "move";  // thiết lập con trỏ thành dạng dịch chuyển object
 }
 
 DefaultHandler.prototype.MouseUp = function (pos) {
@@ -3342,11 +3424,9 @@ DefaultHandler.prototype.SelectObjectInRect = function (rect) {
  *
  */
 function AddGraphHandler(app) {
-    console.log("bước 3: Init AddGraphHandler")
     this.removeStack = true;
     BaseHandler.apply(this, arguments);
     this.message = g_clickToAddVertex;
-
     this.addContextMenu();
 }
 
@@ -3354,13 +3434,12 @@ function AddGraphHandler(app) {
 AddGraphHandler.prototype = Object.create(BaseHandler.prototype);
 
 AddGraphHandler.prototype.MouseDown = function (pos) {
-    console.log("bước 6: AddGraphHandler.MouseDown ", pos);
     this.app.PushToStack("Add");
     this.app.CreateNewGraph(pos.x, pos.y);
     this.needRedraw = true;
     this.inited = false;
 }
-
+// tạo drop down lựa chọn lựa chọn kiểu text cho đỉnh (VD: 0, 1, 2, ...; A, B, C, ...)
 AddGraphHandler.prototype.InitControls = function () {
     var enumVertexsText = document.getElementById("enumVertexsText");
     if (enumVertexsText) {
@@ -3376,9 +3455,9 @@ AddGraphHandler.prototype.InitControls = function () {
         }
 
         var addGraphHandler = this;
+        // bắt sự kiện kiểu text đỉnh được thay đổi -> gọi addGraphHandler.ChangedType()
+        // ChangedType() -> thay đổi biến enumType (dùng để lưu kiểu text đỉnh) và lưu nó lại vào cookie
         enumVertexsText.onchange = function () {
-            console.log("lộc log enumVertexsText onchange");
-
             addGraphHandler.ChangedType();
         };
     }
@@ -3397,9 +3476,14 @@ AddGraphHandler.prototype.ChangedType = function () {
  *
  */
 function ConnectionGraphHandler(app) {
-    console.log("step 3: init ConnectionGraphHandler")
     this.removeStack = true;
     BaseHandler.apply(this, arguments);
+
+    // hàm này nó sẽ tạo ra một message mới trên giao diện gồm: 
+    // 1, lời nhắn "Select second vertex of edge"
+    // 2, checkbox "Reuse saved edge"
+    // 3, hai ô nhập hai đỉnh chính là 2 thẻ input có id là "Vertex1" và "Vertex2"
+    // 4, một drop down gồm các lựa chọn cạnh có hướng hay không?
     this.SelectFirst();
     this.addContextMenu();
 }
@@ -3444,12 +3528,10 @@ ConnectionGraphHandler.prototype.AddDefaultEdge = function (selectedObject) {
 }
 
 ConnectionGraphHandler.prototype.SelectVertex = function (selectedObject) {
-    if (this.firstObject) { // nếu đã tồn tại firstObject (tức đỉnh đầu tiên đã được chọn) 
+    if (this.firstObject) {
         var direct = false;
         var handler = this;
 
-        // kiểm tra có sử dụng cạnh mặc định không, hoặc hộp thoại "Reuse saved edge" có được chọn không
-        // để hiển thị ra hộp thoại dialog setting tạo cạnh mới
         if (!this.app.hasDefaultEdge() || !document.getElementById('useDefaultEdge').checked) {
             this.ShowCreateEdgeDialog(this.firstObject, selectedObject, function (firstVertex, secondVertex, direct) {
                 handler.AddNewEdge(secondVertex, direct);
@@ -3458,16 +3540,17 @@ ConnectionGraphHandler.prototype.SelectVertex = function (selectedObject) {
             handler.AddDefaultEdge(selectedObject);
         }
     }
-    else { // nếu chưa tồn tại firstObject gọi hàm SelectSecond() sẽ set selectedObject cho firstObject
+    else {
         this.SelectSecond(selectedObject);
     }
     this.needRedraw = true;
 }
 
 ConnectionGraphHandler.prototype.MouseDown = function (pos) {
-    $('#message').unbind();
+    $('#message').unbind(); // gỡ bỏ bất kỳ sự kiện mousedown nào trên phần từ "message" trước đó. Điều này có thể được thực hiện để đảm bảo rằng không có sự kiện mousedown trước đó nào ảnh hưởng đến việc xử lý sự kiện mousedown này.
 
-    console.log("step 4: ConnectionGraphHandler.prototype.MouseDown")
+    // xác định đối tượng nào nếu có được chọn tại vị trí pos
+    // nếu có đối tượng nào đó mà đối tượng đó là đỉnh "BaseVertex" thì gọi SelectVertex()
     var selectedObject = this.GetSelectedGraph(pos);
     if (selectedObject && (selectedObject instanceof BaseVertex)) {
         this.SelectVertex(selectedObject);
@@ -3504,6 +3587,9 @@ ConnectionGraphHandler.prototype.SelectFirstVertexMenu = function (vertex1Text, 
 
 ConnectionGraphHandler.prototype.UpdateFirstVertexMenu = function (vertex1Text) {
     if (this.firstObject) {
+        // this.firstObject là object đỉnh 1 được chọn
+        // vertext1Text là thẻ input Vextext1
+        // dòng này autofill đỉnh được chọn vào ô input
         vertex1Text.value = this.firstObject.mainText;
     }
 }
@@ -3514,10 +3600,18 @@ ConnectionGraphHandler.prototype.SelectSecondVertexMenu = function (vertex2Text,
 
 ConnectionGraphHandler.prototype.UpdateSecondVertexMenu = function (vertex2Text) {
     if (this.secondObject) {
+        // this.secondObject là object đỉnh 2 được chọn
+        // vertex2Text là thẻ input Vextext2
+        // dòng này autofill đỉnh được chọn vào ô input
         vertex2Text.value = this.secondObject.mainText;
     }
 }
 
+
+// tạo dropdown các lựa chọn để điều chỉnh đặc tính của cạch
+// 1. Reverse all edges
+// 2. Make all edges undirected
+// 3. Make all edges directed
 ConnectionGraphHandler.prototype.AppendSpecialSctionsButton = function (baseMessage) {
     let hasEdges = this.app.graph.hasEdges();
 
@@ -3570,8 +3664,13 @@ ConnectionGraphHandler.checkUseDefaultEdge = function (elem, app) {
     app.updateMessage();
 };
 
+// Hàm thêm checkbox "Reuse saved edge" vào message
+// sau tạo một cạnh bằng hộp thoại dialog với các lựa chọn, có thể tick checkbox "Save edge to reuse in the future"
+// những lựa chọn này sẽ được lưu cho lần vẽ cạnh tiếp theo
+// nếu ấn tick checkbox thì những lần sau sẽ không mở lên hộp thoại dialog setting cạnh nữa
+// nên có một checkbox ở thanh message "Reuse saved edge" để lựa chọn có dùng lại các lựa chọn cũ hay không( có mở lại hộp thoại dialog ra để setting hay không hay dùng save cũ)
 ConnectionGraphHandler.prototype.GetUseDefaultEdgeCheckBox = function () {
-    if (!this.app.hasDefaultEdge()) {
+    if (!this.app.hasDefaultEdge()) { // nếu chưa tick "Save edge to reuse in the future" thì sẽ không thêm checkbox "Reuse saved edge" vào message
         return "";
     }
 
@@ -3959,7 +4058,6 @@ SavedDialogGraphImageHandler.prototype.showSvg = function () {
  *
  */
 function AlgorithmGraphHandler(app, algorithm) {
-    console.log("buoc 5: Algorithm Graph Handler")
     BaseHandler.apply(this, arguments);
     this.algorithm = algorithm;
     this.SaveUpText();
@@ -3974,20 +4072,22 @@ AlgorithmGraphHandler.prototype = Object.create(BaseHandler.prototype);
 AlgorithmGraphHandler.prototype.MouseMove = function (pos) { }
 
 AlgorithmGraphHandler.prototype.MouseDown = function (pos) {
-    console.log("buoc 7: AlgorithmGraphHandler.prototype.MouseDown", this.algorithm)
-
     this.app.setRenderPath([]);
+    // Cuộc gọi này được sử dụng để đặt lại đường dẫn vẽ trước đó. 
+    // Khi một thuật toán hoặc một tác vụ được kích hoạt, bạn muốn xóa bỏ bất kỳ đường dẫn vẽ trước đó nào trên canvas, 
+    // và điều này được thực hiện bằng cách truyền một mảng rỗng [] cho setRenderPath
 
-    console.log("this.algorithm.instance()", this.algorithm.instance())
-    if (this.algorithm.instance()) {
-        this.app.SetDefaultHandler();
-    }
+
+    if (this.algorithm.instance()) {    // kiểm tra một phiên bản của thuật toán đã được tạo ra( đã được kích hoạt) chưa.
+        this.app.SetDefaultHandler();   // Nếu đã tồn tại phiên bản của thuật toán, nghĩa là người dùng đã chọn một thuật toán để thực thi, thì hàm này sẽ kết thúc việc xử lý sự kiện "MouseDown" và chuyển chế độ của ứng dụng sang chế độ mặc định
+    }   // tức là có những thuật toán chỉ cần click chọn thuật toán là nó sẽ chạy ra kết quả luôn, không cần thực hiện thêm thao tác(chọn đỉnh, chọn cạch, ...) nào cả
+    // và nó sẽ đánh dấu là thuật toán đã được thực thi xong -> và set lại handler thành default handler
+    // ví dụ như thuật toán tìm "đỉnh có cấp cao nhất của đồ thị" ("Calculate vertices degree")
     else {
-        var selectedObject = this.GetSelectedGraph(pos);
-        if (selectedObject && (selectedObject instanceof BaseVertex)) {
+        var selectedObject = this.GetSelectedGraph(pos);    // lấy object tại vị trí click
 
+        if (selectedObject && (selectedObject instanceof BaseVertex)) { // nếu tồn tại object và object là đỉnh
             if (this.algorithm.selectVertex(selectedObject)) {
-                console.log("this.algorithm.selectVertex(selectedObject) == true ===== Selected vertex", selectedObject);
                 this.needRedraw = true;
             }
 
@@ -4001,6 +4101,7 @@ AlgorithmGraphHandler.prototype.MouseDown = function (pos) {
             this.UpdateResultAndMessage();
         }
         else {
+            // bỏ chọn tất cả
             if (this.algorithm.deselectAll()) {
                 this.needRedraw = true;
                 this.UpdateResultAndMessage();
@@ -4016,7 +4117,6 @@ AlgorithmGraphHandler.prototype.GetSelectedGroup = function (object) {
 }
 
 AlgorithmGraphHandler.prototype.RestoreAll = function () {
-    console.log("buoc 5: AlgorithmGraphHandler.prototype.RestoreAll")
     this.app.setRenderPath([]);
 
     if (this.algorithm.needRestoreUpText()) {
@@ -4028,13 +4128,12 @@ AlgorithmGraphHandler.prototype.RestoreAll = function () {
     }
 }
 
+// uptext là phần chú thích của một đỉnh ???
 AlgorithmGraphHandler.prototype.SaveUpText = function () {
-    console.log("buoc 5.5: Saving up text")
     this.vertexUpText = {};
     var graph = this.app.graph;
     for (i = 0; i < graph.vertices.length; i++) {
         this.vertexUpText[graph.vertices[i].id] = graph.vertices[i].upText;
-        console.log(this.vertexUpText)
     }
 }
 
@@ -4049,25 +4148,19 @@ AlgorithmGraphHandler.prototype.RestoreUpText = function () {
 }
 
 AlgorithmGraphHandler.prototype.UpdateResultAndMessage = function () {
-    console.log("buoc 6: UpdateResultAndMessage", this.algorithm)
+    var self = this;    // tạo một đối tượng self để lưu trữ tham chiếu đến đối tượng hiện tại( chắc chắn rằng nó sẽ không thay đổi trong hàm callback)
 
-    var self = this;
+    var result = this.algorithm.result(
+        function (result) {
+            self.message = self.algorithm.getMessage(g_language);
+            self.app.resultCallback(result);
+        }
+    );
 
-    result = this.algorithm.result(function (result) {
-        console.log(" anh Thành3", result)
-
-        self.message = self.algorithm.getMessage(g_language);
-
-        self.app.resultCallback(result);
-    });
-
-    console.log("result: " + result)
-
+    // vẽ animations đường đi
     this.app.resultCallback(result);
 
-    this.message = this.algorithm.getMessage(g_language);
-    console.log("message: " + this.message)
-
+    this.message = this.algorithm.getMessage(g_language);   // kết quả cuối cùng của thuật toán
 }
 
 AlgorithmGraphHandler.prototype.InitControls = function () {
@@ -4772,7 +4865,6 @@ function GraphMLCreator(nodes, arcs, ignoreNodes = {}) {
 
 
 GraphMLCreator.prototype.GetXMLString = function () {
-    console.log("GraphMLCreator.prototype.GetXMLString", this)
     var mainHeader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml>";
     var directedHeader = "<graph id=\"Graph\" edgedefault=\"directed\">";
     var undirectedHeader = "<graph id=\"Graph\" edgedefault=\"undirected\">";
@@ -4812,9 +4904,6 @@ GraphMLCreator.prototype.GetXMLString = function () {
         xmlBody = xmlBody + ((weightData != "") ? ">" + weightData + "</edge>" : "/>")
     }
     xml = mainHeader + weightNode + (hasDirected ? directedHeader : undirectedHeader) + xmlBody + "</graph></graphml>"
-
-    console.log("GraphMLCreator.prototype.GetXMLString xml", xml)
-
     return xml;
 }
 /**
@@ -4835,7 +4924,7 @@ function Graph() {
     // Has direction edge.
     this.hasDirect = false;
     // Is graph multi
-    this.isMultiGraph = false;
+    this.isMultiGraph = false;	// đa đồ thị là đồ thị có thể nhiều cạnh cùng một cặp đỉnh
 };
 
 // infinity
@@ -4851,7 +4940,6 @@ Graph.prototype.AddNewVertex = function (vertex) {
         this.uidGraph = this.uidGraph + 1;
         this.vertices.push(vertex);
     }
-    console.log("bước 7.5: AddNewVertex len(vertices): ", this.vertices.length)
     return this.vertices.length - 1;
 }
 
@@ -4901,7 +4989,8 @@ Graph.prototype.AddNewEdge = function (edge, replaceIfExists) {
 
     return this.edges.length - 1;
 }
-// hàm xóa cạnh
+
+
 Graph.prototype.DeleteEdge = function (edgeObject) {
     var index = this.edges.indexOf(edgeObject);
     if (index > -1) {
@@ -4910,14 +4999,15 @@ Graph.prototype.DeleteEdge = function (edgeObject) {
 
     this.isMultiGraph = this.checkMutiGraph();
 }
-
+// hàm xóa đỉnh: xóa đỉnh và cả các cạnh liên quan đến đỉnh đó
 Graph.prototype.DeleteVertex = function (vertexObject) {
     var index = this.vertices.indexOf(vertexObject);
     if (index > -1) {
         for (var i = 0; i < this.edges.length; i++) {
             if (this.edges[i].vertex1 == vertexObject || this.edges[i].vertex2 == vertexObject) {
                 this.DeleteEdge(this.edges[i]);
-                i--;
+                i--; // i trừ 1 để có thể duyệt phần từ kế tiếp
+                //vì sau khi xóa một phần từ độ dài mảng sẽ giảm xuống 1 các phần từ sau phần từ bị xóa sẽ giảm index xuống 1
             }
         }
         this.vertices.splice(index, 1);
@@ -4994,6 +5084,7 @@ Graph.prototype.FindEdgeAny = function (id1, id2) {
     return res;
 }
 
+// trả về cạnh có khoảng cách ngắn nhất nối 2 đỉnh id1, id2
 Graph.prototype.FindEdgeMin = function (id1, id2) {
     var res = null;
     var minWeight = this.infinity;
@@ -5925,6 +6016,7 @@ Graph.prototype.isNeedReposition = function () {
     return res;
 }
 
+// kiểm tra xem 2 đỉnh đã tồn tại cạnh cũ chưa, nếu đã có tứ là cạnh mới này cần vẽ cong
 Graph.prototype.FixEdgeCurve = function (edgeIndex) {
     var edgeObject = this.edges[edgeIndex];
     var hasPair = this.hasPair(edgeObject);
@@ -5932,7 +6024,7 @@ Graph.prototype.FixEdgeCurve = function (edgeIndex) {
 
     if (hasPair) {
         if (edgeObject.model.default)
-            edgeObject.model.type = EdgeModels.curve;
+            edgeObject.model.type = EdgeModels.curve; // set type cho cạnh để khi vẽ xác định được cần vẽ cạnh cong
 
         var pairEdge = this.FindPairFor(edgeObject);
         if (pairEdge.model.default) {
@@ -6195,56 +6287,69 @@ TextEnumVerticesCustom.prototype.ShowDialog = function (callback, buttonText, ti
 var globalApplication = null;
 
 function Application(document, window) {
-    this.document = document;
-    this.canvas = this.document.getElementById('canvas');
-    this.handler = new DefaultHandler(this);
-    this.savedGraphName = "";
-    this.currentEnumVerticesType = new BaseEnumVertices(this, 1);//this.enumVerticesTextList[0];
+    this.document = document; // lưu dối tượng document của trang web (dom)
+    this.canvas = this.document.getElementById('canvas'); // lấy phần tử có id là canvas trong html. Đây là vùng để vẽ graph
+    this.handler = new DefaultHandler(this); // handler xử lý các sự kiện tương tác với trang web
+    this.savedGraphName = ""; // có thể là tên của đồ thị
+    this.currentEnumVerticesType = new BaseEnumVertices(this, 1);//this.enumVerticesTextList[0]; // liên quan đến text của đỉnh
     this.findPathReport = 1;
     this.isTimerRender = false;
-    globalApplication = this;
+    globalApplication = this; //  Đặt biến globalApplication để tham chiếu đến đối tượng Application hiện tại.
+
     this.renderPath = [];
     this.renderTimer = 0;
     this.renderPathLength = 0;
     this.renderPathCounter = 0;
     this.renderPathLoops = 0;
+    // các biến render liên quan đến việc vẽ graph
+
     this.enumVerticesTextList = [new BaseEnumVertices(this, 1), new BaseEnumVertices(this, 0), new TextEnumVertices(this), new TextEnumVerticesCyr(this), new TextEnumVerticesGreek(this), new TextEnumVerticesCustom(this)];
-    this.SetDefaultTransformations();
-    this.algorithmsValues = {};
-    this.userAction = function () { };
-    this.undoStack = [];
+    // danh sách gồm nhiều đối tượng liên quan đến định dạng và vẽ các đỉnh trong đồ thị
 
-    this.edgeCommonStyle = new CommonEdgeStyle();
-    this.isEdgeCommonStyleCustom = false;
-    this.edgeSelectedStyles = FullArrayCopy(DefaultSelectedEdgeStyles);
-    this.isEdgeSelectedStylesCustom = false;
+    this.SetDefaultTransformations(); // thiết lập các biến biến đổi mặc định cho vẽ đồ thị
+    this.algorithmsValues = {}; // map lưu các thuật toán
+    this.userAction = function () { }; // function xử lý hành động của người dùng trên trang web
+    this.undoStack = []; // có thể được sử dụng để lưu trữ các hành động có thể được hoàn tác (undo)
 
-    this.edgePrintCommonStyle = new CommonPrintEdgeStyle();
+    this.edgeCommonStyle = new CommonEdgeStyle(); // kiểu dáng của cạnh
+    this.isEdgeCommonStyleCustom = false; // biến xác định kiểu dáng cạnh có thể thay đổi không
+    this.edgeSelectedStyles = FullArrayCopy(DefaultSelectedEdgeStyles);  // kiểu dáng cạnh được chọn
+    this.isEdgeSelectedStylesCustom = false; // biến xác định kiểu dáng cạnh được chọn có thể thay đổi không
+
+    this.edgePrintCommonStyle = new CommonPrintEdgeStyle(); //
     this.edgePrintSelectedStyles = FullArrayCopy(DefaultPrintSelectedEdgeStyles);
+    // kiểu dáng cạnh khi print
 
     this.vertexCommonStyle = new CommonVertexStyle();
     this.isVertexCommonStyleCustom = false;
     this.vertexSelectedVertexStyles = FullArrayCopy(DefaultSelectedGraphStyles);
     this.isVertexSelectedVertexStylesCustom = false;
+    // kiểu dáng đỉnh
 
     this.vertexPrintCommonStyle = new CommonPrintVertexStyle();
     this.vertexPrintSelectedVertexStyles = FullArrayCopy(DefaultPrintSelectedGraphStyles);
+    // kiểu dáng đỉnh khi print
 
     this.backgroundCommonStyle = new CommonBackgroundStyle();
     this.backgroundPrintStyle = new PrintBackgroundStyle();
     this.isBackgroundCommonStyleCustom = false;
-    this.renderPathWithEdges = false;
+    // kiểu dáng của background
+
+    this.renderPathWithEdges = false; // một cờ xác định xem đường đi trên đồ thị có đi kèm với các cạnh hay không.
 
     this.edgePresets = [1, 3, 5, 7, 11, 42];
     this.maxEdgePresets = 6;
-    this.selectionRect = null;
+    // các thiết lập và giới hạn liên quan đến kiểu dáng của cạnh.
+
+    this.selectionRect = null; // đối tượng chứa thông tin về khu vực được chọn trên đồ thị
 
     this.defaultVertexSize = null;
     this.defaultEdgeWidth = null;
     this.processEmscriptenFunction = null;
-
     this.defaultEdge = null;
     this.useDefaultEdge = false;
+    // có thể được sử dụng để định cấu hình và lưu trữ các thiết lập khác của ứng dụng đồ họa.
+
 };
 
 // List of graph.
@@ -6263,10 +6368,18 @@ Application.prototype.graphNameLength = 16;
 // Max undo stack size
 Application.prototype.maxUndoStackSize = 8;
 
+/*
+    *Tính tọa độ của chuột trên canvas
+    Lấy tọa độ x, y của sự kiện chuột 'e' (tính từ góc trái trên của trang web) 
+    và trừ đi tọa độ x, y của góc trái trên của khu vực bao quanh thẻ canvas (rect.left và rect.right)
+    tiếp theo chia tọa độ x, y này cho tỉ lệ thu phóng của canvas (this.canvasScale)
+    cuối cùng trừ đi vị trí hiện tại của canvas (this.canvasPosition.x và this.canvasPosition.y)
+    Kết quả cuối cùng là tọa độ chuột trên canvas
+*/
 Application.prototype.getMousePos = function (canvas, e) {
     /// getBoundingClientRect is supported in most browsers and gives you
     /// the absolute geometry of an element
-    var rect = canvas.getBoundingClientRect();
+    var rect = canvas.getBoundingClientRect(); // lấy khu vực bao quanh thẻ canvas, kết quả trả về đối tượng chứa thông tin về vị trí và kích thước tương đối của canvas trên trình duyệt
 
     /// as mouse event coords are relative to document you need to
     /// subtract the element's left and top position:
@@ -6274,7 +6387,8 @@ Application.prototype.getMousePos = function (canvas, e) {
 }
 
 Application.prototype.redrawGraph = function () {
-    console.log("bước 8: redrawGraph")
+    // nếu isTimerRender == false thì tiếp tục redraw 
+    // -> có thể là đang trong quá trình vẽ nên không cần vẽ lại
     if (!this.isTimerRender) {
         this._redrawGraphInWindow();
 
@@ -6354,17 +6468,25 @@ Application.prototype.redrawGraphTimer = function () {
 }
 
 Application.prototype._redrawGraphInWindow = function () {
-    // console.log("bước 9: _redrawGraphInWindow")
-
+    // lấy đối tượng context của canvas
+    // đối tượng context cho phép vẽ các đồ họa trên canvas
     var context = this.canvas.getContext('2d');
 
+    // để lưu trạng thái hiện tại của context
+    // điều này là cần thiết để có thể khôi phục trạng thái gốc sau khi vẽ xong
     context.save();
 
-    context.scale(this.canvasScale, this.canvasScale);
+    context.scale(this.canvasScale, this.canvasScale); // thay đổi tỉ lệ
+
+    // thay đổi vị trí bắt đầu vẽ 
+    // -> bthg (0,0) sẽ ở (x,y) thay vì góc trên bên trái 
     context.translate(this.canvasPosition.x, this.canvasPosition.y);
 
+    //Todo: comment this
     this._RedrawGraph(context, this.canvasPosition, this.backgroundCommonStyle, true);
 
+    // khôi phục lại trạng thái ban đầu của context sau khi đã vẽ lại đồ thị
+    // điều này đảm bảo rằng các thay đổi về tỉ lệ vị trí sẽ không ảnh hướng đến các lần vẽ sau
     context.restore();
 
     return context;
@@ -6456,9 +6578,9 @@ Application.prototype.stopRenderTimer = function () {
     }
 }
 
+//? test thử thuật toán tìm đường đi ngắn nhất ?
+// vẽ đường đi ngắn nhất
 Application.prototype.setRenderPath = function (renderPath, renderMinPath) {
-    console.log("lộc log setRenderPath", renderPath, renderMinPath);
-
     this.renderPath = renderPath;
     this.renderMinPath = renderMinPath;
     this.renderPathWithEdges = false;
@@ -6483,11 +6605,10 @@ Application.prototype.setRenderPathWithEdges = function (renderPath) {
         this.stopRenderTimer();
     }
 }
-
+// hàm này trả về đối tượng arcDrawer để vẽ cạnh
 Application.prototype.GetBaseArcDrawer = function (context, edge) {
     var arcDrawer = new BaseEdgeDrawer(context);
 
-    // kiểm tra xem kiểu của cạnh có phải cong không để trả về đối tượng vẽ cạnh phù hợp
     if (edge.model.type == EdgeModels.curve) {
         var curvedArcDrawer = new CurvedArcDrawer(context, edge.model);
 
@@ -6554,15 +6675,12 @@ Application.prototype.UpdateEdgesCurrentStyle = function (ForceCommonStyle, Forc
 }
 
 Application.prototype.RedrawEdges = function (context) {
-    // console.log("bước 10.5: RedrawEdges", this.graph.edges.length)
     for (i = 0; i < this.graph.edges.length; i++) {
         this.RedrawEdge(context, this.graph.edges[i]);
     }
 }
 
 Application.prototype.RedrawNodes = function (context) {
-    // console.log("bước 10.5: RedrawNodes", this.graph.vertices.length)
-
     var graphDrawer = new BaseVertexDrawer(context);
 
     for (i = 0; i < this.graph.vertices.length; i++) {
@@ -6594,7 +6712,6 @@ Application.prototype.UpdateNodesCurrentStyle = function (ForceCommonStyle, Forc
 }
 
 Application.prototype.RedrawSelectionRect = function (context) {
-    console.log("lộc log RedrawSelectionRect")
     context.lineWidth = 1.0 / this.canvasScale;
 
     context.strokeStyle = this.edgeSelectedStyles[0].strokeStyle;
@@ -6608,14 +6725,19 @@ Application.prototype.RedrawSelectionRect = function (context) {
     context.setLineDash([]);
 }
 
+// hàm để gắn message của handler vào thẻ div message trên giao diện
 Application.prototype.updateMessage = function () {
     this.document.getElementById('message').innerHTML = this.handler.GetMessage();
+
+    // đối với một số Handler message không chỉ có mỗi text
+    // còn có cả một số thẻ input, checkbox, dropdown
     this.handler.InitControls();
 }
 
 Application.prototype.CanvasOnMouseMove = function (e) {
     // X,Y position.
     var pos = this.getMousePos(this.canvas, e);
+
     this.handler.MouseMove(pos);
     if (this.handler.IsNeedRedraw()) {
         this.handler.RestRedraw();
@@ -6630,13 +6752,12 @@ Application.prototype.CanvasOnMouseDown = function (e) {
     if (e.which !== 1) return;
 
     var pos = this.getMousePos(this.canvas, e); /// provide this canvas and event
-    console.log("bước 5: CanvasOnMouseDown", this.handler)
+
     this.handler.MouseDown(pos);
     if (this.handler.IsNeedRedraw()) {
         this.handler.RestRedraw();
         this.redrawGraph();
     }
-    console.log("graph", this.graph)
 
     this.updateMessage();
 }
@@ -6703,12 +6824,13 @@ Application.prototype.AddNewEdge = function (edge, replaceIfExists) {
     return this.graph.AddNewEdge(edge, replaceIfExists);
 }
 
+// tạo đỉnh mới và thêm đỉnh mới vào đồ thị và vẽ lại đồ thị 
 Application.prototype.CreateNewGraph = function (x, y) {
-    console.log("bước 7: CreateNewGraph")
     var app = this;
 
     this.currentEnumVerticesType.GetVertexTextAsync(
         function (enumType) {
+            // tạo một đỉnh mới và push vào mảng các đỉnh của graph ([]graph.vertices)
             app.graph.AddNewVertex(new BaseVertex(x, y, enumType));
             app.redrawGraph();
         });
@@ -6717,16 +6839,17 @@ Application.prototype.CreateNewGraph = function (x, y) {
 Application.prototype.CreateNewGraphEx = function (x, y, vertexEnume) {
     return this.graph.AddNewVertex(new BaseVertex(x, y, vertexEnume));
 }
-
+// hàm tạo và quản lý cạnh mới trong đồ thị
+// và chỉnh đường cong của cạnh và cập nhật trọng số cạnh
 Application.prototype.CreateNewArc = function (graph1, graph2, isDirect, weight, replaceIfExist, upText) {
     var edge = this.AddNewEdge(new BaseEdge(graph1, graph2, isDirect, weight, upText), replaceIfExist);
 
-    this.graph.FixEdgeCurve(edge);
+    this.graph.FixEdgeCurve(edge); // điều chỉnh đường cong của cạnh
 
     var edgeObject = this.graph.edges[edge];
 
-    if (edgeObject.useWeight)
-        this.UpdateEdgePresets(edgeObject.weight);
+    if (edgeObject.useWeight) // kiểm tra cạnh có trọng số không
+        this.UpdateEdgePresets(edgeObject.weight); // update lại danh sách trọng số trong hộp thoại dialog hiện ra khi tạo cạnh mới
 
     return edge;
 }
@@ -6784,9 +6907,8 @@ Application.prototype.FindAllEdges = function (id1, id2) {
 
 Application.prototype.SetHandlerMode = function (mode) {
     var manipulationHandlers = ["default", "addGraph", "addArc", "delete", "findPath", "connectedComponent", "eulerianLoop"];
-    console.log("------ mode: ", mode, "--------------------------------")
+
     if (this.handler && (g_AlgorithmIds.indexOf(mode) >= 0 || manipulationHandlers.indexOf(mode) >= 0)) {
-        console.log("buoc 4: setHandlerMode " + mode)
         this.handler.RestoreAll();
     }
 
@@ -6794,11 +6916,9 @@ Application.prototype.SetHandlerMode = function (mode) {
         this.handler = new DefaultHandler(this);
     }
     else if (mode == "addGraph") {
-        console.log("bước 2: SetHandlerMode ", mode)
         this.handler = new AddGraphHandler(this);
     }
     else if (mode == "addArc") {
-        console.log("step 2: SetHandlerMode ", mode)
         this.handler = new ConnectionGraphHandler(this);
     }
     else if (mode == "delete") {
@@ -6878,7 +6998,6 @@ Application.prototype.SetHandlerMode = function (mode) {
             this.Undo();
     }
     else if (g_AlgorithmIds.indexOf(mode) >= 0) {
-        console.log("buoc 4.5: xét handler ", mode)
         this.handler = new AlgorithmGraphHandler(this, g_Algorithms[g_AlgorithmIds.indexOf(mode)](this.graph, this));
     }
 
@@ -7460,10 +7579,10 @@ Application.prototype.OnAutoAdjustViewport = function () {
     this.redrawGraph();
 }
 
+// trả về danh sách thuật toán (đã đc push vào g_Algorithms) đã sắp xếp theo priority
 Application.prototype.getAlgorithmNames = function () {
     var res = [];
     for (var i = 0; i < g_Algorithms.length; i++) {
-        console.log(i + ": " + g_Algorithms[i].name);
         factory = g_Algorithms[i];
         var obj = {};
         oneFactory = factory(this.graph);
@@ -7482,14 +7601,11 @@ Application.prototype.getAlgorithmNames = function () {
 }
 
 Application.prototype.resultCallback = function (paths) {
-    console.log("=========== Application resultCallback")
-    console.log("paths", paths);
+    console.log(paths);
     if ((paths instanceof Object) && "paths" in paths) {
-        console.log("resultCallback 1 <<<<<<<<<<<<<<<<<<<<<<")
         this.setRenderPath(paths["paths"][0], "minPath" in paths);
     }
     else if ((paths instanceof Object) && "pathsWithEdges" in paths) {
-        console.log("resultCallback 2 <<<<<<<<<<<<<<<<<<<<<<")
         this.setRenderPathWithEdges(paths["pathsWithEdges"][0]);
     }
 
@@ -7519,6 +7635,7 @@ Application.prototype.IsGraphFitOnViewport = function () {
         && Math.floor(canvasPositionInverse.y + canvasHeight) >= Math.floor(graphBBox.maxPoint.y));
 }
 
+// function push action vào stack để thực hiện tính năng Undo
 Application.prototype.PushToStack = function (actionName) {
     var object = {};
     object.actionName = actionName;
@@ -7813,7 +7930,6 @@ Application.prototype.GraphTypeChanged = function () {
     $("#CanvasMessage").text(this.graph.isMulti() ? g_GraphIsMultiMessage : g_GraphIsGeneralMessage);
 }
 
-// update lại danh sách các trọng số trong bảng dialog hiện ra khi setting tạo cạnh mới
 Application.prototype.UpdateEdgePresets = function (weight) {
     var oldPresets = this.edgePresets;
     this.edgePresets = [1];
@@ -7882,25 +7998,41 @@ Application.prototype.GetStyle = function (type, styleName, object, index) {
     return null;
 }
 
+/*  
+    * Phương thức này thực hiện việc vẽ lại đồ thị trên canvas
 
+    context: đối tượng context của canvas
+    backgroundPosition: vị trí nền trên canvas
+    backgroundStyle: kiểu style của nền background của đồ thị
+    bDrawSelectedRect: một cờ (boolean) xác định xem có nên vẽ một hình chữ nhật chọn lựa (selection rectangle) hay không.
+    forceVertexCommon, forceVertexSelected, forceEdgeCommon, forceEdgeSelected: Các cờ để xác định xem có cần vẽ lại các phần tử cụ thể (đỉnh và cạnh) bằng kiểu (style) mặc định hay không. Cờ này được sử dụng để xác định xem có nên cập nhật lại kiểu của đỉnh và cạnh hay không.
+*/
 Application.prototype._RedrawGraph = function (context, backgroundPosition, backgroundStyle, bDrawSelectedRect,
     forceVertexCommon, forceVertexSelected, forceEdgeCommon, forceEdgeSelected) {
-
-    // console.log("bước 10: _RedrawGraph", this.graph)
+    // đối tượng backgroundDrawer để vẽ nền background của đồ thị
     var backgroundDrawer = new BaseBackgroundDrawer(context);
 
     backgroundDrawer.Draw(
-        backgroundStyle,
-        Math.max(this.canvas.width, this.GetRealWidth()),
-        Math.max(this.canvas.height, this.GetRealHeight()),
-        backgroundPosition,
-        this.canvasScale);
+        backgroundStyle,                                    // kiểu của nền
+        Math.max(this.canvas.width, this.GetRealWidth()),   // chiều rộng tối đa của nền (max của canvas.width và this.canvas.width / this.canvasScale)
+        Math.max(this.canvas.height, this.GetRealHeight()), // chiều dài tối đa của nền (max của canvas.height và this.canvas.height / this.canvasScale)
+        backgroundPosition,                                 // vị trí của nền
+        this.canvasScale);                                  // tỉ lệ của canvas
 
+    // cập nhật kiểu của cạnh nếu cần
     this.UpdateEdgesCurrentStyle(forceEdgeCommon, forceEdgeSelected);
+
+    // cập nhật kiểu của đỉnh nếu cần
     this.UpdateNodesCurrentStyle(forceVertexCommon, forceVertexSelected);
 
+    // hàm vẽ cạnh
     this.RedrawEdges(context);
+
+    // hàm vẽ đỉnh
     this.RedrawNodes(context);
+
+    // nếu bDrawSelectedRect được đặt và selectionRect != null thì gọi phương thức RedrawSelectionRect
+    // để vẽ một hình chữ nhật lựa chọn lên canvas
     if (bDrawSelectedRect && this.selectionRect != null)
         this.RedrawSelectionRect(context);
 }
@@ -8019,6 +8151,8 @@ var application = new Application(document, window);
 
 var waitCounter = false;
 var fullscreen = false;
+
+// Theo dõi hành động của người dùng
 var userAction = function (str) {
     if (typeof window.yaCounter25827098 !== "undefined") {
         console.log(g_language + "/" + str);
@@ -8047,14 +8181,11 @@ function restButtons(me) {
         else {
             if (document.getElementById(buttonsList[i]).className != "btn btn-default btn-sm") {
                 needSetDefault = true;
-                console.log("0 " + me)
             }
         }
     }
-
     if (needSetDefault) {
         document.getElementById(buttonsList[i]).className = "btn btn-primary btn-sm";
-
     }
     else {
         document.getElementById(me).className = "btn btn-primary btn-sm";
@@ -8102,30 +8233,44 @@ function preLoadPage() {
 }
 
 function createAlgorithmMenu() {
-    console.log("Buoc 2: Run createAlgorithmMenu")
     var algorithmBaseId = "Algo";
 
+    // lấy danh sách tên thuật toán
     var algorithms = application.getAlgorithmNames();
     var index = 0;
 
-
+    // lặp qua danh sách thuật toán, tạo button, sự kiện onclick button và append vào list div trên giao diện
     for (var i = 0; i < algorithms.length; i++) {
         algorithm = algorithms[i];
 
+        // lấy div list thuật toán theo category
         var list = document.getElementById("algorithmCategoryElements" + algorithm.category);
+
+        /* 
+            *template cho các button thuật toán
+            <div class="dropdown-item" style="display: none;" id="algTopic1">
+                <button type="button" class="btn btn-default btn-sm" style="width: 100%; text-align: left; border: none;" id="">
+                    <span class="glyphicon glyphicon-search fa-fw"></span> 
+                    <span></span>
+                </button>
+            </div>
+        */
+        // lấy thẻ div có id là "algTopic + category", đây là template cho các button thuật toán
         var item = document.getElementById("algTopic" + algorithm.category);
+
+        // sao chép (clone) phần từ `item` để tạo ra bản sao của nó. Tham số true trong cloneNode cho biết rằng cả nội dung bên trong cũng sẽ được sao chép
         var clone = item.cloneNode(true);
         var button = clone.getElementsByTagName("button")[0];
         var textSpan = button.getElementsByTagName("span")[1];
-        button.id = algorithm.id;
-        textSpan.innerHTML = algorithm.name;
-        clone.style.display = "block";
 
-        buttonsList.push(algorithm.id);
+        button.id = algorithm.id; // gắn id cho button ví dụ: OlegSh.BFSAlgorithm
+        textSpan.innerHTML = algorithm.name; // gắn tên cho button vi dụ: Breadth-first search
+        clone.style.display = "block"; // hiển thị button (default của template là none)
 
+        buttonsList.push(algorithm.id); // thêm id của thuật toán vào buttonsList 
+
+        // xét sự kiện onclick cho button
         button.onclick = function (e) {
-            console.log("============> Chọn thuật toán ", this.id, " <==============");
-            console.log("buoc 3: button onclick")
             e["closeThisMenu"] = true;
             userAction(this.id);
             restButtons(this.id);
@@ -8167,17 +8312,16 @@ function handelImportGraph(files) {
 
     fileReader.readAsText(graphFileToLoad, "UTF-8");
 }
+
 //* Xử lý các tương tác người dùng trên canvas, các sự kiện button và điều hướng trong ứng dụng
 function postLoadPage() {
     application.userAction = userAction;
 
     application.canvas.onmousemove = function (e) {
-        // console.log("lộc log onmousemove");
         return application.CanvasOnMouseMove(e);
     };
 
     application.canvas.onmousedown = function (e) {
-        console.log("bước 4: canvas.onmousedown")
         return application.CanvasOnMouseDown(e);
     };
 
@@ -8220,7 +8364,6 @@ function postLoadPage() {
 
     // xử lý sự kiện keypress(một phím được nhấn và duy trì trạng thái bấm) được đặt cho đối tượng document.
     document.onkeypress = function (e) {
-
         // nếu một trong các sự kiện sau đang diễn ra thì sự kiện keypress sẽ không được xử lý
         // các sự kiện dưới đây là các sự kiện có xuất hiện hộp thoại dialog
         if (event.defaultPrevented
@@ -8239,13 +8382,14 @@ function postLoadPage() {
 
 
         var key = getChar(event);
-        console.log("lộc log onkeypress: ", key);
         var code = getCharCode(event);
         console.log(key + " code=" + code);
         var evtobj = window.event ? event : e;
         var isCtrl = evtobj ? evtobj.ctrlKey : false;
 
         var moveValue = 10;
+
+        // +, - tăng giảm scale của canvas
         if (code == 61 || code == 43) // +
         {
             application.multCanvasScale(1.5);
@@ -8254,6 +8398,8 @@ function postLoadPage() {
         {
             application.multCanvasScale(1 / 1.5);
         }
+
+        // W, S, A, D dịch chuyển vị trí của đồ thị trên canvas theo 4 hướng
         else if (key == 'w' || key == 'ц') // up
         {
             application.onCanvasMove(new Point(0, moveValue));
@@ -8270,6 +8416,8 @@ function postLoadPage() {
         {
             application.onCanvasMove(new Point(-moveValue, 0));
         }
+
+        // V, E, R, M, Crtl+Z thực hiện chọn button và chọn handler
         else if (key == 'v' || key == 'м') // vertex
         {
             selectHandler('AddGraph', 'addGraph');
@@ -8299,6 +8447,8 @@ function postLoadPage() {
         }
     }
 
+
+    // theo dõi sự kiện nhấn phím Ctrl (windows) và Cmd (macOS) và đánh dấu vào biến g_ctrlPressed
     $(document).keydown(function (event) {
         if (event.which == "17" || event.which == "91")
             g_ctrlPressed = true;
@@ -8308,6 +8458,8 @@ function postLoadPage() {
         g_ctrlPressed = false;
     });
 
+
+    // Xác định và điều hướng các sự kiện onclick từng element cụ thể
     document.getElementById('ShowAdjacencyMatrix').onclick = function () {
         userAction(this.id);
         application.SetHandlerMode("showAdjacencyMatrix");
@@ -8337,19 +8489,16 @@ function postLoadPage() {
         application.SetHandlerMode("default");
         document.getElementById('Default').className = "btn btn-primary btn-sm";
     }
-    console.log("default AddGraph ", document.getElementById('AddGraph').className);
 
     document.getElementById('AddGraph').onclick = function () {
         userAction(this.id);
         restButtons('AddGraph');
-        console.log("bước 1: div AddGraph clicked")
         application.SetHandlerMode(document.getElementById('AddGraph').className != "" ? "addGraph" : "default");
     }
 
     document.getElementById('ConnectGraphs').onclick = function () {
         userAction(this.id);
         restButtons('ConnectGraphs');
-        console.log("step 1: div ConnectGraphs clicked")
         application.SetHandlerMode(document.getElementById('ConnectGraphs').className != "" ? "addArc" : "default");
     }
 
@@ -8532,6 +8681,7 @@ function postLoadPage() {
         }
     }
 
+    // dropdown click chọn thuật toán
     document.getElementById('openAlgorithmList').onclick = function () {
         // Show menu first
         setTimeout(function () {
@@ -8609,7 +8759,6 @@ function postLoadPage() {
     // Get algorithms list and load it.
     $.get("/" + SiteDir + "cgi-bin/getPluginsList.php",
         function (data) {
-            console.log("Buoc 1: call http://localhost:8080/graphonline/cgi-bin/getPluginsList.php")
             var scriptList = JSON.parse(data);
 
             var loadOneScript = function () {
@@ -8635,6 +8784,9 @@ function postLoadPage() {
     resizeCanvas();
     application.onPostLoadEvent();
 
+    // xử lý việc đóng menu thuật toán
+    // 1. khi click vào button thuật toán
+    // 2. khi click ra ngoài khỏi menu
     $(function () {
         $('#algorithmList').on('click', function (event) {
             if (!event.originalEvent.closeThisMenu) {
@@ -8695,7 +8847,7 @@ $(document).ready(function () {
     var isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
     if (!isMobile && !DisableEmscripten) {
         const jsScript = document.createElement('script');
-        jsScript.src = 'script/Graphoffline.Emscripten.js';
+        jsScript.src = 'graphline/script/Graphoffline.Emscripten.js';
         document.body.appendChild(jsScript);
         jsScript.addEventListener('load', () => {
             Module['onRuntimeInitialized'] = onRuntimeInitialized;
@@ -8736,6 +8888,7 @@ Array.prototype.swap = function (x, y) {
  *
  */
 
+// base thuật toán duyệt đường đi
 function BaseTraversal(graph, app) {
     BaseAlgorithmEx.apply(this, arguments);
     this.visited = [];
@@ -8756,23 +8909,23 @@ BaseTraversal.prototype.result = function (resultCallback) {
 }
 
 BaseTraversal.prototype.selectVertex = function (vertex) {
-
-    console.log("buoc 8: BaseTraversal.prototype.selectVertex", vertex, this)
-
-    this.visited = [];
-    this.edges = [];
+    this.visited = [];  // đỉnh đã duyệt qua
+    this.edges = [];  // danh sách cạnh
 
     if (this.timer)
         clearTimeout(this.timer);
     this.timer = null;
 
-    this.visited.push(vertex);
+    this.visited.push(vertex);  // thêm đỉnh xuất phát vào danh sách đỉnh đã duyệt qua
 
     var context = this;
+
+    // chạy thuật toán và xử lý việc vẽ lại đồ thị(từng cạnh) theo từng bước chạy của thuật toán
     this.timer = setInterval(function () {
         context.step();
     }, this.timerInterval);
 
+    // chạy thuật toán và lấy kết quả của thuật toán
     this.message = this.getMainMessage();
 
     return true;
@@ -8782,7 +8935,7 @@ BaseTraversal.prototype.getObjectSelectedGroup = function (object) {
     return (this.visited.includes(object) ? 1 : (this.edges.includes(object) ? 1 : 0));
 }
 
-// trả về thuật toán đã được thức thi xong chưa
+// trả về thuật toán đã được thực thi xong chưa
 BaseTraversal.prototype.instance = function () {
     return false;
 }

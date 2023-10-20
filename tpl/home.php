@@ -108,6 +108,7 @@
     <button type="button" class="btn btn-default btn-sm" id="Default"><span class="glyphicon glyphicon-fullscreen fa-fw"></span><span class="hidden-phone"> <?= L('default') ?> <sub style="color:#AAAAAA">m</sub></span></button>
     <button type="button" class="btn btn-primary btn-sm" id="AddGraph"><span class="glyphicon glyphicon-plus fa-fw"></span><span class="hidden-phone"> <?= L('add_node') ?> <sub style="color:#AAAAAA">v</sub></span></button>
     <button type="button" class="btn btn-default btn-sm" id="ConnectGraphs"><span class="glyphicon glyphicon-road fa-fw"></span><span class="hidden-phone"> <?= L('connect_nodes') ?> <sub style="color:#AAAAAA">e</sub></span></button>
+    <button type="button" class="btn btn-default btn-sm" id="Tree"><span class="glyphicon glyphicon-tree-deciduous fa-fw"></span><span class="hidden-phone"> <?= L('tree') ?> <sub style="color:#AAAAAA">e</sub></span></button>
 
     <!-- Algorithms -->
     <div class="btn-group" role="group">
