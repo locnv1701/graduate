@@ -3,7 +3,6 @@
  *
  */
 
-console.log("================================bfs file js================================")
 function BFSAlgorithm(graph, app) {
     BaseTraversal.apply(this, arguments);
     this.message = g_startTraversal;

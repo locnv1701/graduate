@@ -37,7 +37,6 @@ var g_AlgorithmIds = [];
 
 // Call this function to register your factory algorithm.
 function RegisterAlgorithm(factory) {
-    console.log("RegisterAlgorithm ----------------------------", factory);
     g_Algorithms.push(factory);
     g_AlgorithmIds.push(factory(null).getId());
 }
@@ -172,8 +171,6 @@ BaseAlgorithmEx.prototype.CalculateAlgorithm = function (algorithmName, otherPar
     console.log(xml);
 
     var processResult = function (msg) {
-        console.log("====================== processResult ======================");
-        console.log(msg);
         /*  
             *Ví dụ xml được log ra của thuật toán dijkstra 
             * start 4, end 6
@@ -294,10 +291,10 @@ BaseAlgorithmEx.prototype.CalculateAlgorithm = function (algorithmName, otherPar
             });
         });
 
-        console.log("pathObjects", pathObjects);    // danh sách cạnh và danh sách đỉnh
-        console.log("properties", properties);      // lưu lowestDistance, index, highlightNode của tất cả các đỉnh
-        console.log("result", result);              // lưu result
-        console.log("====================== end ======================");
+        // console.log("pathObjects", pathObjects);    // danh sách cạnh và danh sách đỉnh
+        // console.log("properties", properties);      // lưu lowestDistance, index, highlightNode của tất cả các đỉnh
+        // console.log("result", result);              // lưu result
+        // console.log("====================== end ======================");
 
         resultCallback(pathObjects, properties, result);
     };

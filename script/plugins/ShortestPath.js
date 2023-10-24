@@ -38,11 +38,8 @@ FindShortPathNew.prototype.getCategory = function () {
 }
 
 FindShortPathNew.prototype.result = function (resultCallback) {
-    console.log("====================FindShortPathNew result==========================")
     if (this.firstObject && this.secondObject) {
-        console.log(" anh Thành1", result)
         this.outResultCallback = function (result) { // result trong tham số này là một object "outputResult"
-            console.log(" anh Thành2", result)
             resultCallback(result); 
         };
         self = this;
@@ -52,7 +49,6 @@ FindShortPathNew.prototype.result = function (resultCallback) {
             {name: "finish", value: this.secondObject.id}
             ], 
             function (pathObjects, properties, results) {
-                console.log("anh Thành4", pathObjects, properties, results)
                 self.resultCallback(pathObjects, properties, results);
             }
         );
@@ -66,7 +62,6 @@ FindShortPathNew.prototype.result = function (resultCallback) {
 // là đã có kết quả của thuật toán
 // resultCallback chỉ là update lại message để trả ra kết quả thôi
 FindShortPathNew.prototype.resultCallback = function (pathObjects, properties, results) {
-    console.log("====================FindShortPathNew resultCallback==========================")
 
     var outputResult = {};
     outputResult["version"] = 1;

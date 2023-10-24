@@ -131,5 +131,3 @@ function CreateDFSAlgorithm(graph, app)
 
 // Gerister connected component.
 RegisterAlgorithm (CreateDFSAlgorithm);
-
-console.log("run DFSAlgorithm");
