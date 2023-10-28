@@ -146,23 +146,23 @@ AVL.prototype.insertCallback = function (event) {
 }
 
 AVL.prototype.importCallback = function (event) {
-    console.log("bước 3: AVL.prototype.importCallback")
+	console.log("bước 3: AVL.prototype.importCallback")
 
-    var self = this;
-    var numbersToInsert = ["1", "2", "3", "4", "5", "6"];
-    var index = 0;
+	var self = this;
+	var numbersToInsert = ["1", "2", "3", "4", "5", "6"];
+	var index = 0;
 
-    function insertNext() {
-        if (index < numbersToInsert.length) {
-            var number = numbersToInsert[index];
-            self.insertField.value = "";
-            self.implementAction(self.insertElement.bind(self), number);
-            index++;
-            setTimeout(insertNext, 4000); // Chờ 1000ms (1 giây) trước khi gọi tiếp theo
-        }
-    }
+	function insertNext() {
+		if (index < numbersToInsert.length) {
+			var number = numbersToInsert[index];
+			self.insertField.value = "";
+			self.implementAction(self.insertElement.bind(self), number);
+			index++;
+			setTimeout(insertNext, 4000); // Chờ 1000ms (1 giây) trước khi gọi tiếp theo
+		}
+	}
 
-    insertNext();
+	insertNext();
 }
 
 
@@ -765,7 +765,7 @@ AVL.prototype.insert = function (elem, tree) {
 	this.cmd("SetHighlight", tree.graphicID, 1);
 	this.cmd("SetHighlight", elem.graphicID, 1);
 
-	if (elem.data < tree.data) {
+	if (compareStringsAsNumbersOrAlphabetically(elem.data, tree.data) == -1) {
 		this.cmd("SetText", 0, elem.data + " < " + tree.data + ".  Looking at left subtree");
 	}
 	else {
@@ -775,7 +775,7 @@ AVL.prototype.insert = function (elem, tree) {
 	this.cmd("SetHighlight", tree.graphicID, 0);
 	this.cmd("SetHighlight", elem.graphicID, 0);
 
-	if (elem.data < tree.data) {
+	if (compareStringsAsNumbersOrAlphabetically(elem.data, tree.data) == -1) {
 		if (tree.left == null) {
 			this.cmd("SetText", 0, "Found null tree, inserting element");
 			this.cmd("SetText", elem.heightLabelID, 1);	// set text này là set height cho node mới tạo bằng 1 để hiển thị lên giao diện
@@ -1320,6 +1320,29 @@ AVLNode.prototype.isLeftChild = function () {
 	}
 	return this.parent.left == this;
 }
+
+function compareStringsAsNumbersOrAlphabetically(str1, str2) {
+	// Chuyển chuỗi thành số bằng cách loại bỏ các ký tự không phải số và sử dụng parseInt
+	const num1 = parseInt(str1.replace(/\D/g, ''), 10);
+	const num2 = parseInt(str2.replace(/\D/g, ''), 10);
+
+	console.log("compare", str1, str2);
+
+	if (!isNaN(num1) && !isNaN(num2)) {
+		// Nếu cả hai chuỗi có thể chuyển thành số, so sánh chúng
+		if (num1 > num2) {
+			return 1;
+		} else if (num1 < num2) {
+			return -1;
+		} else {
+			return 0;
+		}
+	} else {
+		// Nếu ít nhất một trong hai chuỗi không phải số, so sánh chúng theo thứ tự chữ cái
+		return str1.localeCompare(str2);
+	}
+}
+
 
 
 
