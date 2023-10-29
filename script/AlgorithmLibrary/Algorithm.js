@@ -270,6 +270,21 @@ Algorithm.prototype.implementAction = function (funct, val) {
 	this.animationManager.StartNewAnimation(retVal);	// hiển thị các bước thực hiện thuật toán theo trình tự đã định lên màn hình		
 }
 
+Algorithm.prototype.implementListAction = function (actions) {
+    console.log("bước 8: Algorithm.prototype.implementListAction");
+
+    var listCommand = []; // Mảng chứa tất cả các bước thực hiện
+
+    for (var i = 0; i < actions.length; i++) {
+        var action = actions[i];
+        var funct = action.funct;
+        var val = action.val;
+        var retVal = funct(val);
+        listCommand = listCommand.concat(retVal);
+    }
+
+    this.animationManager.StartNewAnimation(listCommand); // Hiển thị tất cả các bước thực hiện thuật toán
+}
 
 Algorithm.prototype.isAllDigits = function (str) {
 	for (var i = str.length - 1; i >= 0; i--) {
