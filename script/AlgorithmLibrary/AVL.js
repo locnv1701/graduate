@@ -111,17 +111,21 @@ AVL.prototype.addControls = function () {
 	this.findButton = findControlElement("Button", "Find");
 	this.findButton.onclick = this.findCallback.bind(this);
 
-	this.findField = findControlElement("Text", "Find"); 8
+	this.findField = findControlElement("Text", "Find");
 	this.findField.onkeydown = this.returnSubmit(this.findField, this.findCallback.bind(this), 4);
 
-	this.printButton = findControlElement("Button", "PrintPreOrder");
-	this.printButton.onclick = this.printPreOrderCallback.bind(this);
+	this.printButton1 = findControlElement("Button", "PrintPreOrder");
+	this.printButton1.onclick = this.printPreOrderCallback.bind(this);
 
-	this.printButton = findControlElement("Button", "PrintInOrder");
-	this.printButton.onclick = this.printInOrderCallback.bind(this);
+	this.printButton2 = findControlElement("Button", "PrintInOrder");
+	this.printButton2.onclick = this.printInOrderCallback.bind(this);
 
-	this.printButton = findControlElement("Button", "PrintPostOrder");
-	this.printButton.onclick = this.printPostOrderCallback.bind(this);
+	this.printButton3 = findControlElement("Button", "PrintPostOrder");
+	this.printButton3.onclick = this.printPostOrderCallback.bind(this);
+
+	this.adjacencyMatrixButton = findControlElement("Button", "AdjacencyMatrix");
+	this.adjacencyMatrixButton.onclick = this.adjacencyMatrixCallback.bind(this);
+
 }
 
 AVL.prototype.reset = function () {
@@ -149,44 +153,26 @@ AVL.prototype.importCallback = function (event) {
 	console.log("bước 3: AVL.prototype.importCallback")
 
 	var self = this;
-	var numbersToInsert = ["1", "2", "3", "4", "5", "6"];
-	var index = 0;
 
-	function insertNext() {
-		if (index < numbersToInsert.length) {
-			var number = numbersToInsert[index];
-			self.insertField.value = "";
-			self.implementAction(self.insertElement.bind(self), number);
-			index++;
-			setTimeout(insertNext, 4000); // Chờ 1000ms (1 giây) trước khi gọi tiếp theo
+	var importValue = this.importField.value;
+
+	var numbersToInsert = importValue.split(",");
+	this.importField.value = "";
+
+	var actions = [];
+
+	numbersToInsert.forEach(number => {
+		if (number != "") {
+			actions.push({
+				funct: self.insertElement.bind(self),
+				val: number
+			})
 		}
-	}
+	});
 
-	insertNext();
+	this.implementListAction(actions);
 }
 
-
-
-
-// AVL.prototype.importCallback = function (event) {
-// 	console.log("bước 3: AVL.prototype.importCallback")
-
-// 	var importValue = this.importField.value;
-// 	// Get text value
-// 	// insertedValue = this.normalizeNumber(insertedValue, 4);
-
-// 	var numbersArray = importValue.split(",");
-// 	console.log("Number", numbersArray)
-
-// 	for (var i = 0; i < numbersArray.length; i++) {
-// 		if (numbersArray[i] != "") {
-// 			// set text value
-// 			this.insertField.value = "";
-// 			this.implementAction(this.insertElement.bind(this), numbersArray[i]);
-// 		}
-// 	}
-
-// }
 
 AVL.prototype.deleteCallback = function (event) {
 	console.log("deleteCallback called", this.deleteField.value);
@@ -220,6 +206,10 @@ AVL.prototype.printPostOrderCallback = function (event) {
 	this.implementAction(this.printTreePostOrder.bind(this), "");
 }
 
+AVL.prototype.adjacencyMatrixCallback = function (event) {
+	this.implementAction(this.adjacencyMatrix.bind(this), "");
+}
+
 AVL.prototype.sizeChanged = function (newWidth, newHeight) {
 	this.startingX = newWidth / 2;
 }
@@ -246,7 +236,7 @@ AVL.prototype.printTreePreOrder = function (unused) {
 		this.nextIndex = this.highlightID;  /// Reuse objects.  Not necessary.
 	}
 
-	const stringList = this.order.map(number => number.toString());
+	var stringList = this.order.map(number => number.toString());
 
 	this.cmd("SetText", 0, "Pre order traversal: " + stringList);
 
@@ -273,7 +263,7 @@ AVL.prototype.printTreeInOrder = function (unused) {
 		this.nextIndex = this.highlightID;  /// Reuse objects.  Not necessary.
 	}
 
-	const stringList = this.order.map(number => number.toString());
+	var stringList = this.order.map(number => number.toString());
 
 	this.cmd("SetText", 0, "In order traversal: " + stringList);
 
@@ -301,12 +291,33 @@ AVL.prototype.printTreePostOrder = function (unused) {
 		this.nextIndex = this.highlightID;  /// Reuse objects.  Not necessary.
 	}
 
-	const stringList = this.order.map(number => number.toString());
+	var stringList = this.order.map(number => number.toString());
 
 	this.cmd("SetText", 0, "Post order traversal: " + stringList);
 
 	return this.commands;
 }
+
+// AVL.prototype.adjacencyMatrix = function (unused) {
+// 	console.log("Adjacency Matrix", this);
+// 	console.log("Adjacency Matrix", this.animationManager);
+// 	console.log("Adjacency Matrix", this.animationManager.animatedObjects);
+// 	console.log("Adjacency Matrix", this.animationManager.animatedObjects.Edges);
+
+// 	this.animationManager.animatedObjects.Edges.forEach(element => {
+// 		// console.log(element);
+// 		if (element.length > 0) {
+// 			element.forEach(ele => {
+// 				// console.log("->", ele);
+// 				console.log("node", ele.Node1.label, " noi voi ", ele.Node2.label)
+// 			});
+// 		}
+// 	});
+
+
+// }
+
+
 
 AVL.prototype.preOrder = function (tree) {
 	this.cmd("Step");
@@ -824,7 +835,7 @@ AVL.prototype.insert = function (elem, tree) {
 			}
 			if ((tree.right != null && tree.left.height > tree.right.height + 1) ||
 				(tree.right == null && tree.left.height > 1)) {
-				if (elem.data < tree.left.data) {
+				if (compareStringsAsNumbersOrAlphabetically(elem.data, tree.left.data) == -1) {
 					this.singleRotateRight(tree);
 				}
 				else {
@@ -898,7 +909,7 @@ AVL.prototype.insert = function (elem, tree) {
 
 			if ((tree.left != null && tree.right.height > tree.left.height + 1) ||
 				(tree.left == null && tree.right.height > 1)) {
-				if (elem.data >= tree.right.data) {
+				if (compareStringsAsNumbersOrAlphabetically(elem.data, tree.right.data) != -1) {
 					this.singleRotateLeft(tree);
 				}
 				else {
@@ -929,7 +940,7 @@ AVL.prototype.treeDelete = function (tree, valueToDelete) {
 			leftchild = tree.parent.left == tree;
 		}
 		this.cmd("SetHighlight", tree.graphicID, 1);
-		if (valueToDelete < tree.data) {
+		if (compareStringsAsNumbersOrAlphabetically(valueToDelete, tree.data) != -1) {
 			this.cmd("SetText", 0, valueToDelete + " < " + tree.data + ".  Looking at left subtree");
 		}
 		else if (valueToDelete > tree.data) {
@@ -941,7 +952,7 @@ AVL.prototype.treeDelete = function (tree, valueToDelete) {
 		this.cmd("Step");
 		this.cmd("SetHighlight", tree.graphicID, 0);
 
-		if (valueToDelete == tree.data) {
+		if (compareStringsAsNumbersOrAlphabetically(valueToDelete, tree.data) == 0) {
 			if (tree.left == null && tree.right == null) {
 				this.cmd("SetText", 0, "Node to delete is a leaf.  Delete it.");
 				this.cmd("Delete", tree.graphicID);
@@ -1129,7 +1140,7 @@ AVL.prototype.treeDelete = function (tree, valueToDelete) {
 
 			}
 		}
-		else if (valueToDelete < tree.data) {
+		else if (compareStringsAsNumbersOrAlphabetically(valueToDelete, tree.data) == -1) {
 			if (tree.left != null) {
 				this.cmd("CreateHighlightCircle", this.highlightID, AVL.HIGHLIGHT_COLOR, tree.x, tree.y);
 				this.cmd("Move", this.highlightID, tree.left.x, tree.left.y);
@@ -1285,7 +1296,16 @@ AVL.prototype.disableUI = function (event) {
 	this.deleteButton.disabled = true;
 	this.findField.disabled = true;
 	this.findButton.disabled = true;
-	this.printButton.disabled = true;
+	// this.printButton.disabled = true;
+
+	this.importButton.disabled = true;
+	this.importField.disabled = true;
+
+	this.printButton1.disabled = true;
+	this.printButton2.disabled = true;
+	this.printButton3.disabled = true;
+
+	this.adjacencyMatrixButton.disabled = true;
 }
 
 AVL.prototype.enableUI = function (event) {
@@ -1295,7 +1315,16 @@ AVL.prototype.enableUI = function (event) {
 	this.deleteButton.disabled = false;
 	this.findField.disabled = false;
 	this.findButton.disabled = false;
-	this.printButton.disabled = false;
+	// this.printButton.disabled = false;
+
+	this.importButton.disabled = false;
+	this.importField.disabled = false;
+
+	this.printButton1.disabled = false;
+	this.printButton2.disabled = false;
+	this.printButton3.disabled = false;
+
+	this.adjacencyMatrixButton.disabled = false;
 }
 
 
