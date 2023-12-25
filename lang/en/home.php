@@ -4,7 +4,9 @@
     $g_lang["text"] = "<p>Create graph and find the shortest path. On the Help page you <a href=\"/en/help\">will find tutorial video</a>.</p>\n";
     $g_lang["add_node"] = "Add vertex";
     $g_lang["connect_nodes"] = "Connect vertices";
-    $g_lang["tree"] = "Tree";
+    $g_lang["tree"] = "AVL Tree";
+    $g_lang["bst"] = "Binary Search Tree";
+    $g_lang["graph_algo"] = "Graph Algorithm";
     $g_lang["delete"] = "Remove object";
     $g_lang["default"] = "Drag";
     $g_lang["short_path"] = "Find shortest path";

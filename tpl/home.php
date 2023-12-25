@@ -18,6 +18,35 @@
   </script>
   <script src="https://yandex.ru/ads/system/context.js" async></script>
 
+  <!-- Javascript for the AVL actual visualization code -->
+  <script type="text/javascript" src="script/AnimationLibrary/CustomEvents.js">
+  </script> <!---->
+  <script type="text/javascript" src="script/AnimationLibrary/UndoFunctions.js">
+  </script> <!---->
+  <script type="text/javascript" src="script/AnimationLibrary/AnimatedObject.js">
+  </script> <!---->
+  <script type="text/javascript" src="script/AnimationLibrary/AnimatedLabel.js">
+  </script> <!---->
+  <script type="text/javascript" src="script/AnimationLibrary/AnimatedCircle.js">
+  </script> <!---->
+  <script type="text/javascript" src="script/AnimationLibrary/AnimatedRectangle.js">
+  </script> <!---->
+  <!-- <script type="text/javascript" src="script/AnimationLibrary/AnimatedLinkedList.js"> -->
+  <!-- </script> -->
+  <script type="text/javascript" src="script/AnimationLibrary/HighlightCircle.js">
+  </script> <!---->
+  <script type="text/javascript" src="script/AnimationLibrary/Line.js"> </script>
+  <!---->
+  <script type="text/javascript" src="script/AnimationLibrary/ObjectManager.js">
+  </script> <!---->
+  <script type="text/javascript" src="script/AnimationLibrary/AnimationMain.js">
+  </script> <!---->
+  <script type="text/javascript" src="script/AlgorithmLibrary/Algorithm.js"> </script>
+  <!---->
+  <script type="text/javascript" src="script/AlgorithmLibrary/AVL.js"> </script>
+  <!-- -->
+  <script type="text/javascript" src="script/AlgorithmLibrary/BST.js"> </script>
+  <!-- -->
 </head>
 <!--
 <div class="pull-right">
@@ -35,8 +64,11 @@
 <span class="hidden-xs" id="h1Text"><?= L('text') ?></span>
 
 <section>
-  <ul class="nav nav-pills">
-
+  <button type="button" id="tree"><span class="glyphicon glyphicon-tree-deciduous fa-fw"></span><span> <?= L('tree') ?> <sub style="color:#AAAAAA">e</sub></span></button>
+  <button type="button" id="bst"><span class="glyphicon glyphicon glyphicon-search fa-fw"></span><span> <?= L('bst') ?> <sub style="color:#AAAAAA">e</sub></span></button>
+  <button type="button" id="graph_algo"><span class="glyphicon glyphicon-signal fa-fw"></span><span> <?= L('graph_algo') ?> <sub style="color:#AAAAAA">e</sub></span></button>
+  <br>
+  <ul class="nav nav-pills" id="GraphControls">
     <div class="btn-group" role="group">
       <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
         <span class="glyphicon glyphicon-cog fa-fw"></span><span class="hidden-phone"> <?= L('graph') ?> </span><span class="caret"></span></button>
@@ -108,7 +140,6 @@
     <button type="button" class="btn btn-default btn-sm" id="Default"><span class="glyphicon glyphicon-fullscreen fa-fw"></span><span class="hidden-phone"> <?= L('default') ?> <sub style="color:#AAAAAA">m</sub></span></button>
     <button type="button" class="btn btn-primary btn-sm" id="AddGraph"><span class="glyphicon glyphicon-plus fa-fw"></span><span class="hidden-phone"> <?= L('add_node') ?> <sub style="color:#AAAAAA">v</sub></span></button>
     <button type="button" class="btn btn-default btn-sm" id="ConnectGraphs"><span class="glyphicon glyphicon-road fa-fw"></span><span class="hidden-phone"> <?= L('connect_nodes') ?> <sub style="color:#AAAAAA">e</sub></span></button>
-    <button type="button" class="btn btn-default btn-sm" id="Tree"><span class="glyphicon glyphicon-tree-deciduous fa-fw"></span><span class="hidden-phone"> <?= L('tree') ?> <sub style="color:#AAAAAA">e</sub></span></button>
 
     <!-- Algorithms -->
     <div class="btn-group" role="group">
@@ -160,7 +191,7 @@
     </div>
 
     <button type="button" class="btn btn-default btn-sm" id="GraphUndo"><span class="glyphicon glyphicon-arrow-left fa-fw"></span><span class="hidden-phone"> <?= L('undo') ?> <sub style="color:#AAAAAA">crtl+z</sub></span></button>
-    
+
     <!--
         <? if (!$wasVote && count($voteTopics) > 0) : ?>
         <button type="button" class="btn btn-success" id="VoteButton"><span class="glyphicon glyphicon-thumbs-up"></span> <?= L('vote') ?></button>
@@ -170,12 +201,67 @@
 		  <button type="button" class="btn btn-default" id="Test"><span class="glyphicon glyphicon-remove"></span> Test repos</button>
 -->
   </ul>
+
+  <ul class="nav nav-pills" id="AlgorithmSpecificControls" style="display: none;">
+    <!-- Table for buttons to control specific animation (insert/find/etc) -->
+    <!-- (filled in by javascript code specific to the animation) -->
+    <td><button type="button" class="btn btn-default btn-sm" id="button-dialog-insert" style="margin-right: 1px;"><span class="glyphicon glyphicon-plus-sign fa-fw"></span><span class="hidden-phone"> Insert AVL Tree<sub style="color: rgb(170, 170, 170);"></sub></span></button></td>
+    <td><button type="button" class="btn btn-default btn-sm" id="button-dialog-delete" style="margin-right: 1px;"><span class="glyphicon glyphicon-remove-sign fa-fw"></span><span class="hidden-phone"> Delete Node<sub style="color: rgb(170, 170, 170);"></sub></span></button></td>
+    <td><button type="button" class="btn btn-default btn-sm" id="button-dialog-setting" style="margin-right: 1px;"><span class="glyphicon glyphicon-cog"></span><span class="hidden-phone"> Setting<sub style="color: rgb(170, 170, 170);"></sub></span></button></td>
+
+
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="openAlgorithmList">
+        <span class="glyphicon glyphicon-cog fa-fw "></span><span class="hidden-phone"> Algorithms </span><span class="caret"></span>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right" role="menu" id="algorithmList">
+
+        <div id="algorithmCategoryElements1">
+          <div class="dropdown-item" style="display: block;" id="PrintPreOrder-Button"><button type="button" class="btn btn-default btn-sm" style="width: 100%; text-align: left; border: none;"><span class="glyphicon glyphicon-search fa-fw"></span> Pre order traversal <span></span></button></div>
+          <div class="dropdown-item" style="display: block;" id="PrintInOrder-Button"><button type="button" class="btn btn-default btn-sm" style="width: 100%; text-align: left; border: none;"><span class="glyphicon glyphicon-search fa-fw"></span> <span> In order traversal </span></button></div>
+          <div class="dropdown-item" style="display: block;" id="PrintPostOrder-Button"><button type="button" class="btn btn-default btn-sm" style="width: 100%; text-align: left; border: none;"><span class="glyphicon glyphicon-search fa-fw"></span> <span> Post order traversal </span></button></div>
+          <div class="dropdown-item" style="display: block;" id="button-dialog-find"><button type="button" class="btn btn-default btn-sm" style="width: 100%; text-align: left; border: none;"><span class="glyphicon glyphicon-search fa-fw"></span> <span> Search Tree </span></button></div>
+        </div>
+      </div>
+    </div>
+
+  </ul>
+
+  <ul class="nav nav-pills" id="AlgorithmSpecificControlsBST" style="display: none;">
+    <!-- Table for buttons to control specific animation (insert/find/etc) -->
+    <!-- (filled in by javascript code specific to the animation) -->
+    <td><button type="button" class="btn btn-default btn-sm" id="button-dialog-insert-bst" style="margin-right: 1px;"><span class="glyphicon glyphicon-plus-sign fa-fw"></span><span class="hidden-phone"> Insert Binary Search Tree<sub style="color: rgb(170, 170, 170);"></sub></span></button></td>
+    <td><button type="button" class="btn btn-default btn-sm" id="button-dialog-delete-bst" style="margin-right: 1px;"><span class="glyphicon glyphicon-remove-sign fa-fw"></span><span class="hidden-phone"> Delete Node<sub style="color: rgb(170, 170, 170);"></sub></span></button></td>
+    <td><button type="button" class="btn btn-default btn-sm" id="button-dialog-setting-bst" style="margin-right: 1px;"><span class="glyphicon glyphicon-cog"></span><span class="hidden-phone"> Setting<sub style="color: rgb(170, 170, 170);"></sub></span></button></td>
+
+
+    
+    <div class="btn-group" role="group">
+      <button type="button" class="btn btn-default btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false" id="openAlgorithmList">
+        <span class="glyphicon glyphicon-cog fa-fw "></span><span class="hidden-phone"> Algorithms </span><span class="caret"></span>
+      </button>
+      <div class="dropdown-menu dropdown-menu-right" role="menu" id="algorithmList">
+
+        <div id="algorithmCategoryElements1BST">
+          <div class="dropdown-item" style="display: block;" id="BST-PrintPreOrder-Button"><button type="button" class="btn btn-default btn-sm" style="width: 100%; text-align: left; border: none;"><span class="glyphicon glyphicon-search fa-fw"></span> Pre order traversal <span></span></button></div>
+          <div class="dropdown-item" style="display: block;" id="BST-PrintInOrder-Button"><button type="button" class="btn btn-default btn-sm" style="width: 100%; text-align: left; border: none;"><span class="glyphicon glyphicon-search fa-fw"></span> <span> In order traversal </span></button></div>
+          <div class="dropdown-item" style="display: block;" id="BST-PrintPostOrder-Button"><button type="button" class="btn btn-default btn-sm" style="width: 100%; text-align: left; border: none;"><span class="glyphicon glyphicon-search fa-fw"></span> <span> Post order traversal </span></button></div>
+          
+          <div class="dropdown-item" style="display: block;" id="button-dialog-find-bst"><button type="button" class="btn btn-default btn-sm" style="width: 100%; text-align: left; border: none;"><span class="glyphicon glyphicon-search fa-fw"></span> <span> Search Tree </span></button></div>
+        </div>
+      </div>
+    </div>
+
+  </ul>
 </section>
 
 <section>
   <div id="message" class="alert alert-success" role="alert">Graph</div>
 </section>
 
+
+<canvas id="canvas-tree" width="1117" height="450" style="border: 2px solid lightgray; display: none;"></canvas>
+<canvas id="canvas-bst" width="1117" height="450" style="border: 2px solid lightgray; display: none;"></canvas>
 <section id="canvasSection">
   <span id="CanvasMessage"></span>
   <button type="button" class="btn btn-default btn-sm hidden-phone" id="Fullscreen"><span class="glyphicon glyphicon-resize-full fa-fw" id="FullscreenIcon"></span></button>
@@ -213,16 +299,195 @@
   </div>
 </section>
 
+<div id="dialog-insert-node" title="Insert Tree">
+  <td>
+    <label for="Insert-Text" style="display: block; margin-bottom: 5px;">Insert Node:</label>
+    <input type="Text" value="" id="Insert-Text" size="10" style="margin-right: 5px; height: 30px; width: 200px;">
+  </td>
+  <td>
+    <button type="button" class="btn btn-default btn-sm" id="Insert-Button" style="margin-left: 1px;">
+      <span class="glyphicon glyphicon-plus-sign fa-fw"></span>
+      <span class="hidden-phone"><sub style="color: rgb(170, 170, 170);"></sub>
+      </span>
+    </button>
+  </td>
+  <td>
+    <label for="Import-Text" style="display: block; margin-bottom: 5px;">Insert Multi Node:</label>
+    <input type="Text" placeholder='Separator by comma ","' id="Import-Text" size="10" style="margin-right: 5px; height: 30px; width: 200px;">
+  </td>
+  <td>
+    <button type="button" class="btn btn-default btn-sm" id="Import-Button" style="margin-left: 1px;">
+      <span class="glyphicon glyphicon-plus-sign fa-fw"></span>
+      <span class="hidden-phone"><sub style="color: rgb(170, 170, 170);"></sub>
+      </span>
+    </button>
+  </td>
+</div>
+
+<div id="dialog-delete-node" title="Delete Tree">
+  <td>
+    <label for="Insert-Text" style="display: block; margin-bottom: 5px;">Delete Node:</label>
+  <td><input type="Text" value="" id="Delete-Text" size="4" style="margin-right: 5px; height: 30px; width:200px;"></td>
+  </td>
+  <td>
+    <button type="button" class="btn btn-default btn-sm" id="Delete-Button" style="margin-right: 1px;">
+      <span class="glyphicon glyphicon-remove-sign fa-fw"></span>
+      <span class="hidden-phone"><sub style="color: rgb(170, 170, 170);"></sub></span></button>
+  </td>
+</div>
+
+<div id="dialog-setting" title="Setting">
+  <div id="generalAnimationControlSection">
+    <!-- Table for buttons to control general animation (play/pause/undo/etc) ->
+					<-- (filled in by javascript code, specifically AnimationMain.js)  -->
+
+    <table id="GeneralAnimationControls">
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td>
+                <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" style="width: 200px" id="slider-animation-speed">
+                  <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">Animation Speed</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td><label style="width: 50px; margin-right: 5px">w:</label></td>
+        <td><input id="canvas-width-input" type="Text" size="4"></td>
+      </tr>
+      <tr>
+        <td><label style="width: 50px; margin-right: 5px">h:</label></td>
+        <td><input id="canvas-height-input" type="Text" size="4"></td>
+      </tr>
+      <tr>
+        <td>
+          <input id="canvas-change-size-button" type="Button" value="Change Canvas Size" display="block" margin-top="5px">
+        </td>
+      </tr>
+    </table>
+
+  </div>
+</div>
+
+<div id="dialog-find-node" title="Search Tree">
+  <td>
+    <label for="Insert-Text" style="display: block; margin-bottom: 5px;">Find Node:</label>
+  <td><input type="Text" value="" id="Find-Text" size="4" style="margin-right: 5px; height: 30px; width:200px;"></td>
+  <td>
+    <button type="button" class="btn btn-default btn-sm" id="Find-Button" style="margin-right: 1px;"><span class="glyphicon glyphicon-search fa-fw"></span>
+      <span class="hidden-phone"><sub style="color: rgb(170, 170, 170);"></sub></span></button>
+  </td>
+</div>
+
+<!-- BST -->
+
+<div id="dialog-insert-node-bst" title="Insert Binary Search Tree">
+  <td>
+    <label for="Insert-Text" style="display: block; margin-bottom: 5px;">Insert Node:</label>
+    <input type="Text" value="" id="BST-Insert-Text" size="10" style="margin-right: 5px; height: 30px; width: 200px;">
+  </td>
+  <td>
+    <button type="button" class="btn btn-default btn-sm" id="BST-Insert-Button" style="margin-left: 1px;">
+      <span class="glyphicon glyphicon-plus-sign fa-fw"></span>
+      <span class="hidden-phone"><sub style="color: rgb(170, 170, 170);"></sub>
+      </span>
+    </button>
+  </td>
+  <td>
+    <label for="Import-Text" style="display: block; margin-bottom: 5px;">Insert Multi Node:</label>
+    <input type="Text" placeholder='Separator by comma ","' id="BST-Import-Text" size="10" style="margin-right: 5px; height: 30px; width: 200px;">
+  </td>
+  <td>
+    <button type="button" class="btn btn-default btn-sm" id="BST-Import-Button" style="margin-left: 1px;">
+      <span class="glyphicon glyphicon-plus-sign fa-fw"></span>
+      <span class="hidden-phone"><sub style="color: rgb(170, 170, 170);"></sub>
+      </span>
+    </button>
+  </td>
+</div>
+
+<div id="dialog-delete-node-bst" title="Delete Node">
+  <td>
+    <label for="Insert-Text" style="display: block; margin-bottom: 5px;">Delete Node:</label>
+  <td><input type="Text" value="" id="BST-Delete-Text" size="4" style="margin-right: 5px; height: 30px; width:200px;"></td>
+  </td>
+  <td>
+    <button type="button" class="btn btn-default btn-sm" id="BST-Delete-Button" style="margin-right: 1px;">
+      <span class="glyphicon glyphicon-remove-sign fa-fw"></span>
+      <span class="hidden-phone"><sub style="color: rgb(170, 170, 170);"></sub></span></button>
+  </td>
+</div>
+
+<div id="dialog-setting-bst" title="Setting">
+  <div id="generalAnimationControlSection">
+    <!-- Table for buttons to control general animation (play/pause/undo/etc) ->
+					<-- (filled in by javascript code, specifically AnimationMain.js)  -->
+
+    <table id="GeneralAnimationControls">
+      <tr>
+        <td>
+          <table>
+            <tr>
+              <td>
+                <div class="ui-slider ui-slider-horizontal ui-widget ui-widget-content ui-corner-all" style="width: 200px" id="slider-animation-speed-bst ">
+                  <span class="ui-slider-handle ui-state-default ui-corner-all" tabindex="0" style="left: 100%;"></span>
+                </div>
+              </td>
+            </tr>
+            <tr>
+              <td align="center">Animation Speed</td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+      <tr>
+        <td><label style="width: 50px; margin-right: 5px">w:</label></td>
+        <td><input id="canvas-width-input-bst" type="Text" size="4"></td>
+      </tr>
+      <tr>
+        <td><label style="width: 50px; margin-right: 5px">h:</label></td>
+        <td><input id="canvas-height-input-bst" type="Text" size="4"></td>
+      </tr>
+      <tr>
+        <td>
+          <input id="canvas-change-size-button-bst" type="Button" value="Change Canvas Size" display="block" margin-top="5px">
+        </td>
+      </tr>
+    </table>
+
+  </div>
+</div>
+
+<div id="dialog-find-node-bst" title="Binary Search Tree">
+  <td>
+    <label for="BST-Insert-Text" style="display: block; margin-bottom: 5px;">Find Node:</label>
+  <td><input type="Text" value="" id="BST-Find-Text" size="4" style="margin-right: 5px; height: 30px; width:200px;"></td>
+  <td>
+    <button type="button" class="btn btn-default btn-sm" id="BST-Find-Button" style="margin-right: 1px;"><span class="glyphicon glyphicon-search fa-fw"></span>
+      <span class="hidden-phone"><sub style="color: rgb(170, 170, 170);"></sub></span></button>
+  </td>
+</div>
+
+
+
+
 <?php if (L('current_language') == "en" && false) : ?>
 
-  <section style="height:32px;text-align: center;" id="bottom_info" class="hidden-phone">
+  <!-- <section style="height:32px;text-align: center;" id="bottom_info" class="hidden-phone">
     <a class="ProgresssBarLink" href="https://docs.google.com/spreadsheets/d/1iLswxMsTwfEu56RjW21nCov2LS_A-OJlmfJZ-j4Cj80/edit?usp=sharing" target="_blank">
       <div class="ProgressBar" style="height:32px">
         <div class="ProgressBarFill" style="width:0%;"></div>
         <span class="ProgressBarText" style="top:-28px">You may help us with translation to Portuguese</span>
       </div>
     </a>
-  </section>
+  </section> -->
 
 
 <?php elseif (L('current_language') == "ru" && false) : ?>
@@ -281,7 +546,7 @@
 -->
 
 <?php else : ?>
-  <section style="height:32px;text-align: center;" id="bottom_info" class="hidden-phone">
+  <!-- <section style="height:32px;text-align: center;" id="bottom_info" class="hidden-phone">
     <a class="ProgresssBarLink" href="opensource" target="_blank">
       <div class="ProgressBar" style="height:32px">
         <div class="ProgressBarFill" style="width:0%;"></div>
@@ -290,7 +555,7 @@
         </span>
       </div>
     </a>
-  </section>
+  </section> -->
 
 <?php endif; ?>
 
