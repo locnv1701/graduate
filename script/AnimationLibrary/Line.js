@@ -171,8 +171,8 @@ function Line(n1, n2, color, cv, d, weight, anchorIndex) {
 		ctx.globalAlpha = this.alpha;
 
 		if (this.highlighted)
-			this.drawArrow(this.highlightDiff, "#FF0000", ctx);
-		this.drawArrow(1, this.edgeColor, ctx);
+			this.drawArrow(this.highlightDiff, "#c7b7c7", ctx);// "#FF0000", ctx);
+		this.drawArrow(3, this.edgeColor, ctx);
 	}
 
 

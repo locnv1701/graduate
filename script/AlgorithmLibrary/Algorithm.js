@@ -113,11 +113,9 @@
 // }
 
 function findControlElement(type, name) {
-	var controlBar = document.getElementById("AlgorithmSpecificControls");
-
 	var selector = "[id='" + name + "-" + type + "']";
 
-	var res = controlBar.querySelector(selector);
+	var res = document.querySelector(selector);
 	console.log("controlBar", res);
 	return res;
 }

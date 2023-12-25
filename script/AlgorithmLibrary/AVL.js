@@ -75,17 +75,36 @@ AVL.prototype.init = function (am, w, h) {
 	this.first_print_pos_y = h - 2 * AVL.PRINT_VERTICAL_GAP;
 	this.print_max = w - 10;
 
-	fn.call(this, am, w, h); 	// khởi tạo các giá trị cơ bản //Algorithm.prototype.init = function(am, w, h)
+	this.initEvent();
+
+	fn.call(this, am, w, h);	 // khởi tạo các giá trị cơ bản //Algorithm.prototype.init = function(am, w, h)
 	this.startingX = w / 2;
 	this.addControls();			// khởi tạo các ô input nút bấm để lắng nghe các sự kiện insert, delete, ... trên giao diện
 	this.nextIndex = 1;
 	this.commands = [];
 	this.cmd("CreateLabel", 0, " ", AVL.EXPLANITORY_TEXT_X, AVL.EXPLANITORY_TEXT_Y, 0);
-	this.cmd("SETTEXT", 0, "AVL Tree Algorithms");
+	this.cmd("SETTEXT", 0, "AVL Tree's Algorithms");
 	this.animationManager.StartNewAnimation(this.commands);
 	this.animationManager.skipForward();
 	this.animationManager.clearHistory();
 
+}
+
+AVL.prototype.initEvent = function () {
+	console.log("initEvent AVL")
+	$("#button-dialog-insert").click(function () {
+		$("#dialog-insert-node").dialog('open');
+	});
+	$("#button-dialog-delete").click(function () {
+		$("#dialog-delete-node").dialog('open');
+	});
+	$("#button-dialog-setting").click(function () {
+		$("#dialog-setting").dialog('open');
+
+	});
+	$("#button-dialog-find").click(function () {
+		$("#dialog-find-node").dialog('open');
+	});
 }
 
 AVL.prototype.addControls = function () {
@@ -122,10 +141,6 @@ AVL.prototype.addControls = function () {
 
 	this.printButton3 = findControlElement("Button", "PrintPostOrder");
 	this.printButton3.onclick = this.printPostOrderCallback.bind(this);
-
-	this.adjacencyMatrixButton = findControlElement("Button", "AdjacencyMatrix");
-	this.adjacencyMatrixButton.onclick = this.adjacencyMatrixCallback.bind(this);
-
 }
 
 AVL.prototype.reset = function () {
@@ -139,6 +154,9 @@ AVL.prototype.reset = function () {
 AVL.prototype.insertCallback = function (event) {
 	console.log("bước 3: AVL.prototype.insertCallback")
 
+	$("#dialog-insert-node").dialog('close');
+
+
 	var insertedValue = this.insertField.value;
 	// Get text value
 	// insertedValue = this.normalizeNumber(insertedValue, 4);
@@ -151,6 +169,9 @@ AVL.prototype.insertCallback = function (event) {
 
 AVL.prototype.importCallback = function (event) {
 	console.log("bước 3: AVL.prototype.importCallback")
+
+	$("#dialog-insert-node").dialog('close');
+
 
 	var self = this;
 
@@ -176,6 +197,9 @@ AVL.prototype.importCallback = function (event) {
 
 AVL.prototype.deleteCallback = function (event) {
 	console.log("deleteCallback called", this.deleteField.value);
+
+	$("#dialog-delete-node").dialog('close');
+
 	var deletedValue = this.deleteField.value;
 	if (deletedValue != "") {
 		// deletedValue = this.normalizeNumber(deletedValue, 4);
@@ -186,6 +210,9 @@ AVL.prototype.deleteCallback = function (event) {
 
 
 AVL.prototype.findCallback = function (event) {
+
+	$("#dialog-find-node").dialog('close');
+
 	var findValue = this.findField.value;
 	if (findValue != "") {
 		// findValue = this.normalizeNumber(findValue, 4);
@@ -233,7 +260,7 @@ AVL.prototype.printTreePreOrder = function (unused) {
 		this.cmd("Step");
 		for (var i = firstLabel; i < this.nextIndex; i++)
 			this.cmd("Delete", i);
-		this.nextIndex = this.highlightID;  /// Reuse objects.  Not necessary.
+		this.nextIndex = this.highlightID;  /// Reuse objectsNot necessary.
 	}
 
 	var stringList = this.order.map(number => number.toString());
@@ -1305,7 +1332,6 @@ AVL.prototype.disableUI = function (event) {
 	this.printButton2.disabled = true;
 	this.printButton3.disabled = true;
 
-	this.adjacencyMatrixButton.disabled = true;
 }
 
 AVL.prototype.enableUI = function (event) {
@@ -1324,7 +1350,6 @@ AVL.prototype.enableUI = function (event) {
 	this.printButton2.disabled = false;
 	this.printButton3.disabled = false;
 
-	this.adjacencyMatrixButton.disabled = false;
 }
 
 
@@ -1380,7 +1405,82 @@ var currentAlg;
 
 function init() {
 	console.log("AVL init()")
-	var animManag = initCanvas();
+	var animManag = initCanvasAVL();
 
 	currentAlg = new AVL(animManag, canvas.width, canvas.height);
+}
+
+function initDialog() {
+	console.log("initDialog")
+	$("#dialog-insert-node").dialog({
+		modal: true,
+		autoOpen: false,
+		width: 300,
+		height: 200,
+		open: function () {
+
+		},
+		position: {
+			my: 'center', at: 'center', of: window, using: function (pos) {
+				$(this).css({
+					top: '270px', // Đặt vị trí theo chiều dọc
+					left: '230px' // Đặt vị trí theo chiều ngang
+				});
+			}
+		},
+	});
+
+	$("#dialog-delete-node").dialog({
+		modal: true,
+		autoOpen: false,
+		width: 300,
+		height: 150,
+		open: function () {
+
+		},
+		position: {
+			my: 'center', at: 'center', of: window, using: function (pos) {
+				$(this).css({
+					top: '270px', // Đặt vị trí theo chiều dọc
+					left: '230px' // Đặt vị trí theo chiều ngang
+				});
+			}
+		}
+	});
+
+	$("#dialog-setting").dialog({
+		modal: true,
+		autoOpen: false,
+		// width: 300,
+		// height: 150,
+		open: function () {
+
+		},
+		position: {
+			my: 'center', at: 'center', of: window, using: function (pos) {
+				$(this).css({
+					top: '270px', // Đặt vị trí theo chiều dọc
+					left: '230px' // Đặt vị trí theo chiều ngang
+				});
+			}
+		}
+	});
+
+	$("#dialog-find-node").dialog({
+		modal: true,
+		autoOpen: false,
+		width: 300,
+		height: 150,
+		open: function () {
+
+		},
+		position: {
+			my: 'center', at: 'center', of: window, using: function (pos) {
+				$(this).css({
+					top: '270px', // Đặt vị trí theo chiều dọc
+					left: '230px' // Đặt vị trí theo chiều ngang
+				});
+			}
+		}
+	});
 }

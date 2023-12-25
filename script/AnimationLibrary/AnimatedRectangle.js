@@ -205,8 +205,8 @@ AnimatedRectangle.prototype.draw = function (context) {
 	context.lineWidth = 1;
 
 	if (this.highlighted) {
-		context.strokeStyle = "#ff0000";
-		context.fillStyle = "#ff0000";
+		context.strokeStyle = "#c7b7c7";// "#ff0000";
+		context.fillStyle = "#c7b7c7";// "#ff0000";
 
 		context.beginPath();
 		context.moveTo(startX - this.highlightDiff, startY - this.highlightDiff);

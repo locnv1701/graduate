@@ -887,7 +887,29 @@ AddGraphHandler.prototype.ChangedType = function () {
     this.app.SetEnumVerticesType(enumVertexsText.options[enumVertexsText.selectedIndex].value);
 }
 
+/*
+ * Tree handler.
+ *
+ */
+function TreeHandler(app) {
+    this.app = app;
+}
 
+TreeHandler.prototype.RestoreAll = function () {
+}
+
+TreeHandler.prototype.GetMessage = function (local) {
+    console.log("TreeHandler.getMessage", this.message);
+    return "AVL TREE";
+}
+
+TreeHandler.prototype.InitControls = function () {
+    AVL();
+}
+
+// TreeHandler.prototype.InitControls = function () {
+//     AVL();
+// }
 
 /**
  * Connection Graph handler.

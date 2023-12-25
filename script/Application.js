@@ -829,24 +829,56 @@ Application.prototype.onLoad = function () {
     this.document.getElementById('tree').onclick = function () {
         console.log("========================= tree mode =========================")
         document.getElementById("AlgorithmSpecificControls").style.display = 'block';
+        document.getElementById("AlgorithmSpecificControlsBST").style.display = 'none';
         document.getElementById("GraphControls").style.display = 'none';
 
-        AVL();
+        document.getElementById("canvas-tree").style.display = 'block';
+        document.getElementById("canvasSection").style.display = 'none';
+        document.getElementById("canvas-bst").style.display = 'none';
 
+        AVL();
     }
+
+    this.document.getElementById('bst').onclick = function () {
+        console.log("========================= bst mode 2 =========================")
+        document.getElementById("AlgorithmSpecificControls").style.display = 'none';
+        document.getElementById("AlgorithmSpecificControlsBST").style.display = 'block';
+        document.getElementById("GraphControls").style.display = 'none';
+
+        document.getElementById("canvas-tree").style.display = 'block';
+        document.getElementById("canvasSection").style.display = 'none';
+        document.getElementById("canvas-bst").style.display = 'none';
+
+
+        BST();
+    }
+
+    var self = this;
 
     this.document.getElementById('graph_algo').onclick = function () {
         console.log("========================= graph_algo =========================")
 
         document.getElementById("GraphControls").style.display = 'block';
         document.getElementById("AlgorithmSpecificControls").style.display = 'none';
+        document.getElementById("AlgorithmSpecificControlsBST").style.display = 'none';
 
-        this.SetDefaultHandler();
+        document.getElementById("canvas-tree").style.display = 'none';
+        document.getElementById("canvasSection").style.display = 'block';
+        document.getElementById("canvas-bst").style.display = 'none';
 
-        this.updateMessage();
-        this.redrawGraph();
+
+        document.getElementById("message").innerText = "Graph's Algorithms";
+
+        // self.SetDefaultHandler();
+
+        // self.updateMessage();
+        // self.redrawGraph();
     }
 
+    this.SetDefaultHandler();
+
+    this.updateMessage();
+    this.redrawGraph();
 
 }
 

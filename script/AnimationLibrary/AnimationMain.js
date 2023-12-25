@@ -81,12 +81,12 @@ var objectManager;
 var animationManager;
 var canvas;
 
-var paused = false;
-var playPauseBackButton;
-var skipBackButton;
-var stepBackButton;
-var stepForwardButton;
-var skipForwardButton;
+// var paused = false;
+// var playPauseBackButton;
+// var skipBackButton;
+// var stepBackButton;
+// var stepForwardButton;
+// var skipForwardButton;
 
 var widthEntry;
 var heightEntry;
@@ -130,38 +130,38 @@ function returnSubmit(field, funct, maxsize, intOnly) {
 
 
 function animWaiting() {
-	stepForwardButton.disabled = false;
-	if (skipBackButton.disabled == false) {
-		stepBackButton.disabled = false;
-	}
+	// stepForwardButton.disabled = false;
+	// if (skipBackButton.disabled == false) {
+	// 	stepBackButton.disabled = false;
+	// }
 	objectManager.statusReport.setText("Animation Paused");
-	objectManager.statusReport.setForegroundColor("#FF0000");
+	objectManager.statusReport.setForegroundColor("#FFFFFF");
 }
 
 function animStarted() {
-	skipForwardButton.disabled = false;
-	skipBackButton.disabled = false;
-	stepForwardButton.disabled = true;
-	stepBackButton.disabled = true;
+	// skipForwardButton.disabled = false;
+	// skipBackButton.disabled = false;
+	// stepForwardButton.disabled = true;
+	// stepBackButton.disabled = true;
 	objectManager.statusReport.setText("Animation Running");
-	objectManager.statusReport.setForegroundColor("#009900");
+	objectManager.statusReport.setForegroundColor("#FFFFFF");
 }
 
 function animEnded() {
-	skipForwardButton.disabled = true;
-	stepForwardButton.disabled = true;
-	if (skipBackButton.disabled == false && paused) {
-		stepBackButton.disabled = false;
-	}
+	// skipForwardButton.disabled = true;
+	// stepForwardButton.disabled = true;
+	// if (skipBackButton.disabled == false && paused) {
+	// 	stepBackButton.disabled = false;
+	// }
 	objectManager.statusReport.setText("Animation Completed");
-	objectManager.statusReport.setForegroundColor("#000000");
+	objectManager.statusReport.setForegroundColor("#FFFFFF");
 }
 
 
 
 function anumUndoUnavailable() {
-	skipBackButton.disabled = true;
-	stepBackButton.disabled = true;
+	// skipBackButton.disabled = true;
+	// stepBackButton.disabled = true;
 }
 
 
@@ -176,38 +176,38 @@ function timeout() {
 }
 
 
-function doStep() {
-	animationManager.step();
-}
+// function doStep() {
+// 	animationManager.step();
+// }
 
 
-function doSkip() {
-	animationManager.skipForward();
-}
+// function doSkip() {
+// 	animationManager.skipForward();
+// }
 
 
-function doSkipBack() {
-	animationManager.skipBack();
-}
+// function doSkipBack() {
+// 	animationManager.skipBack();
+// }
 
 
-function doStepBack() {
-	animationManager.stepBack();
-}
-function doPlayPause() {
-	paused = !paused;
-	if (paused) {
-		playPauseBackButton.setAttribute("value", "play");
-		if (skipBackButton.disabled == false) {
-			stepBackButton.disabled = false;
-		}
+// function doStepBack() {
+// 	animationManager.stepBack();
+// }
+// function doPlayPause() {
+// 	paused = !paused;
+// 	if (paused) {
+// 		playPauseBackButton.setAttribute("value", "play");
+// 		if (skipBackButton.disabled == false) {
+// 			stepBackButton.disabled = false;
+// 		}
 
-	}
-	else {
-		playPauseBackButton.setAttribute("value", "pause");
-	}
-	animationManager.SetPaused(paused);
-}
+// 	}
+// 	else {
+// 		playPauseBackButton.setAttribute("value", "pause");
+// 	}
+// 	animationManager.SetPaused(paused);
+// }
 
 
 function addControl(type, name, location) {
@@ -252,64 +252,22 @@ function addControlToAnimationBar(type, name, containerType) {
 
 }
 
-
-function initCanvas() {
+function initCanvasAVL() {
+	console.log("initCanvasAVL");
 	canvas = document.getElementById("canvas-tree");
 	objectManager = new ObjectManager();
 	animationManager = new AnimationManager(objectManager, document);
 
-	skipBackButton = addControlToAnimationBar("Button", "Skip Back");
-	skipBackButton.onclick = animationManager.skipBack.bind(animationManager);
-	stepBackButton = addControlToAnimationBar("Button", "Step Back");
-	stepBackButton.onclick = animationManager.stepBack.bind(animationManager);
-	playPauseBackButton = addControlToAnimationBar("Button", "Pause");
-	playPauseBackButton.onclick = doPlayPause;
-	stepForwardButton = addControlToAnimationBar("Button", "Step Forward");
-	stepForwardButton.onclick = animationManager.step.bind(animationManager);
-	skipForwardButton = addControlToAnimationBar("Button", "Skip Forward");
-	skipForwardButton.onclick = animationManager.skipForward.bind(animationManager);
-
-
-	var element = document.createElement("div");
-	element.setAttribute("display", "inline-block");
-	element.setAttribute("float", "left");
-
-
-	var tableEntry = document.createElement("td");
-
-
-	var controlBar = document.getElementById("GeneralAnimationControls");
-
-
-
-	var newTable = document.createElement("table");
-
-	var midLevel = document.createElement("tr");
-	var bottomLevel = document.createElement("td");
-	midLevel.appendChild(bottomLevel);
-	bottomLevel.appendChild(element);
-	newTable.appendChild(midLevel);
-
-
-
-	midLevel = document.createElement("tr");
-	bottomLevel = document.createElement("td");
-	bottomLevel.align = "center";
-	var txtNode = document.createTextNode("Animation Speed");
-	midLevel.appendChild(bottomLevel);
-	bottomLevel.appendChild(txtNode);
-	newTable.appendChild(midLevel);
-
-
-
-	tableEntry.appendChild(newTable);
-
-
-
-	//Append the element in page (in span).
-	controlBar.appendChild(tableEntry);
-
-	//tableEntry.appendChild(element);
+	// skipBackButton = addControlToAnimationBar("Button", "Skip Back");
+	// skipBackButton.onclick = animationManager.skipBack.bind(animationManager);
+	// stepBackButton = addControlToAnimationBar("Button", "Step Back");
+	// stepBackButton.onclick = animationManager.stepBack.bind(animationManager);
+	// playPauseBackButton = addControlToAnimationBar("Button", "Pause");
+	// playPauseBackButton.onclick = doPlayPause;
+	// stepForwardButton = addControlToAnimationBar("Button", "Step Forward");
+	// stepForwardButton.onclick = animationManager.step.bind(animationManager);
+	// skipForwardButton = addControlToAnimationBar("Button", "Skip Forward");
+	// skipForwardButton.onclick = animationManager.skipForward.bind(animationManager);
 
 	var speed = getCookie("VisualizationSpeed");
 	if (speed == null || speed == "") {
@@ -319,7 +277,7 @@ function initCanvas() {
 		speed = parseInt(speed);
 	}
 
-	$(element).slider({
+	$('#slider-animation-speed').slider({
 		animate: true,
 		value: speed,
 		change: function (e, ui) {
@@ -328,14 +286,9 @@ function initCanvas() {
 		slide: function (e, ui) {
 			animationManager.SetSpeed(ui.value);
 		}
-
 	});
 
 	animationManager.SetSpeed(speed);
-
-	element.setAttribute("style", "width:200px");
-
-
 
 	var width = getCookie("VisualizationWidth");
 	if (width == null || width == "") {
@@ -362,35 +315,108 @@ function initCanvas() {
 	canvas.height = height;
 
 
-
-	tableEntry = document.createElement("td");
-	txtNode = document.createTextNode(" w:");
-	tableEntry.appendChild(txtNode);
-	controlBar.appendChild(tableEntry);
-
-
-	widthEntry = addControlToAnimationBar("Text", canvas.width);
+	widthEntry = document.getElementById('canvas-width-input');
+	widthEntry.value = width;
 	widthEntry.size = 4;
 	widthEntry.onkeydown = this.returnSubmit(widthEntry, animationManager.changeSize.bind(animationManager), 4, true);
 
 
-	tableEntry = document.createElement("td");
-	txtNode = document.createTextNode("       h:");
-	tableEntry.appendChild(txtNode);
-	controlBar.appendChild(tableEntry);
-
-	heightEntry = addControlToAnimationBar("Text", canvas.height);
+	heightEntry = document.getElementById('canvas-height-input');
+	heightEntry.value = height;
+	heightEntry.size = 4;
 	heightEntry.onkeydown = this.returnSubmit(heightEntry, animationManager.changeSize.bind(animationManager), 4, true);
 
-	//	heightEntry.size = 4;
-	sizeButton = addControlToAnimationBar("Button", "Change Canvas Size");
 
+	sizeButton = document.getElementById('canvas-change-size-button');
 	sizeButton.onclick = animationManager.changeSize.bind(animationManager);
 
+	animationManager.addListener("AnimationStarted", this, animStarted);
+	animationManager.addListener("AnimationEnded", this, this.animEnded);
+	animationManager.addListener("AnimationWaiting", this, this.animWaiting);
+	animationManager.addListener("AnimationUndoUnavailable", this, this.anumUndoUnavailable);
+	objectManager.width = canvas.width;
+	objectManager.height = canvas.height;
+	return animationManager;
+}
 
-	swapButton = addControlToAnimationBar("Button", "Move Controls");
-	swapButton.onclick = swapControlDiv;
 
+function initCanvasBST() {
+	console.log("initCanvasBST");
+	canvas = document.getElementById("canvas-tree");
+	objectManager = new ObjectManager();
+	animationManager = new AnimationManager(objectManager, document);
+
+	// skipBackButton = addControlToAnimationBar("Button", "Skip Back");
+	// skipBackButton.onclick = animationManager.skipBack.bind(animationManager);
+	// stepBackButton = addControlToAnimationBar("Button", "Step Back");
+	// stepBackButton.onclick = animationManager.stepBack.bind(animationManager);
+	// playPauseBackButton = addControlToAnimationBar("Button", "Pause");
+	// playPauseBackButton.onclick = doPlayPause;
+	// stepForwardButton = addControlToAnimationBar("Button", "Step Forward");
+	// stepForwardButton.onclick = animationManager.step.bind(animationManager);
+	// skipForwardButton = addControlToAnimationBar("Button", "Skip Forward");
+	// skipForwardButton.onclick = animationManager.skipForward.bind(animationManager);
+
+	var speed = getCookie("VisualizationSpeed");
+	if (speed == null || speed == "") {
+		speed = ANIMATION_SPEED_DEFAULT;
+	}
+	else {
+		speed = parseInt(speed);
+	}
+
+	$('#slider-animation-speed-bst').slider({
+		animate: true,
+		value: speed,
+		change: function (e, ui) {
+			setCookie("VisualizationSpeed", String(ui.value), 30);
+		},
+		slide: function (e, ui) {
+			animationManager.SetSpeed(ui.value);
+		}
+	});
+
+	animationManager.SetSpeed(speed);
+
+	var width = getCookie("VisualizationWidth");
+	if (width == null || width == "") {
+		width = canvas.width;
+	}
+	else {
+		width = parseInt(width);
+	}
+	var height = getCookie("VisualizationHeight");
+	if (height == null || height == "") {
+		height = canvas.height;
+	}
+	else {
+		height = parseInt(height);
+	}
+
+	var swappedControls = getCookie("VisualizationControlSwapped");
+	swapped = swappedControls == "true"
+	if (swapped) {
+		reorderSibling(document.getElementById('canvas-tree'), document.getElementById('generalAnimationControlSection'));
+	}
+
+	canvas.width = width;
+	canvas.height = height;
+
+
+	widthEntry = document.getElementById('canvas-width-input-bst');
+	widthEntry.value = width;
+	widthEntry.size = 4;
+	widthEntry.onkeydown = this.returnSubmit(widthEntry, animationManager.changeSize.bind(animationManager), 4, true);
+
+
+	heightEntry = document.getElementById('canvas-height-input-bst');
+	heightEntry.value = height;
+	heightEntry.size = 4;
+	heightEntry.onkeydown = this.returnSubmit(heightEntry, animationManager.changeSize.bind(animationManager), 4, true);
+
+
+	sizeButton = document.getElementById('canvas-change-size-button-bst');
+	sizeButton.onclick = animationManager.changeSize.bind(animationManager);
 
 	animationManager.addListener("AnimationStarted", this, animStarted);
 	animationManager.addListener("AnimationEnded", this, this.animEnded);
@@ -487,6 +513,8 @@ function AnimationManager(objectManager, dom) {
 
 	this.changeSize = function () {
 
+		$("#dialog-setting").dialog('close');
+		$("#dialog-setting-bst").dialog('close');
 		var width = parseInt(widthEntry.value);
 		var height = parseInt(heightEntry.value);
 

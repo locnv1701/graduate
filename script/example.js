@@ -1,42 +1,46 @@
 
-function gEncodeToHTML(str) {
+function gEncodeToHTML(str)
+{
     if (typeof str !== 'string')
-        return str;
-
+      return str;
+        
     return str.replace(/&/g, '&amp;')
-        .replace(/</g, '&lt;')
-        .replace(/>/g, '&gt;')
-        .replace(/"/g, '&quot;')
-        .replace(/'/g, '&apos;');
+               .replace(/</g, '&lt;')
+               .replace(/>/g, '&gt;')
+               .replace(/"/g, '&quot;')
+               .replace(/'/g, '&apos;');
 }
 
-function gDecodeFromHTML(str) {
-    if (typeof str !== 'string')
-        return str;
-
-    return str.replace(/&apos;/g, "'")
-        .replace(/&quot;/g, '"')
-        .replace(/&gt;/g, '>')
-        .replace(/&lt;/g, '<')
-        .replace(/&amp;/g, '&');
+function gDecodeFromHTML(str)
+{
+   if (typeof str !== 'string')
+     return str;
+    
+   return str.replace(/&apos;/g, "'")
+               .replace(/&quot;/g, '"')
+               .replace(/&gt;/g, '>')
+               .replace(/&lt;/g, '<')
+               .replace(/&amp;/g, '&'); 
 }
 
-function FullObjectCopy(obj) {
-    var newObj = Object.create(Object.getPrototypeOf(obj));
+function FullObjectCopy(obj)
+{
+  var newObj = Object.create(Object.getPrototypeOf(obj));
 
-    return Object.assign(newObj, obj);
+  return Object.assign(newObj, obj);
 }
 
-function FullArrayCopy(arr) {
-    var res = [];
+function FullArrayCopy(arr)
+{
+  var res = [];
 
-    arr.forEach(function (element) {
+	arr.forEach(function(element) {
 
-        var copyElement = FullObjectCopy(element);
-        res.push(copyElement);
-    });
+    var copyElement = FullObjectCopy(element);
+    res.push(copyElement);
+	});  
 
-    return res;
+  return res;
 }/**
  *  Place here all tests constants.
  *
@@ -60,7 +64,7 @@ var g_orintEdge = "Directed";
 var g_notOrintEdge = "Undirected";
 
 var g_adjacencyMatrixText = "Adjacency Matrix";
-var g_save = "Save";
+var g_save   = "Save";
 var g_cancel = "Cancel";
 var g_save_graph = "Save Graph";
 
@@ -68,7 +72,7 @@ var g_shortestDistance = "lowest-distance is ";
 var g_incidenceMatrixText = "Incidence Matrix";
 
 var g_save_dialog = "Save dialog";
-var g_close = "close";
+var g_close       = "close";
 var g_sickConnectedComponent = "Sick connected component is ";
 var g_connectedComponent = "Connected component is ";
 
@@ -77,9 +81,9 @@ var g_what_do_you_think = "What do you think about site?";
 var g_name = "Name";
 var g_feedback = "Feedback";
 var g_send = "Send";
-var g_write_to_us = "Write to us";
+var g_write_to_us = "Write to us";	        
 
-var g_fixMatrix = "Fix matrix";
+var g_fixMatrix      = "Fix matrix";
 var g_readMatrixHelp = "Matrix format help";
 var g_matrixWrongFormat = "Matrix is wrong";
 var g_pairWrongFormat = "Edge List is wrong";
@@ -92,7 +96,7 @@ var g_fullReport = "Full report";
 var g_shortReport = "Short report";
 
 var g_hasEulerianLoop = "Graph has Eulerian Loop";
-var g_hasNotEulerianLoop = "Graph has not Eulerian Loop";
+var g_hasNotEulerianLoop  = "Graph has not Eulerian Loop";
 
 var g_hasEulerianPath = "Graph has Eulerian Path";
 var g_hasNotEulerianPath = "Graph has not Eulerian Path";
@@ -116,20 +120,20 @@ var g_vote = "Vote";
 var g_recommendAlgorithm = "Recommend algorithm";
 
 var g_graphOfMinDist = "Graph of minimal distances.";
-var g_checkToSave = "Check to save";
+var g_checkToSave    = "Check to save";
 var g_showDistMatrix = "Show Distance matrix";
 var g_minDistMatrixText = "Minimal distances matrix";
 
-var g_selectStartVertexForMaxFlow = "Select source vertex for max flow";
+var g_selectStartVertexForMaxFlow  = "Select source vertex for max flow";
 var g_selectFinishVertexForMaxFlow = "Select sink vertex for max flow";
 var g_maxFlowResult = "Maximum flow from %2 to %3 is %1";
 var g_flowNotExists = "Flow from %1 to %2 does not exists";
 
 var g_sourceVertex = "Source";
-var g_sinkVertex = "Sink";
+var g_sinkVertex   = "Sink";
 
 var g_hasHamiltonianLoop = "Graph has Hamiltonian Loop";
-var g_hasNotHamiltonianLoop = "Graph has not Hamiltonian Loop";
+var g_hasNotHamiltonianLoop  = "Graph has not Hamiltonian Loop";
 
 var g_hasHamiltonianPath = "Graph has Hamiltonian Path";
 var g_hasNotHamiltonianPath = "Graph has not Hamiltonian Path";
@@ -137,65 +141,65 @@ var g_hasNotHamiltonianPath = "Graph has not Hamiltonian Path";
 var g_startTraversal = "Select start traversal vector";
 var g_traversalOrder = "Traversal order: ";
 
-var g_curveEdge = "Curved edge";
+var g_curveEdge      = "Curved edge";
 
-var g_Undo = "Undo";
-var g_default = "default";
-var g_vertexDraw = "Vertex draw style";
-var g_edgeDraw = "Edge draw style";
+var g_Undo           = "Undo";
+var g_default        = "default";
+var g_vertexDraw     = "Vertex draw style";
+var g_edgeDraw       = "Edge draw style";
 var g_backgroundStyle = "Background style";
 
-var g_GraphIsMultiMessage = "Graph is multigraph";
+var g_GraphIsMultiMessage   = "Graph is multigraph";
 var g_GraphIsGeneralMessage = "";
-var g_DefaultWeightPreset = "no weight";
-var g_dragGroupText = "Drag group.";
-var g_selectGroupText = "Select using ctrl";
-var g_copyGroupeButton = "Duplicate";
-var g_removeGroupeButton = "Remove objects";
+var g_DefaultWeightPreset   = "no weight";
+var g_dragGroupText         = "Drag group.";
+var g_selectGroupText       = "Select using ctrl";
+var g_copyGroupeButton      = "Duplicate";
+var g_removeGroupeButton    = "Remove objects";
 
-var g_BFSName = "Breadth-first search";
-var g_ColoringName = "Graph coloring";
+var g_BFSName               = "Breadth-first search";   
+var g_ColoringName          = "Graph coloring";
 var g_findConnectedComponent = "Find connected components";
-var g_DFSName = "Depth-first search";
-var g_EulerinLoopName = "Find Eulerian cycle";
-var g_EulerinPath = "Find Eulerian path";
-var g_FloidName = "Floyd–Warshall algorithm";
-var g_GraphReorder = "Arrange the graph";
-var g_HamiltoianCycleName = "Find Hamiltonian cycle";
-var g_HamiltonianPath = "Find Hamiltonian path";
-var g_MaxFlowName = "Find Maximum flow";
-var g_minimumSpanningTree = "Search of minimum spanning tree";
-var g_modernGraphStyleName = "Visualization based on weight";
-var g_RadiusAndDiameter = "Search graph radius and diameter";
-var g_findShortPathName = "Find shortest path using Dijkstra's algorithm";
-var g_VerticesDegreeName = "Calculate vertices degree";
-var g_SpanningTreeResult = "Min Spanning Tree is";
+var g_DFSName               = "Depth-first search";
+var g_EulerinLoopName       = "Find Eulerian cycle";
+var g_EulerinPath           = "Find Eulerian path";
+var g_FloidName             = "Floyd–Warshall algorithm";
+var g_GraphReorder          = "Arrange the graph";
+var g_HamiltoianCycleName   = "Find Hamiltonian cycle";
+var g_HamiltonianPath       = "Find Hamiltonian path";
+var g_MaxFlowName           = "Find Maximum flow";
+var g_minimumSpanningTree   = "Search of minimum spanning tree";
+var g_modernGraphStyleName  = "Visualization based on weight";
+var g_RadiusAndDiameter     = "Search graph radius and diameter";
+var g_findShortPathName     = "Find shortest path using Dijkstra's algorithm";
+var g_VerticesDegreeName    = "Calculate vertices degree";
+var g_SpanningTreeResult    = "Min Spanning Tree is";
 var g_SpanningTreeIgnoreDir = "We ignored edges direction for calculation";
 var g_SpanningTreeNotConnected = "Graph is not connected";
 
-var g_selectFirstGraphIsomorphismCheck = "Select first graph for isomorphic check. Click to any node of graph";
+var g_selectFirstGraphIsomorphismCheck  = "Select first graph for isomorphic check. Click to any node of graph";
 var g_selectSecondGraphIsomorphismCheck = "Select second graph for isomorphic check. Click to any node of graph";
 
-var g_selectFirstGraphPatternCheck = "Select a template graph by clicking to any node of graph";
+var g_selectFirstGraphPatternCheck       = "Select a template graph by clicking to any node of graph";
 var g_selectSecondGraphForSearchSubgraph = "Choose a graph in which we will look for isomorphic subgraphs. Click to any node of this graph";
 
 // IsomorphismCheck.js
-var g_graphsIsomorph = "Graphs are isomorphic";
-var g_graphsNotIsomorph = "Graphs are not isomorphic";
-var g_numberOfIsomorphSubgraphIs = "Number of isomorphic subgraphs are ";
-var g_graphHasNoIsomorphSubgraph = "Graph don't contain isomorphic subgraphs";
-var g_searchIsomorphSubgraph = "Search isomorphic subgraphs";
-var g_subgraphNo = "Isomorphic subgraph # ";
-var g_graphHasNoAtleast2Graphs = "To use the algorithm, you need to create 2 separate graphs";
-var g_IsomorphismCheck = "Check Graphs Isomorphism";
+var g_graphsIsomorph                    = "Graphs are isomorphic";
+var g_graphsNotIsomorph                 = "Graphs are not isomorphic";
+var g_numberOfIsomorphSubgraphIs        = "Number of isomorphic subgraphs are ";
+var g_graphHasNoIsomorphSubgraph        = "Graph don't contain isomorphic subgraphs";
+var g_searchIsomorphSubgraph            = "Search isomorphic subgraphs";
+var g_subgraphNo                        = "Isomorphic subgraph # ";
+var g_graphHasNoAtleast2Graphs          = "To use the algorithm, you need to create 2 separate graphs";
+var g_IsomorphismCheck                  = "Check Graphs Isomorphism";
 
 // RadiusAndDiameter.js
-var g_graphIsDisconnected = "Graph is disconnected";
-var g_graphIsTrivial = "Graph contains only one vertex";
-var g_graphRadius = "Graph radius";
-var g_graphDiameter = "Graph diameter";
-var g_vertexCentral = "Central";
-var g_vertexPeripheral = "Peripheral";
+var g_graphIsDisconnected   = "Graph is disconnected";
+var g_graphIsTrivial        = "Graph contains only one vertex";
+var g_graphRadius           = "Graph radius";
+var g_graphDiameter         = "Graph diameter";
+var g_vertexCentral         = "Central";
+var g_vertexPeripheral      = "Peripheral";
 
 // VerticesDegree.js
 var g_maximumDegreeOfGraph = "The maximum degree of a graph is";
@@ -206,9 +210,9 @@ var g_colorNumber = "Color number is";
 var g_done = "Done";
 
 var g_action = "Action";
-var g_commonEdgeStyle = "Common Edge Style";
+var g_commonEdgeStyle   = "Common Edge Style";
 var g_selectedEdgeStyle = "Selected Edge Style";
-var g_commonVertexStyle = "Common Vertex Style";
+var g_commonVertexStyle   = "Common Vertex Style";
 var g_selectedVertexStyle = "Selected Vertex Style";
 
 // FindAllPatches.js
@@ -230,175 +234,176 @@ var g_useContextMenuText = "Use context menu for addition actions."
 var g_findLongestPath = "Find the longest path";
 var g_LengthOfLongestPathFrom = "Length of the longest path from ";
 
-var g_additionalActions = "Additional actions";
-var g_reverseAllEdges = "Reverse all edges";
+var g_additionalActions  = "Additional actions";
+var g_reverseAllEdges   = "Reverse all edges";
 var g_makeAllUndirected = "Make all edges undirected";
-var g_makeAllDirected = "Make all edges directed";
+var g_makeAllDirected   = "Make all edges directed";
 
 var g_reuseSavedEdge = "Reuse saved edge";
 
-function loadTexts() {
-    g_textsSelectAndMove = document.getElementById("SelectAndMoveObject").innerHTML;
-    g_moveCursorForMoving = document.getElementById("MoveCursorForMoving").innerHTML;
-    g_clickToAddVertex = document.getElementById("clickToAddVertex").innerHTML;
-    g_selectFirstVertexToConnect = document.getElementById("selectFisrtVertextToConnect").innerHTML;
-    g_selectSecondVertexToConnect = document.getElementById("selectSecondVertextToConnect").innerHTML;
-    g_selectStartVertexForShortPath = document.getElementById("selectStartShortPathVertex").innerHTML;
-    g_selectFinishVertexForShortPath = document.getElementById("selectFinishShortPathVertex").innerHTML;
-    g_shortestPathResult = document.getElementById("shortPathResult").innerHTML;
-    g_pathNotExists = document.getElementById("pathNotExists").innerHTML;
-    g_selectObjectToDelete = document.getElementById("selectObjectToDelete").innerHTML;
+function loadTexts()
+{
+	g_textsSelectAndMove  = document.getElementById("SelectAndMoveObject").innerHTML;
+	g_moveCursorForMoving = document.getElementById("MoveCursorForMoving").innerHTML;
+	g_clickToAddVertex = document.getElementById("clickToAddVertex").innerHTML;
+	g_selectFirstVertexToConnect = document.getElementById("selectFisrtVertextToConnect").innerHTML;
+	g_selectSecondVertexToConnect = document.getElementById("selectSecondVertextToConnect").innerHTML;
+	g_selectStartVertexForShortPath = document.getElementById("selectStartShortPathVertex").innerHTML;
+	g_selectFinishVertexForShortPath = document.getElementById("selectFinishShortPathVertex").innerHTML;
+	g_shortestPathResult = document.getElementById("shortPathResult").innerHTML;
+	g_pathNotExists = document.getElementById("pathNotExists").innerHTML;
+	g_selectObjectToDelete = document.getElementById("selectObjectToDelete").innerHTML;
 
-    g_addEdge = document.getElementById("AddEdge").innerHTML;
-    g_orintEdge = document.getElementById("OrintEdge").innerHTML;
-    g_notOrintEdge = document.getElementById("NotOrintdge").innerHTML;
+	g_addEdge             = document.getElementById("AddEdge").innerHTML;
+	g_orintEdge           = document.getElementById("OrintEdge").innerHTML;
+	g_notOrintEdge        = document.getElementById("NotOrintdge").innerHTML;
 
-    g_adjacencyMatrixText = document.getElementById("AdjacencyMatrixText").innerHTML;
-    g_save = document.getElementById("Save").innerHTML;
-    g_cancel = document.getElementById("Cancel").innerHTML;
+	g_adjacencyMatrixText = document.getElementById("AdjacencyMatrixText").innerHTML;
+	g_save   = document.getElementById("Save").innerHTML;
+	g_cancel = document.getElementById("Cancel").innerHTML;
 
     g_shortestDistance = document.getElementById("shortestDist").innerHTML;
 
     g_incidenceMatrixText = document.getElementById("IncidenceMatrixText").innerHTML;
+	
+	g_save_dialog = document.getElementById("saveDialogTitle").innerHTML;
+	g_close       = document.getElementById("closeButton").innerHTML;
 
-    g_save_dialog = document.getElementById("saveDialogTitle").innerHTML;
-    g_close = document.getElementById("closeButton").innerHTML;
+	g_sickConnectedComponent = document.getElementById("sickConnectedComponentResult").innerHTML;
+	g_connectedComponent     = document.getElementById("connectedComponentResult").innerHTML;
 
-    g_sickConnectedComponent = document.getElementById("sickConnectedComponentResult").innerHTML;
-    g_connectedComponent = document.getElementById("connectedComponentResult").innerHTML;
-
-    g_what_do_you_think = document.getElementById("whatDoYouThink").innerHTML;
-    g_name = document.getElementById("name").innerHTML;
-    g_feedback = document.getElementById("feedback").innerHTML;
-    g_send = document.getElementById("send").innerHTML;
-    g_write_to_us = document.getElementById("writeToUs").innerHTML;
+	g_what_do_you_think = document.getElementById("whatDoYouThink").innerHTML;
+	g_name = document.getElementById("name").innerHTML;
+	g_feedback = document.getElementById("feedback").innerHTML;
+	g_send = document.getElementById("send").innerHTML;
+	g_write_to_us = document.getElementById("writeToUs").innerHTML;
 
 
-    g_fixMatrix = document.getElementById("fixMatrixButton").innerHTML;
-    g_readMatrixHelp = document.getElementById("matrixHelp").innerHTML;
-    g_matrixWrongFormat = document.getElementById("wronMatrixTitle").innerHTML;
-
+	g_fixMatrix      = document.getElementById("fixMatrixButton").innerHTML;
+	g_readMatrixHelp = document.getElementById("matrixHelp").innerHTML;
+	g_matrixWrongFormat = document.getElementById("wronMatrixTitle").innerHTML;
+    
     g_save_image_dialog = document.getElementById("saveImageDialogTitle").innerHTML;
-
+    
     g_fullReport = document.getElementById("fullReport").innerHTML;
     g_shortReport = document.getElementById("shortReport").innerHTML;
-
-
-    g_hasEulerianLoop = document.getElementById("hasEulerianLoop").innerHTML;
+    
+    
+    g_hasEulerianLoop    = document.getElementById("hasEulerianLoop").innerHTML;
     g_hasNotEulerianLoop = document.getElementById("hasNotEulerianLoop").innerHTML;
-
+    
     g_processing = document.getElementById("processing").innerHTML;
-
+    
     g_customEnumVertex = document.getElementById("customEnumVertex").innerHTML;
-
+    
     g_addVertex = document.getElementById("addVertexText").innerHTML;
-
+    
     g_renameVertex = document.getElementById("renameVertex").innerHTML;
     g_rename = document.getElementById("renameText").innerHTML;
-
+    
     g_language = document.getElementById("currentLanguage").innerHTML;
-
+    
     g_editWeight = document.getElementById("editWeight").innerHTML;
-
+    
     g_noWeight = document.getElementById("noWeight").innerHTML;
     g_groupRename = document.getElementById("groupeRenameText").innerHTML;
     g_vote = document.getElementById("voteText").innerHTML;
-
+    
     g_recommendAlgorithm = document.getElementById("recommend_algorithm").innerHTML;
-
-    g_hasEulerianPath = document.getElementById("hasEulerianPath").innerHTML;
+    
+    g_hasEulerianPath    = document.getElementById("hasEulerianPath").innerHTML;
     g_hasNotEulerianPath = document.getElementById("hasNotEulerianPath").innerHTML;
-
+    
     g_graphOfMinDist = document.getElementById("graphOfMinDist").innerHTML;
-    g_checkToSave = document.getElementById("checkToSave").innerHTML;
+    g_checkToSave    = document.getElementById("checkToSave").innerHTML;
     g_showDistMatrix = document.getElementById("showDistMatrix").innerHTML;
     g_minDistMatrixText = document.getElementById("distMatrixText").innerHTML;
-
-    g_selectStartVertexForMaxFlow = document.getElementById("selectStartVertexForMaxFlow").innerHTML;
+    
+    g_selectStartVertexForMaxFlow  = document.getElementById("selectStartVertexForMaxFlow").innerHTML;
     g_selectFinishVertexForMaxFlow = document.getElementById("selectFinishVertexForMaxFlow").innerHTML;
     g_maxFlowResult = document.getElementById("maxFlowResult").innerHTML;
     g_flowNotExists = document.getElementById("flowNotExists").innerHTML;
-
+    
     g_sourceVertex = document.getElementById("sourceVertex").innerHTML;
-    g_sinkVertex = document.getElementById("sinkVertex").innerHTML;
-
-    g_hasHamiltonianLoop = document.getElementById("hasHamiltonianLoop").innerHTML;
+    g_sinkVertex   = document.getElementById("sinkVertex").innerHTML;
+    
+    g_hasHamiltonianLoop    = document.getElementById("hasHamiltonianLoop").innerHTML;
     g_hasNotHamiltonianLoop = document.getElementById("hasNotHamiltonianLoop").innerHTML;
 
-    g_hasHamiltonianPath = document.getElementById("hasHamiltonianPath").innerHTML;
+    g_hasHamiltonianPath    = document.getElementById("hasHamiltonianPath").innerHTML;
     g_hasNotHamiltonianPath = document.getElementById("hasNotHamiltonianPath").innerHTML;
-
+    
     g_startTraversal = document.getElementById("startTraversal").innerHTML;
     g_traversalOrder = document.getElementById("traversalOrder").innerHTML;
-
+    
     g_curveEdge = document.getElementById("curveEdge").innerHTML;
-
-    g_Undo = document.getElementById("undoTranslate").innerHTML;
+    
+    g_Undo       = document.getElementById("undoTranslate").innerHTML;
     g_save_graph = document.getElementById("saveGraph").innerHTML;
-    g_default = document.getElementById("default").innerHTML;
+    g_default    = document.getElementById("default").innerHTML;
     g_vertexDraw = document.getElementById("vertexDrawStyle").innerHTML;
-    g_edgeDraw = document.getElementById("edgeDrawStyle").innerHTML;
-
+    g_edgeDraw   = document.getElementById("edgeDrawStyle").innerHTML;
+    
     g_backgroundStyle = document.getElementById("backgroundStyle").innerHTML;
-
-    g_GraphIsMultiMessage = document.getElementById("graphIsMultiMessage").innerHTML;
+    
+    g_GraphIsMultiMessage   = document.getElementById("graphIsMultiMessage").innerHTML;
     g_GraphIsGeneralMessage = document.getElementById("graphIsGeneralMessage").innerHTML;
-    g_DefaultWeightPreset = document.getElementById("defaultWeightPreset").innerHTML;
-
-    var isMac = navigator.platform.toUpperCase().indexOf('MAC') >= 0;
+    g_DefaultWeightPreset   = document.getElementById("defaultWeightPreset").innerHTML;
+    
+    var isMac = navigator.platform.toUpperCase().indexOf('MAC')>=0;
     if (isMac)
-        g_selectGroupText = document.getElementById("selectGroupMac").innerHTML;
+        g_selectGroupText       = document.getElementById("selectGroupMac").innerHTML;
     else
-        g_selectGroupText = document.getElementById("selectGroupWin").innerHTML;
-
-    g_dragGroupText = document.getElementById("dragSelectedGroup").innerHTML;
-    g_copyGroupeButton = document.getElementById("copySelectedGroup").innerHTML;
-    g_removeGroupeButton = document.getElementById("removeSelectedGroup").innerHTML;
-
-    g_BFSName = document.getElementById("BFSName").innerHTML;
-    g_ColoringName = document.getElementById("ColoringName").innerHTML;
+        g_selectGroupText       = document.getElementById("selectGroupWin").innerHTML;
+    
+    g_dragGroupText         = document.getElementById("dragSelectedGroup").innerHTML;
+    g_copyGroupeButton      = document.getElementById("copySelectedGroup").innerHTML;
+    g_removeGroupeButton    = document.getElementById("removeSelectedGroup").innerHTML;
+    
+    g_BFSName               = document.getElementById("BFSName").innerHTML; 
+    g_ColoringName          = document.getElementById("ColoringName").innerHTML;
     g_findConnectedComponent = document.getElementById("findConnectedComponent").innerHTML;
-    g_DFSName = document.getElementById("DFSName").innerHTML;
-    g_EulerinLoopName = document.getElementById("EulerinLoopName").innerHTML;
-    g_EulerinPath = document.getElementById("EulerinPath").innerHTML;
-    g_FloidName = document.getElementById("FloidName").innerHTML;
-    g_GraphReorder = document.getElementById("GraphReorder").innerHTML;
-    g_HamiltoianCycleName = document.getElementById("HamiltoianCycleName").innerHTML;
-    g_HamiltonianPath = document.getElementById("HamiltonianPath").innerHTML;
-    g_MaxFlowName = document.getElementById("MaxFlowName").innerHTML;
-    g_minimumSpanningTree = document.getElementById("minimumSpanningTree").innerHTML;
-    g_modernGraphStyleName = document.getElementById("modernGraphStyleName").innerHTML;
-    g_RadiusAndDiameter = document.getElementById("RadiusAndDiameter").innerHTML;
-    g_findShortPathName = document.getElementById("findShortPathName").innerHTML;
-    g_VerticesDegreeName = document.getElementById("VerticesDegreeName").innerHTML;
-
-    g_SpanningTreeResult = document.getElementById("MinSpanningTreeResult").innerHTML;
+    g_DFSName               = document.getElementById("DFSName").innerHTML;
+    g_EulerinLoopName       = document.getElementById("EulerinLoopName").innerHTML;
+    g_EulerinPath           = document.getElementById("EulerinPath").innerHTML;
+    g_FloidName             = document.getElementById("FloidName").innerHTML;
+    g_GraphReorder          = document.getElementById("GraphReorder").innerHTML;
+    g_HamiltoianCycleName   = document.getElementById("HamiltoianCycleName").innerHTML;
+    g_HamiltonianPath       = document.getElementById("HamiltonianPath").innerHTML;
+    g_MaxFlowName           = document.getElementById("MaxFlowName").innerHTML;
+    g_minimumSpanningTree   = document.getElementById("minimumSpanningTree").innerHTML;
+    g_modernGraphStyleName  = document.getElementById("modernGraphStyleName").innerHTML;
+    g_RadiusAndDiameter     = document.getElementById("RadiusAndDiameter").innerHTML;
+    g_findShortPathName     = document.getElementById("findShortPathName").innerHTML;
+    g_VerticesDegreeName    = document.getElementById("VerticesDegreeName").innerHTML;
+    
+    g_SpanningTreeResult    = document.getElementById("MinSpanningTreeResult").innerHTML;
     g_SpanningTreeIgnoreDir = document.getElementById("MinSpanningIgnoreDir").innerHTML;
     g_SpanningTreeNotConnected = document.getElementById("MinSpanningNotConnected").innerHTML;
 
-    g_selectFirstGraphIsomorphismCheck = document.getElementById("SelectFirstGraphIsomorphismCheck").innerHTML;
+    g_selectFirstGraphIsomorphismCheck  = document.getElementById("SelectFirstGraphIsomorphismCheck").innerHTML;
     g_selectSecondGraphIsomorphismCheck = document.getElementById("SelectSecondGraphIsomorphismCheck").innerHTML;
-
-    g_selectFirstGraphPatternCheck = document.getElementById("SelectFirstGraphPatternCheck").innerHTML;
+    
+    g_selectFirstGraphPatternCheck       = document.getElementById("SelectFirstGraphPatternCheck").innerHTML;
     g_selectSecondGraphForSearchSubgraph = document.getElementById("SelectSecondGraphForSearchSubgraph").innerHTML;
 
     // IsomorphismCheck.js
-    g_graphsIsomorph = document.getElementById("GraphsIsomorph").innerHTML;
-    g_graphsNotIsomorph = document.getElementById("GraphsNotIsomorph").innerHTML;
-    g_numberOfIsomorphSubgraphIs = document.getElementById("NumberOfIsomorphSubgraphIs").innerHTML;
-    g_graphHasNoIsomorphSubgraph = document.getElementById("GraphHasNoIsomorphSubgraph").innerHTML;
-    g_searchIsomorphSubgraph = document.getElementById("SearchIsomorphSubgraph").innerHTML;
-    g_subgraphNo = document.getElementById("SubgraphNo").innerHTML;
-    g_graphHasNoAtleast2Graphs = document.getElementById("GraphHasNoAtleast2Graphs").innerHTML;
-    g_IsomorphismCheck = document.getElementById("IsomorphismCheck").innerHTML;
+    g_graphsIsomorph                    = document.getElementById("GraphsIsomorph").innerHTML;
+    g_graphsNotIsomorph                 = document.getElementById("GraphsNotIsomorph").innerHTML;
+    g_numberOfIsomorphSubgraphIs        = document.getElementById("NumberOfIsomorphSubgraphIs").innerHTML;
+    g_graphHasNoIsomorphSubgraph        = document.getElementById("GraphHasNoIsomorphSubgraph").innerHTML;
+    g_searchIsomorphSubgraph            = document.getElementById("SearchIsomorphSubgraph").innerHTML;
+    g_subgraphNo                        = document.getElementById("SubgraphNo").innerHTML;
+    g_graphHasNoAtleast2Graphs          = document.getElementById("GraphHasNoAtleast2Graphs").innerHTML;
+    g_IsomorphismCheck                  = document.getElementById("IsomorphismCheck").innerHTML;
 
     // RadiusAndDiameter.js
-    g_graphIsDisconnected = document.getElementById("GraphIsDisconnected").innerHTML;
-    g_graphIsTrivial = document.getElementById("GraphIsTrivial").innerHTML;
-    g_graphRadius = document.getElementById("GraphRadius").innerHTML;
-    g_graphDiameter = document.getElementById("GraphDiameter").innerHTML;
-    g_vertexCentral = document.getElementById("VertexCentral").innerHTML;
-    g_vertexPeripheral = document.getElementById("VertexPeripheral").innerHTML;
+    g_graphIsDisconnected   = document.getElementById("GraphIsDisconnected").innerHTML;
+    g_graphIsTrivial        = document.getElementById("GraphIsTrivial").innerHTML;
+    g_graphRadius           = document.getElementById("GraphRadius").innerHTML;
+    g_graphDiameter         = document.getElementById("GraphDiameter").innerHTML;
+    g_vertexCentral         = document.getElementById("VertexCentral").innerHTML;
+    g_vertexPeripheral      = document.getElementById("VertexPeripheral").innerHTML;
 
     // VerticesDegree.js
     g_maximumDegreeOfGraph = document.getElementById("MaximumDegreeOfGraph").innerHTML;
@@ -408,10 +413,10 @@ function loadTexts() {
 
     g_done = document.getElementById("Done").innerHTML;
 
-    g_action = document.getElementById("ActionText").innerHTML;
-    g_commonEdgeStyle = document.getElementById("CommonEdgeStyleText").innerHTML;
-    g_selectedEdgeStyle = document.getElementById("SelectedEdgeStyleText").innerHTML;
-    g_commonVertexStyle = document.getElementById("CommonVertexStyleText").innerHTML;
+    g_action              = document.getElementById("ActionText").innerHTML;
+    g_commonEdgeStyle     = document.getElementById("CommonEdgeStyleText").innerHTML;
+    g_selectedEdgeStyle   = document.getElementById("SelectedEdgeStyleText").innerHTML;
+    g_commonVertexStyle   = document.getElementById("CommonVertexStyleText").innerHTML;
     g_selectedVertexStyle = document.getElementById("SelectedVertexStyleText").innerHTML;
 
     // FindAllPatches.js
@@ -433,70 +438,70 @@ function loadTexts() {
     g_findLongestPath = document.getElementById("findLongestPath").innerHTML;
     g_LengthOfLongestPathFrom = document.getElementById("LengthOfLongestPathFrom").innerHTML;
 
-    g_additionalActions = document.getElementById("additionlActions").innerHTML;
-    g_reverseAllEdges = document.getElementById("reverseAllEdges").innerHTML;
+    g_additionalActions  = document.getElementById("additionlActions").innerHTML;
+    g_reverseAllEdges   = document.getElementById("reverseAllEdges").innerHTML;
     g_makeAllUndirected = document.getElementById("makeAllUndirected").innerHTML;
-    g_makeAllDirected = document.getElementById("makeAllDirected").innerHTML;
+    g_makeAllDirected   = document.getElementById("makeAllDirected").innerHTML;
 
     g_pairWrongFormat = document.getElementById("pairWrongFormat").innerHTML;
     g_fix = document.getElementById("fixButton").innerHTML;
 
     g_reuseSavedEdge = document.getElementById("reuseSavedEdge").innerHTML;
 }
-function Point(x, y) {
+function Point(x, y){
     this.x = x || 0;
     this.y = y || 0;
 };
 Point.prototype.x = null;
 Point.prototype.y = null;
-Point.prototype.add = function (v) {
+Point.prototype.add = function(v){
     return new Point(this.x + v.x, this.y + v.y);
 };
-Point.prototype.addValue = function (v) {
+Point.prototype.addValue = function(v){
     return new Point(this.x + v, this.y + v);
 };
-Point.prototype.clone = function () {
+Point.prototype.clone = function(){
     return new Point(this.x, this.y);
 };
-Point.prototype.degreesTo = function (v) {
+Point.prototype.degreesTo = function(v){
     var dx = this.x - v.x;
     var dy = this.y - v.y;
     var angle = Math.atan2(dy, dx); // radians
     return angle * (180 / Math.PI); // degrees
 };
-Point.prototype.distance = function (v) {
+Point.prototype.distance = function(v){
     return Math.sqrt(this.distanceSqr(v));
 };
-Point.prototype.distanceSqr = function (v) {
+Point.prototype.distanceSqr = function(v){
     var x = this.x - v.x;
     var y = this.y - v.y;
     return x * x + y * y;
 };
-Point.prototype.equals = function (toCompare) {
+Point.prototype.equals = function(toCompare){
     return this.x == toCompare.x && this.y == toCompare.y;
 };
-Point.prototype.interpolate = function (v, f) {
+Point.prototype.interpolate = function(v, f){
     return new Point((this.x + v.x) * f, (this.y + v.y) * f);
 };
-Point.prototype.length = function () {
+Point.prototype.length = function(){
     return Math.sqrt(this.x * this.x + this.y * this.y);
 };
-Point.prototype.normalize = function (thickness) {
+Point.prototype.normalize = function(thickness){
     var l = this.length();
     this.x = this.x / l * thickness;
     this.y = this.y / l * thickness;
     return new Point(this.x, this.y);
 };
-Point.prototype.normalizeCopy = function (thickness) {
+Point.prototype.normalizeCopy = function(thickness){
     var l = this.length();
     return new Point(this.x / l * thickness, this.y / l * thickness);
 };
-Point.prototype.orbit = function (origin, arcWidth, arcHeight, degrees) {
+Point.prototype.orbit = function(origin, arcWidth, arcHeight, degrees){
     var radians = degrees * (Math.PI / 180);
     this.x = origin.x + arcWidth * Math.cos(radians);
     this.y = origin.y + arcHeight * Math.sin(radians);
 };
-Point.prototype.rotate = function (center, degrees) {
+Point.prototype.rotate = function(center, degrees){
     var radians = degrees * (Math.PI / 180);
     offset = this.subtract(center);
     this.x = offset.x * Math.cos(radians) - offset.y * Math.sin(radians);
@@ -506,74 +511,80 @@ Point.prototype.rotate = function (center, degrees) {
     return this;
 };
 
-Point.prototype.offset = function (dx, dy) {
+Point.prototype.offset = function(dx, dy){
     this.x += dx;
     this.y += dy;
 };
-Point.prototype.subtract = function (v) {
+Point.prototype.subtract = function(v){
     return new Point(this.x - v.x, this.y - v.y);
 };
-Point.prototype.subtractValue = function (value) {
+Point.prototype.subtractValue = function(value){
     return new Point(this.x - value, this.y - value);
 };
-Point.prototype.multiply = function (value) {
+Point.prototype.multiply = function(value){
     return new Point(this.x * value, this.y * value);
 };
-Point.prototype.toString = function () {
+Point.prototype.toString = function(){
     return "(x=" + this.x + ", y=" + this.y + ")";
 };
 
-Point.prototype.normal = function () {
+Point.prototype.normal = function(){
     return new Point(-this.y, this.x);
 };
 
-Point.prototype.min = function (point) {
+Point.prototype.min = function(point)
+{
     return new Point(Math.min(this.x, point.x), Math.min(this.y, point.y));
 };
 
-Point.prototype.max = function (point) {
+Point.prototype.max = function(point)
+{
     return new Point(Math.max(this.x, point.x), Math.max(this.y, point.y));
 };
 
-Point.prototype.inverse = function () {
+Point.prototype.inverse = function()
+{
     return new Point(-this.x, -this.y);
 };
 
-Point.prototype.cross = function (point) {
+Point.prototype.cross = function(point)
+{
     return this.x * point.y - this.y * point.x;
 };
-
-Point.interpolate = function (pt1, pt2, f) {
+ 
+Point.interpolate = function(pt1, pt2, f){
     return new Point(pt1.x * (1.0 - f) + pt2.x * f, pt1.y * (1.0 - f) + pt2.y * f);
 };
-Point.polar = function (len, angle) {
+Point.polar = function(len, angle){
     return new Point(len * Math.cos(angle), len * Math.sin(angle));
 };
-Point.distance = function (pt1, pt2) {
+Point.distance = function(pt1, pt2){
     var x = pt1.x - pt2.x;
     var y = pt1.y - pt2.y;
     return Math.sqrt(x * x + y * y);
 };
 
-Point.center = function (pt1, pt2) {
+Point.center = function(pt1, pt2){
     return new Point((pt1.x + pt2.x) / 2.0, (pt1.y + pt2.y) / 2.0);
 };
 
-Point.toString = function () {
-    return x + " " + y;
+Point.toString = function(){
+	return x + " " + y;
 }
 
-Point.projection = function (point, line1, line2) {
+Point.projection = function (point, line1, line2)
+{
     var x = line2.y - line1.y;
     var y = line1.x - line2.x;
-    var l = (line1.cross(line2) + line1.cross(point) + line2.cross(point)) / (x * (line2.y - line1.y) + y * (line1.x - line2.x));
-    var res = new Point(point.x + x * l, point.y + y * l);
+    var l = (line1.cross(line2) + line1.cross(point) + line2.cross(point))/(x*(line2.y - line1.y) + y*(line1.x - line2.x));
+    var res = new Point(point.x + x * l,  point.y + y * l);
     return res;
 }
 
-Point.hitTest = function (pt11, pt12, pt21, pt22) {
+Point.hitTest = function (pt11, pt12, pt21, pt22)
+{
     var res = null;
-    var n = 0.0;
+    var n   = 0.0;
 
     var x1 = pt11.x;
     var y1 = pt11.y;
@@ -584,72 +595,83 @@ Point.hitTest = function (pt11, pt12, pt21, pt22) {
     var x4 = pt22.x;
     var y4 = pt22.y;
 
-    if (y2 - y1 != 0.0) {  // a(y)
-        var q = (x2 - x1) / (y1 - y2);
-        var sn = (x3 - x4) + (y3 - y4) * q;
-        if (sn == 0.0) {
-            return res;
+    if (y2 - y1 != 0.0) 
+    {  // a(y)
+        var q = (x2 - x1) / (y1 - y2);   
+        var sn = (x3 - x4) + (y3 - y4) * q; 
+        if (sn == 0.0) 
+        { 
+            return res; 
         }  // c(x) + c(y)*q
 
         var fn = (x3 - x1) + (y3 - y1) * q;   // b(x) + b(y)*q
         n = fn / sn;
     }
-    else {
-        if ((y3 - y4) == 0.0) {
+    else 
+    {
+        if ((y3 - y4) == 0.0) 
+        { 
             return res;
         }  // b(y)
         n = (y3 - y1) / (y3 - y4);   // c(y)/b(y)
     }
-
+    
     // x3 + (-b(x))*n && y3 +(-b(y))*n
     res = new Point(x3 + (x4 - x3) * n, y3 + (y4 - y3) * n);
-
+    
     var epsilon = 1E-5;
-    if (!(res.x >= Math.min(x1, x2) - epsilon && res.x >= Math.min(x3, x4) - epsilon && res.x <= Math.max(x1, x2) + epsilon && res.x <= Math.max(x3, x4) + epsilon &&
-        res.y >= Math.min(y1, y2) - epsilon && res.y >= Math.min(y3, y4) - epsilon && res.y <= Math.max(y1, y2) + epsilon && res.y <= Math.max(y3, y4) + epsilon)) {
-        res = null;
+    if (! (res.x >= Math.min(x1, x2) - epsilon && res.x >= Math.min(x3, x4) - epsilon && res.x <= Math.max(x1, x2) + epsilon && res.x <= Math.max(x3, x4) + epsilon && 
+           res.y >= Math.min(y1, y2) - epsilon && res.y >= Math.min(y3, y4) - epsilon && res.y <= Math.max(y1, y2) + epsilon && res.y <= Math.max(y3, y4) + epsilon))
+    {
+      res = null;
     }
-
+    
     return res;
 }
 
-function Rect(minPoint, maxPoint) {
+function Rect(minPoint, maxPoint){
     this.minPoint = minPoint;
     this.maxPoint = maxPoint;
 };
 
-Rect.prototype.center = function () {
+Rect.prototype.center = function()
+{
     return Point.center(this.minPoint, this.maxPoint);
 };
 
-Rect.prototype.size = function () {
+Rect.prototype.size = function()
+{
     return this.maxPoint.subtract(this.minPoint);
 };
 
-Rect.prototype.left = function () {
+Rect.prototype.left = function()
+{
     return this.minPoint.x;
 };
 
-Rect.prototype.top = function () {
+Rect.prototype.top = function()
+{
     return this.minPoint.y;
 };
 
-Rect.prototype.isIn = function (v) {
-    return this.minPoint.x <= v.x && this.minPoint.y <= v.y &&
-        this.maxPoint.x > v.x && this.maxPoint.y > v.y;
+Rect.prototype.isIn = function(v)
+{
+    return this.minPoint.x <= v.x && this.minPoint.y <= v.y && 
+           this.maxPoint.x > v.x  && this.maxPoint.y > v.y;
 };
 /**
  * This is edge model
  *
  */
 
-var EdgeModels = { "line": 0, "curve": 1 };
+var EdgeModels = {"line": 0, "curve" : 1};
 
 const defaultEdgeWidth = 4;
-
-function EdgeModel() {
+                
+function EdgeModel()
+{
     this.width = globalApplication.GetDefaultEdgeWidth();
-    this.type = EdgeModels.line;
+    this.type  = EdgeModels.line;
     this.curveValue = EdgeModel.prototype.defaultCurve;
     this.default = true;
     this.sizeOfLoop = 24;
@@ -658,37 +680,41 @@ function EdgeModel() {
 
 EdgeModel.prototype.defaultCurve = 0.1;
 
-EdgeModel.prototype.copyFrom = function (other) {
+EdgeModel.prototype.copyFrom = function(other)
+{
     this.width = other.width;
-    this.type = other.type;
+    this.type  = other.type;
     this.curveValue = other.curveValue;
-    this.default = other.default;
+    this.default     = other.default;
 }
 
-EdgeModel.prototype.SaveToXML = function () {
+EdgeModel.prototype.SaveToXML = function ()
+{
     return "model_width=\"" + this.width + "\" " +
-        "model_type=\"" + this.type + "\" " +
-        "model_curveValue=\"" + this.curveValue + "\" "
-    "model_default=\"" + this.default + "\" ";
+	       "model_type=\""  + this.type   + "\" " +
+	       "model_curveValue=\""  + this.curveValue + "\" "
+           "model_default=\""  + this.default + "\" ";
 }
 
-EdgeModel.prototype.LoadFromXML = function (xml, graph) {
-    this.width = xml.attr('model_width') == null ? this.width : parseFloat(xml.attr("model_width"));
-    this.type = xml.attr('model_type') == null ? this.type : xml.attr("model_type");
-    this.curveValue = xml.attr('model_curveValue') == null ? this.curveValue : parseFloat(xml.attr("model_curveValue"));
+EdgeModel.prototype.LoadFromXML = function (xml, graph)
+{
+	this.width = xml.attr('model_width') == null ? this.width : parseFloat(xml.attr("model_width"));
+	this.type  = xml.attr('model_type')  == null ? this.type  : xml.attr("model_type");
+	this.curveValue  = xml.attr('model_curveValue')  == null ? this.curveValue : parseFloat(xml.attr("model_curveValue"));
     this.default = xml.attr('model_default') == null ? this.default : parseFloat(xml.attr("model_default"));
 }
 
-EdgeModel.prototype.GetCurvePoint = function (position1, position2, t) {
+EdgeModel.prototype.GetCurvePoint = function(position1, position2, t)
+{
     var points = this.GetBezierPoints(position1, position2);
-    var firstBezierPoint = points[0];
+    var firstBezierPoint  = points[0];  
     var secondBezierPoint = points[1];
-
-    var B0_t = Math.pow(1 - t, 3);
-    var B1_t = 3 * t * Math.pow(1 - t, 2);
-    var B2_t = 3 * t * t * (1 - t)
-    var B3_t = t * t * t;
-
+    
+    var B0_t = Math.pow(1-t, 3);
+    var B1_t = 3 * t * Math.pow(1-t, 2);
+    var B2_t = 3 * t*t * (1-t)
+    var B3_t = t*t*t;
+    
     var ax = position1.x;
     var ay = position1.y;
     var dx = position2.x;
@@ -697,137 +723,155 @@ EdgeModel.prototype.GetCurvePoint = function (position1, position2, t) {
     var by = firstBezierPoint.y;
     var cx = secondBezierPoint.x;
     var cy = secondBezierPoint.y;
-
+    
     var px_t = (B0_t * ax) + (B1_t * bx) + (B2_t * cx) + (B3_t * dx);
     var py_t = (B0_t * ay) + (B1_t * by) + (B2_t * cy) + (B3_t * dy);
-
+    
     return new Point(px_t, py_t);
 }
 
-EdgeModel.prototype.GetBezierPoints = function (position1, position2) {
-    var direction = position2.subtract(position1);
-    var delta = direction.length();
-    direction.normalize(1.0);
+EdgeModel.prototype.GetBezierPoints = function(position1, position2)
+{
+    var direction = position2.subtract(position1); 
+    var delta     = direction.length();
+    direction.normalize(1.0);  
     var normal = direction.normal();
-
+    
     var deltaOffsetPixels = delta * this.curveValue;
     var yOffset = normal.multiply(deltaOffsetPixels);
-    var firstBezierPointShift = (direction.multiply(delta * 0.2)).add(yOffset);
-    var secondBezierPointShift = (direction.multiply(-delta * 0.2)).add(yOffset);
-    var firstBezierPoint = position1.add(firstBezierPointShift);
+    var firstBezierPointShift  = (direction.multiply(delta * 0.2)).add(yOffset); 
+    var secondBezierPointShift = (direction.multiply(-delta * 0.2)).add(yOffset); 
+    var firstBezierPoint  = position1.add(firstBezierPointShift);  
     var secondBezierPoint = position2.add(secondBezierPointShift);
-
+    
     return [firstBezierPoint, secondBezierPoint];
 }
 
 
-EdgeModel.prototype.HitTest = function (position1, position2, mousePos) {
+EdgeModel.prototype.HitTest = function(position1, position2, mousePos)
+{
     if (this.type == EdgeModels.line)
         return this.HitTestLine(position1, position2, mousePos);
     else if (this.type == EdgeModels.curve)
         return this.HitTestCurve(position1, position2, mousePos);
-
+    
     return false;
 }
 
 
-EdgeModel.prototype.HitTestLine = function (position1, position2, mousePos, factor) {
-    if (factor === undefined) {
-        factor = 1.0;
+EdgeModel.prototype.HitTestLine = function(position1, position2, mousePos, factor)
+{
+    if (factor === undefined) 
+    {
+      factor = 1.0;
     }
-
-
+    
+    
     var pos1 = position1;
     var pos2 = position2;
     var pos0 = mousePos;
-
+    
     // Self loop case
-    if (pos1.equals(pos2)) {
-        var xCenter = pos1.x - Math.cos(this.GetLoopShiftAngel()) * this.GetLoopSize();
+    if (pos1.equals(pos2))
+    {
+        var xCenter = pos1.x - Math.cos(this.GetLoopShiftAngel()) * this.GetLoopSize(); 
         var yCenter = pos1.y - Math.sin(this.GetLoopShiftAngel()) * this.GetLoopSize();
-
+        
         return Math.abs((Point.distance(new Point(xCenter, yCenter), pos0)) - this.GetLoopSize()) <= this.width * 1.5 * factor;
     }
-
-    var r1 = pos0.distance(pos1);
-    var r2 = pos0.distance(pos2);
+		
+    var r1  = pos0.distance(pos1);
+    var r2  = pos0.distance(pos2);
     var r12 = pos1.distance(pos2);
-
-    if (r1 >= (new Point(r2, r12)).length() || r2 >= (new Point(r1, r12)).length()) {
+		
+    if (r1 >= (new Point(r2, r12)).length() || r2 >= (new Point(r1,r12)).length())
+    {
     }
-    else {
+    else		
+    { 
         var distance = ((pos1.y - pos2.y) * pos0.x + (pos2.x - pos1.x) * pos0.y + (pos1.x * pos2.y - pos2.x * pos1.y)) / r12;
 
-        if (Math.abs(distance) <= this.width * 1.5 * factor) {
+        if (Math.abs(distance) <= this.width * 1.5 * factor)
+        {
             return true;
         }
     }
-
+    
     return false;
 }
 
-EdgeModel.prototype.HitTestCurve = function (position1, position2, mousePos) {
+EdgeModel.prototype.HitTestCurve = function(position1, position2, mousePos)
+{
     var pos1 = position1;
     var pos2 = position2;
     var pos0 = mousePos;
-
+    
     // Self loop case
-    if (pos1.equals(pos2)) {
-        var xCenter = pos1.x - Math.cos(this.GetLoopShiftAngel()) * this.GetLoopSize();
+    if (pos1.equals(pos2))
+    {
+        var xCenter = pos1.x - Math.cos(this.GetLoopShiftAngel()) * this.GetLoopSize(); 
         var yCenter = pos1.y - Math.sin(this.GetLoopShiftAngel()) * this.GetLoopSize();
-
+        
         return Math.abs((Point.distance(new Point(xCenter, yCenter), pos0)) - this.GetLoopSize()) <= this.width * 1.5;
     }
-
+    
     var interval_count = position1.distance(position2) / 100 * 30;
-
+    
     var start = position1;
-    for (var i = 0; i < interval_count; i++) {
+    for (var i = 0; i < interval_count; i ++)
+    {
         var finish = this.GetCurvePoint(position1, position2, i / interval_count);
-
+        
         if (this.HitTestLine(start, finish, mousePos, 2.0))
             return true;
-
+        
         start = finish;
     }
-
+    
     return false;
 }
 
-EdgeModel.prototype.ChangeCurveValue = function (delta) {
-    if (this.type == EdgeModels.line) {
+EdgeModel.prototype.ChangeCurveValue = function (delta)
+{
+    if (this.type == EdgeModels.line)
+    {
         this.type = EdgeModels.curve;
         this.curveValue = 0.0;
     }
 
     this.curveValue = this.curveValue + delta;
-
+    
     if (Math.abs(this.curveValue) <= 0.01)
         this.type = EdgeModels.line;
-
+    
     this.default = false;
 }
 
-EdgeModel.prototype.SetCurveValue = function (value) {
-    if (this.type == EdgeModels.line) {
+EdgeModel.prototype.SetCurveValue = function (value)
+{
+    if (this.type == EdgeModels.line)
+    {
         this.type = EdgeModels.curve;
         this.curveValue = 0.0;
     }
 
     this.curveValue = value;
-
+    
     if (Math.abs(this.curveValue) <= 0.01)
         this.type = EdgeModels.line;
-
+    
     this.default = false;
 }
 
-EdgeModel.prototype.GetLoopSize = function () {
-    if (Math.abs(this.curveValue) <= 0.01) {
+EdgeModel.prototype.GetLoopSize = function ()
+{
+    if (Math.abs(this.curveValue) <= 0.01)
+    { 
         // without this condition arc disappears when curveValue=0
-        return this.sizeOfLoop;
+        return this.sizeOfLoop; 
     }
-    else {
+    else
+    { 
         // bigger curveValue -> bigger loop size
         let normalCurve = this.curveValue;
         if (this.type == EdgeModels.line) {
@@ -839,14 +883,17 @@ EdgeModel.prototype.GetLoopSize = function () {
 
         return this.sizeOfLoop * Math.abs(normalCurve) * (1 / this.defaultCurve);
     }
-
+    
 }
 
-EdgeModel.prototype.GetLoopShiftAngel = function () {
-    if (this.type == EdgeModels.line || this.curveValue >= 0.0) { // shift to top-left
+EdgeModel.prototype.GetLoopShiftAngel = function ()
+{
+    if (this.type == EdgeModels.line || this.curveValue >= 0.0)
+    { // shift to top-left
         return this.loopShiftAngel;
     }
-    else { // shift to bottom-right
+    else
+    { // shift to bottom-right
         return this.loopShiftAngel + Math.PI;
     }
 }
@@ -856,9 +903,10 @@ EdgeModel.prototype.GetLoopShiftAngel = function () {
  *
  */
 
-const defaultVertexDiameter = 30;
+ const defaultVertexDiameter = 30;
 
-function VertexModel() {
+function VertexModel()
+{
     this.diameter = globalApplication.GetDefaultVertexSize();
 }
 /**
@@ -866,344 +914,393 @@ function VertexModel() {
  *
  */
 
-
-function BaseVertex(x, y, vertexEnumType) {
+ 
+function BaseVertex(x, y, vertexEnumType)
+{
     this.position = new Point(x, y);
-    this.id = 0;
+    this.id       = 0;
     this.mainText = "";
-    this.upText = "";
+    this.upText   = "";
     this.vertexEnumType = vertexEnumType;
-    this.model = new VertexModel();
+    this.model    = new VertexModel();
     this.hasUndefinedPosition = false;
     this.ownStyles = {};
 };
 
 BaseVertex.prototype.position = new Point(0, 0);
 
-BaseVertex.prototype.copyFrom = function (other) {
+BaseVertex.prototype.copyFrom = function (other)
+{
     this.position = new Point(other.position.x, other.position.y);
-    this.id = other.id;
+    this.id       = other.id;
     this.mainText = other.mainText;
-    this.upText = other.upText;
+    this.upText   = other.upText;
     this.vertexEnumType = other.vertexEnumType;
-    this.model = new VertexModel();
+    this.model    = new VertexModel();
     this.hasUndefinedPosition = other.hasUndefinedPosition;
     this.ownStyles = FullObjectCopy(other.ownStyles);
 }
 
-BaseVertex.prototype.SaveToXML = function () {
-    return "<node " +
-        "positionX=\"" + this.position.x + "\" " +
-        "positionY=\"" + this.position.y + "\" " +
-        "id=\"" + this.id + "\" " +
-        "mainText=\"" + gEncodeToHTML(this.mainText) + "\" " +
-        "upText=\"" + gEncodeToHTML(this.upText) + "\" " +
-        ((Object.keys(this.ownStyles).length > 0) ? "ownStyles = \"" + gEncodeToHTML(JSON.stringify(this.ownStyles)) + "\" " : "") +
-        "size=\"" + this.model.diameter + "\" " +
-        "></node>";
+BaseVertex.prototype.SaveToXML = function ()
+{
+	return "<node " + 
+	       "positionX=\""  + this.position.x   + "\" " +
+	       "positionY=\""  + this.position.y   + "\" " +
+	       "id=\""         + this.id   + "\" " +
+	       "mainText=\""   + gEncodeToHTML(this.mainText) + "\" " +
+	       "upText=\""     + gEncodeToHTML(this.upText)   + "\" " +
+         ((Object.keys(this.ownStyles).length > 0) ? "ownStyles = \"" + gEncodeToHTML(JSON.stringify(this.ownStyles)) + "\" ": "") +
+         "size=\"" + this.model.diameter + "\" " +
+		"></node>";
 }
 
-BaseVertex.prototype.LoadFromXML = function (xml) {
+BaseVertex.prototype.LoadFromXML = function (xml)
+{
     var xmlX = xml.attr('positionX');
     var xmlY = xml.attr('positionY');
     this.hasUndefinedPosition = (typeof xmlX === 'undefined') || (typeof xmlY === 'undefined');
     this.position = new Point(parseFloat(xmlX), parseFloat(xmlY));
-    this.id = xml.attr('id');
+    this.id       = xml.attr('id');
     this.mainText = xml.attr('mainText');
-    this.upText = xml.attr('upText');
-
+    this.upText   = xml.attr('upText');
+    
     if (typeof this.mainText === 'undefined')
-        this.mainText = this.id;
+      this.mainText = this.id;
     else
-        this.mainText = gDecodeFromHTML(this.mainText);
-
+      this.mainText = gDecodeFromHTML(this.mainText);
+    
     if (typeof this.upText === 'undefined')
-        this.upText = "";
+      this.upText = "";
     else
-        this.upText = gDecodeFromHTML(this.upText);
+      this.upText = gDecodeFromHTML(this.upText);
 
     var ownStyle = xml.attr('ownStyles');
-    if (typeof ownStyle !== 'undefined') {
-        var parsedSave = gDecodeFromHTML(JSON.parse(ownStyle));
-
-        for (var indexField in parsedSave) {
-            var index = parseInt(indexField);
-            this.ownStyles[index] = FullObjectCopy(this.getStyleFor(index));
-            for (var field in parsedSave[indexField]) {
-                if (this.ownStyles[index].ShouldLoad(field))
-                    this.ownStyles[index][field] = parsedSave[indexField][field];
-            }
+    if (typeof ownStyle !== 'undefined')
+    {
+      var parsedSave = gDecodeFromHTML(JSON.parse(ownStyle));
+    
+      for(var indexField in parsedSave)
+      {
+        var index = parseInt(indexField);
+        this.ownStyles[index] = FullObjectCopy(this.getStyleFor(index));
+        for(var field in parsedSave[indexField])
+        {
+            if (this.ownStyles[index].ShouldLoad(field))
+              this.ownStyles[index][field] = parsedSave[indexField][field];
         }
+      }
     }
 
     var size = xml.attr('size');
     if (typeof size !== 'undefined')
-        this.model.diameter = parseInt(size);
+      this.model.diameter = parseInt(size);
 }
 
-BaseVertex.prototype.SetId = function (id) {
-    this.id = id;
+BaseVertex.prototype.SetId = function (id)
+{
+    this.id       = id;
     if (this.vertexEnumType != null)
-        this.mainText = this.vertexEnumType.GetVertexText(id);
+      this.mainText = this.vertexEnumType.GetVertexText(id);		                 
 }
 
-BaseVertex.prototype.diameterFactor = function () {
+BaseVertex.prototype.diameterFactor = function ()
+{
     return new Point(1.0 + (this.mainText.length ? this.mainText.length / 8.0 : 0), 1.5);
 }
 
-BaseVertex.prototype.IsUndefinedPosition = function () {
+BaseVertex.prototype.IsUndefinedPosition = function ()
+{
     return this.hasUndefinedPosition;
 }
 
 //todo: comment this
-BaseVertex.prototype.HitTest = function (pos) {
-    var shape = this.hasOwnProperty('currentStyle') ? this.currentStyle.GetStyle({}, this).shape : VertexCircleShape;
-    var width = this.hasOwnProperty('currentStyle') ? this.currentStyle.GetStyle({}, this).lineWidth : 0;
+BaseVertex.prototype.HitTest = function (pos)
+{
+  var shape = this.hasOwnProperty('currentStyle') ? this.currentStyle.GetStyle({}, this).shape : VertexCircleShape;
+  var width = this.hasOwnProperty('currentStyle') ? this.currentStyle.GetStyle({}, this).lineWidth : 0;
+  
+  if (shape == VertexCircleShape)
+  {
+  	return this.position.distance(pos) < this.model.diameter / 2.0 + width;
+  }
+  else
+  {
+    var relativePos  = (new Point(pos.x, pos.y)).subtract(this.position);
+    var lineFinish1 = relativePos.add(new Point(1000, 0));
+    var lineFinish2 = relativePos.add(new Point(-1000, 0));
 
-    if (shape == VertexCircleShape) {
-        return this.position.distance(pos) < this.model.diameter / 2.0 + width;
-    }
-    else {
-        var relativePos = (new Point(pos.x, pos.y)).subtract(this.position);
-        var lineFinish1 = relativePos.add(new Point(1000, 0));
-        var lineFinish2 = relativePos.add(new Point(-1000, 0));
+    var pointsVertex1 = GetPointsForShape(shape, this.model.diameter + width, this.mainText);
+    pointsVertex1.push(pointsVertex1[0]);
 
-        var pointsVertex1 = GetPointsForShape(shape, this.model.diameter + width, this.mainText);
-        pointsVertex1.push(pointsVertex1[0]);
+    var hitNumber1 = 0;
+    var hitNumber2 = 0;
 
-        var hitNumber1 = 0;
-        var hitNumber2 = 0;
-
-        for (var i = 0; i < pointsVertex1.length - 1; i++) {
-            var hitTest = Point.hitTest(relativePos, lineFinish1, pointsVertex1[i], pointsVertex1[i + 1]);
-            if (hitTest != null) {
-                hitNumber1++;
-            }
-            hitTest = Point.hitTest(relativePos, lineFinish2, pointsVertex1[i], pointsVertex1[i + 1]);
-            if (hitTest != null) {
-                hitNumber2++;
-            }
+    for (var i = 0; i < pointsVertex1.length - 1; i ++)
+    {
+        var hitTest = Point.hitTest(relativePos, lineFinish1, pointsVertex1[i], pointsVertex1[i + 1]);
+        if (hitTest != null)
+        {
+          hitNumber1++;
         }
-
-        return hitNumber1 == 1 && hitNumber2 == 1;
+        hitTest = Point.hitTest(relativePos, lineFinish2, pointsVertex1[i], pointsVertex1[i + 1]);
+        if (hitTest != null)
+        {
+          hitNumber2++;
+        }
     }
 
-    return false;
+    return hitNumber1 == 1 && hitNumber2 == 1;
+  }
+
+  return false;
 }
 
-BaseVertex.prototype.resetOwnStyle = function (index) {
-    if (this.ownStyles.hasOwnProperty(index)) {
-        delete this.ownStyles[index];
-    }
+BaseVertex.prototype.resetOwnStyle = function (index)
+{
+  if (this.ownStyles.hasOwnProperty(index))
+  {
+    delete this.ownStyles[index];
+  }
 }
 
-BaseVertex.prototype.setOwnStyle = function (index, style) {
-    this.ownStyles[index] = FullObjectCopy(style);
+BaseVertex.prototype.setOwnStyle = function (index, style)
+{
+  this.ownStyles[index] = FullObjectCopy(style);
 }
 
-BaseVertex.prototype.getStyleFor = function (index) {
-    if (this.ownStyles.hasOwnProperty(index)) {
-        return this.ownStyles[index];
-    }
-    else {
-        var style = null;
+BaseVertex.prototype.getStyleFor = function (index)
+{
+  if (this.ownStyles.hasOwnProperty(index))
+  {
+    return this.ownStyles[index];
+  }
+  else
+  {
+    var style = null;
 
-        if (index == 0)
-            style = globalApplication.GetStyle("vertex", "common");
-        else
-            style = globalApplication.GetStyle("vertex", "selected", undefined, index - 1);
+    if (index == 0)
+      style = globalApplication.GetStyle("vertex", "common");
+    else
+      style = globalApplication.GetStyle("vertex", "selected", undefined, index - 1);
 
-        return style;
-    }
+    return style;
+  }
 }
 
-BaseVertex.prototype.hasOwnStyleFor = function (index) {
-    return this.ownStyles.hasOwnProperty(index);
+BaseVertex.prototype.hasOwnStyleFor = function (index)
+{
+  return this.ownStyles.hasOwnProperty(index);
 }/**
  * This is base arc.
  *
  *
  */
 
-function BaseEdge(vertex1, vertex2, isDirect, weight, upText) {
-    this.vertex1 = vertex1;
-    this.vertex2 = vertex2;
-    this.arrayStyleStart = "";
+function BaseEdge(vertex1, vertex2, isDirect, weight, upText)
+{
+    this.vertex1    = vertex1;
+    this.vertex2    = vertex2;
+    this.arrayStyleStart  = "";
     this.arrayStyleFinish = "";
-
-    this.isDirect = isDirect;
-    this.weight = 0;
-    this.text = "";
+    
+    this.isDirect  = isDirect;
+    this.weight    = 0;
+    this.text      = "";
     this.useWeight = false;
-    this.id = 0;
+    this.id        = 0;
     this.model = new EdgeModel();
-
+    
     if (upText === undefined)
-        this.upText = "";
+        this.upText    = "";
     else
-        this.upText = upText;
-
+        this.upText    = upText;
+    
     if (weight !== undefined)
-        this.SetWeight(weight);
+      this.SetWeight(weight);
 
-    this.ownStyles = {};
+    this.ownStyles = {};      
 }
 
-BaseEdge.prototype.copyFrom = function (other) {
-    this.vertex1 = other.vertex1;
-    this.vertex2 = other.vertex2;
-    this.arrayStyleStart = other.arrayStyleStart;
+BaseEdge.prototype.copyFrom = function(other)
+{
+    this.vertex1    = other.vertex1;
+    this.vertex2    = other.vertex2;
+    this.arrayStyleStart  = other.arrayStyleStart;
     this.arrayStyleFinish = other.arrayStyleFinish;
-
-    this.isDirect = other.isDirect;
-    this.weight = other.weight;
-    this.text = other.text;
+    
+    this.isDirect  = other.isDirect;
+    this.weight    = other.weight;
+    this.text      = other.text;
     this.useWeight = other.useWeight;
-    this.id = other.id;
-    this.model = new EdgeModel();
+    this.id        = other.id;
+    this.model     = new EdgeModel();
     this.model.copyFrom(other.model);
-
-    this.upText = other.upText;
+    
+    this.upText    = other.upText;
 
     this.ownStyles = FullObjectCopy(other.ownStyles);
 }
 
-BaseEdge.prototype.SaveToXML = function () {
-    return "<edge " +
-        "source=\"" + this.vertex1.id + "\" " +
-        "target=\"" + this.vertex2.id + "\" " +
-        "isDirect=\"" + this.isDirect + "\" " +
-        "weight=\"" + this.weight + "\" " +
-        "useWeight=\"" + this.useWeight + "\" " +
-        "id=\"" + this.id + "\" " +
-        "text=\"" + gEncodeToHTML(this.text) + "\" " +
-        "upText=\"" + gEncodeToHTML(this.upText) + "\" " +
-        "arrayStyleStart=\"" + this.arrayStyleStart + "\" " +
-        "arrayStyleFinish=\"" + this.arrayStyleFinish + "\" " +
-        ((Object.keys(this.ownStyles).length > 0) ? "ownStyles = \"" + gEncodeToHTML(JSON.stringify(this.ownStyles)) + "\" " : "") +
-        this.model.SaveToXML() +
-        "></edge>";
+BaseEdge.prototype.SaveToXML = function ()
+{
+	return "<edge " + 
+	       "source=\""     + this.vertex1.id   + "\" " +
+	       "target=\""     + this.vertex2.id   + "\" " +
+	       "isDirect=\""   + this.isDirect + "\" " +
+	       "weight=\""     + this.weight   + "\" " +
+	       "useWeight=\""  + this.useWeight + "\" " +
+	       "id=\""         + this.id + "\" " +
+           "text=\""       + gEncodeToHTML(this.text) + "\" " +
+           "upText=\""     + gEncodeToHTML(this.upText) + "\" " +
+           "arrayStyleStart=\""       + this.arrayStyleStart + "\" " +
+           "arrayStyleFinish=\""       + this.arrayStyleFinish + "\" " +
+           ((Object.keys(this.ownStyles).length > 0) ? "ownStyles = \"" + gEncodeToHTML(JSON.stringify(this.ownStyles)) + "\" ": "") +
+           this.model.SaveToXML() + 
+		"></edge>";       
 }
 
-BaseEdge.prototype.LoadFromXML = function (xml, graph) {
-    var attr = xml.attr('vertex1');
-    if (typeof attr === 'undefined') {
+BaseEdge.prototype.LoadFromXML = function (xml, graph)
+{
+    var attr       =    xml.attr('vertex1');
+    if (typeof attr === 'undefined')
+    {
         attr = xml.attr('source');
     }
-    this.vertex1 = graph.FindVertex(typeof attr !== 'undefined' ? attr : xml.attr('graph1'));
-    var attr = xml.attr('vertex2');
-    if (typeof attr === 'undefined') {
+	this.vertex1   =    graph.FindVertex(typeof attr !== 'undefined' ? attr : xml.attr('graph1'));
+    var attr       =    xml.attr('vertex2');
+    if (typeof attr === 'undefined')
+    {
         attr = xml.attr('target');
     }
-    this.vertex2 = graph.FindVertex(typeof attr !== 'undefined' ? attr : xml.attr('graph2'));
-    this.isDirect = xml.attr('isDirect') == "true";
-    this.weight = parseFloat(xml.attr('weight'));
-    if (isNaN(this.weight)) {
-        this.weight = 1;
+	this.vertex2   =    graph.FindVertex(typeof attr !== 'undefined' ? attr : xml.attr('graph2'));
+	this.isDirect  =    xml.attr('isDirect') == "true";
+	this.weight    =    parseFloat(xml.attr('weight'));
+    if (isNaN(this.weight))
+    {
+        this.weight = 1;        
     }
-    this.hasPair = xml.attr('hasPair') == "true";
-    this.useWeight = xml.attr('useWeight') == "true";
-    this.id = xml.attr('id');
-    this.text = xml.attr("text") == null ? "" : gDecodeFromHTML(xml.attr("text"));
-    this.arrayStyleStart = xml.attr("arrayStyleStart") == null ? "" : xml.attr("arrayStyleStart");
-    this.arrayStyleFinish = xml.attr("arrayStyleFinish") == null ? "" : xml.attr("arrayStyleFinish");
-    this.upText = xml.attr('upText');
-    if (typeof this.upText === 'undefined') {
-        this.upText = "";
+	this.hasPair   =    xml.attr('hasPair') == "true";
+	this.useWeight =    xml.attr('useWeight') == "true";
+    this.id        =    xml.attr('id');
+    this.text      =    xml.attr("text") == null ? "" : gDecodeFromHTML(xml.attr("text"));
+    this.arrayStyleStart      =   xml.attr("arrayStyleStart") == null ? "" : xml.attr("arrayStyleStart");
+    this.arrayStyleFinish      =  xml.attr("arrayStyleFinish") == null ? "" : xml.attr("arrayStyleFinish");
+	this.upText    = xml.attr('upText');
+    if (typeof this.upText === 'undefined')
+    {
+        this.upText = "";        
     }
-    else {
+    else
+    {
         this.upText = gDecodeFromHTML(this.upText);
     }
 
     var ownStyle = xml.attr('ownStyles');
-    if (typeof ownStyle !== 'undefined') {
-        var parsedSave = gDecodeFromHTML(JSON.parse(ownStyle));
-
-        for (var indexField in parsedSave) {
-            var index = parseInt(indexField);
-            this.ownStyles[index] = FullObjectCopy(this.getStyleFor(index));
-            for (var field in parsedSave[indexField]) {
-                if (this.ownStyles[index].ShouldLoad(field))
-                    this.ownStyles[index][field] = parsedSave[indexField][field];
-            }
+    if (typeof ownStyle !== 'undefined')
+    {
+      var parsedSave = gDecodeFromHTML(JSON.parse(ownStyle));
+    
+      for(var indexField in parsedSave)
+      {
+        var index = parseInt(indexField);
+        this.ownStyles[index] = FullObjectCopy(this.getStyleFor(index));
+        for(var field in parsedSave[indexField])
+        {
+            if (this.ownStyles[index].ShouldLoad(field))
+              this.ownStyles[index][field] = parsedSave[indexField][field];
         }
-    }
-
+      }
+    }    
+    
     this.model.LoadFromXML(xml);
 }
 
-BaseEdge.prototype.GetPixelLength = function () {
-    if (this.vertex1 == this.vertex2) {
+BaseEdge.prototype.GetPixelLength = function ()
+{
+    if (this.vertex1 == this.vertex2)
+    {
         return this.model.GetLoopSize() * 2 * Math.PI;
     }
-    else {
+    else
+    {
         return Point.distance(this.vertex1.position, this.vertex2.position);
     }
 }
 
 // trả vể trọng số của cạnh, nếu mà không có trọng số trả về khoảng cách mặc định 1
-BaseEdge.prototype.GetWeight = function () {
+BaseEdge.prototype.GetWeight = function ()
+{
     return this.useWeight ? this.weight : 1;
 }
 
-BaseEdge.prototype.GetText = function () {
+BaseEdge.prototype.GetText = function ()
+{
     return this.text.length > 0 ? this.text : (this.useWeight ? this.weight.toString() : "");
 }
 
-BaseEdge.prototype.GetUpText = function () {
+BaseEdge.prototype.GetUpText = function ()
+{
     return this.upText;
 }
 
-BaseEdge.prototype.GetStartEdgeStyle = function () {
+BaseEdge.prototype.GetStartEdgeStyle = function ()
+{
     return this.arrayStyleStart;
 }
 
-BaseEdge.prototype.GetFinishEdgeStyle = function () {
+BaseEdge.prototype.GetFinishEdgeStyle = function ()
+{
     return (this.arrayStyleFinish != "" ? this.arrayStyleFinish : (this.isDirect ? "arrow" : ""));
 }
 
 //todo: comment this
-BaseEdge.prototype.HitTest = function (pos) {
+BaseEdge.prototype.HitTest = function (pos)
+{
     var positions = this.GetEdgePositionsShift();
     return this.model.HitTest(positions[0], positions[1], pos);
 }
 
-BaseEdge.prototype.GetEdgePositionsShift = function () {
+BaseEdge.prototype.GetEdgePositionsShift = function()
+{
     return this.GetEdgePositions();
 }
 
-BaseEdge.prototype.GetEdgePositions = function () {
+BaseEdge.prototype.GetEdgePositions = function()
+{
     var res = [];
 
-    if (this.vertex1 == this.vertex2) {
+    if (this.vertex1 == this.vertex2)
+    {
         res.push(this.vertex1.position);
         res.push(this.vertex2.position);
         return res;
     }
-
+    
     var position1 = this.vertex1.position;
     var position2 = this.vertex2.position;
     var diameter1 = this.vertex1.model.diameter + parseInt(this.vertex1.currentStyle.GetStyle({}, this.vertex1).lineWidth);
     var diameter2 = this.vertex2.model.diameter + parseInt(this.vertex2.currentStyle.GetStyle({}, this.vertex2).lineWidth);
 
     var direction = position1.subtract(position2);
-
+    
     var direction1 = direction;
     var direction2 = direction;
-    var d1 = diameter1;
-    var d2 = diameter2;
-
-    if (this.model.type == EdgeModels.curve) {
-        var dist = position1.distance(position2);
-        var point1 = this.model.GetCurvePoint(position1, position2, 10.0 / dist);
-        direction1 = position1.subtract(point1);
-
-        var point2 = this.model.GetCurvePoint(position1, position2, 1.0 - 10.0 / dist);
-        direction2 = position2.subtract(point2);
-
-        d2 = diameter2;
+    var d1        = diameter1;
+    var d2        = diameter2;
+    
+    if (this.model.type == EdgeModels.curve)
+    {
+        var dist   = position1.distance(position2);
+        var point1  = this.model.GetCurvePoint(position1, position2, 10.0 / dist);
+        direction1  = position1.subtract(point1);   
+        
+        var point2  = this.model.GetCurvePoint(position1, position2, 1.0 - 10.0 / dist);
+        direction2  = position2.subtract(point2);
+        
+        d2         = diameter2;
     }
-    else {
+    else
+    {
         direction2 = direction2.multiply(-1);
     }
 
@@ -1211,79 +1308,94 @@ BaseEdge.prototype.GetEdgePositions = function () {
     direction2.normalize(1.0);
 
     var vertices = [];
-    vertices.push({ vertex: this.vertex1, direction: direction1, position: position1, diameter: d1 });
-    vertices.push({ vertex: this.vertex2, direction: direction2, position: position2, diameter: d2 });
+    vertices.push({vertex : this.vertex1, direction : direction1, position : position1, diameter : d1});
+    vertices.push({vertex : this.vertex2, direction : direction2, position : position2, diameter : d2});
 
-    vertices.forEach(function (data) {
-        var shape = data.vertex.currentStyle.GetStyle({}, data.vertex).shape;
-        if (shape == VertexCircleShape) {
-            var direction = data.direction.multiply(0.5);
-
-            res.push(data.position.subtract(direction.multiply(data.diameter)));
-        }
-        else {
-            var lineFinish1 = data.direction.multiply(-1).multiply(1000.0);
-
-            var pointsVertex1 = GetPointsForShape(shape, data.diameter, data.vertex.mainText);
-            pointsVertex1.push(pointsVertex1[0]);
-
-            for (var i = 0; i < pointsVertex1.length - 1; i++) {
-                var hitText = Point.hitTest(new Point(0, 0), lineFinish1, pointsVertex1[i], pointsVertex1[i + 1]);
-                if (hitText != null) {
-                    res.push(data.position.add(hitText));
-                    break;
+	vertices.forEach(function(data) 
+        {
+            var shape = data.vertex.currentStyle.GetStyle({}, data.vertex).shape;
+            if (shape == VertexCircleShape)
+            {
+                var direction = data.direction.multiply(0.5);        
+        
+                res.push(data.position.subtract(direction.multiply(data.diameter)));
+            }
+            else
+            {
+                var lineFinish1 = data.direction.multiply(-1).multiply(1000.0);
+            
+                var pointsVertex1 = GetPointsForShape(shape, data.diameter, data.vertex.mainText);
+                pointsVertex1.push(pointsVertex1[0]);
+            
+                for (var i = 0; i < pointsVertex1.length - 1; i ++)
+                {
+                    var hitText = Point.hitTest(new Point(0, 0), lineFinish1, pointsVertex1[i], pointsVertex1[i + 1]);
+                    if (hitText != null)
+                    {
+                        res.push(data.position.add(hitText));
+                        break;
+                    }
                 }
             }
-        }
-    });
+        });    
 
 
     return res;
 }
 
-BaseEdge.prototype.SetWeight = function (weight) {
-    var useWeight = false;
-    if (!isNaN(parseInt(weight, 10))) {
-        useWeight = true;
-    }
-    weight = (!isNaN(parseInt(weight, 10)) && weight >= 0) ? weight : 1;
-
-    this.weight = Number(weight);
+BaseEdge.prototype.SetWeight = function(weight)
+{
+	var useWeight = false;
+	if (!isNaN(parseInt(weight, 10)))
+	{
+		useWeight = true;
+	}
+	weight = (!isNaN(parseInt(weight, 10)) && weight >= 0) ? weight : 1;
+    
+    this.weight    = Number(weight);
     this.useWeight = useWeight;
 }
 
-BaseEdge.prototype.SetUpText = function (text) {
+BaseEdge.prototype.SetUpText = function(text)
+{
     this.upText = text;
 }
 
-BaseEdge.prototype.resetOwnStyle = function (index) {
-    if (this.ownStyles.hasOwnProperty(index)) {
-        delete this.ownStyles[index];
-    }
+BaseEdge.prototype.resetOwnStyle = function (index)
+{
+  if (this.ownStyles.hasOwnProperty(index))
+  {
+    delete this.ownStyles[index];
+  }
 }
 
-BaseEdge.prototype.setOwnStyle = function (index, style) {
-    this.ownStyles[index] = style;
+BaseEdge.prototype.setOwnStyle = function (index, style)
+{
+  this.ownStyles[index] = style;
 }
 
-BaseEdge.prototype.getStyleFor = function (index) {
-    if (this.ownStyles.hasOwnProperty(index)) {
-        return this.ownStyles[index];
-    }
-    else {
-        var style = null;
+BaseEdge.prototype.getStyleFor = function (index)
+{
+  if (this.ownStyles.hasOwnProperty(index))
+  {
+    return this.ownStyles[index];
+  }
+  else
+  {
+    var style = null;
 
-        if (index == 0)
-            style = globalApplication.GetStyle("edge", "common");
-        else
-            style = globalApplication.GetStyle("edge", "selected", undefined, index - 1);
+    if (index == 0)
+      style = globalApplication.GetStyle("edge", "common");
+    else
+      style = globalApplication.GetStyle("edge", "selected", undefined, index - 1);
 
-        return style;
-    }
+    return style;
+  }
 }
 
-BaseEdge.prototype.hasOwnStyleFor = function (index) {
-    return this.ownStyles.hasOwnProperty(index);
+BaseEdge.prototype.hasOwnStyleFor = function (index)
+{
+  return this.ownStyles.hasOwnProperty(index);
 }/**
  * Graph drawer.
  */
@@ -1292,390 +1404,424 @@ BaseEdge.prototype.hasOwnStyleFor = function (index) {
 
 
 // Vertex shape
-const VertexCircleShape = 0,
-    VertexSquareShape = 1,
-    VertexTriangleShape = 2,
-    VertexPentagonShape = 3,
-    VertexHomeShape = 4,
-    VertexTextboxShape = 5;
-VertexSnowflakeShape = 6;
+const VertexCircleShape   = 0,
+      VertexSquareShape   = 1,
+      VertexTriangleShape = 2,
+	  VertexPentagonShape = 3,
+	  VertexHomeShape     = 4,
+	  VertexTextboxShape = 5;
+	  VertexSnowflakeShape = 6;
 
 // Common text position
 const CommonTextCenter = 0,
-    CommonTextUp = 1;
+      CommonTextUp     = 1;
 
 // Fonts
 const DefaultFont = "px sans-serif",
-    MainTextFontSize = 16,
-    TopTextFontSize = 12.0;
+	  MainTextFontSize = 16,
+	  TopTextFontSize  = 12.0;
 
-function GetSquarePoints(diameter) {
-    var res = [];
+function GetSquarePoints(diameter)
+{
+  var res = [];
 
-    var a = diameter;
-    res.push(new Point(-a / 2, - a / 2));
-    res.push(new Point(a / 2, -a / 2));
-    res.push(new Point(a / 2, a / 2));
-    res.push(new Point(-a / 2, a / 2));
+  var a = diameter;
+  res.push(new Point(-a / 2, - a / 2));
+  res.push(new Point(a / 2, -a / 2));
+  res.push(new Point(a / 2, a / 2));
+  res.push(new Point(-a / 2, a / 2));
 
-    return res;
+  return res;
 }
 
-function GetTrianglePoints(diameter) {
-    var res = [];
+function GetTrianglePoints(diameter)
+{
+	var res = [];
 
-    var effectiveDiameter = diameter * 1.5;
-    var upOffset = effectiveDiameter / 2;
-    var downOffset = effectiveDiameter / 4;
-    var lrOffset = effectiveDiameter * 3 / (Math.sqrt(3) * 4);
+  	var effectiveDiameter = diameter * 1.5;
+  	var upOffset   = effectiveDiameter / 2;
+  	var downOffset = effectiveDiameter / 4;
+  	var lrOffset   = effectiveDiameter * 3 / (Math.sqrt(3) * 4);
 
-    res.push(new Point(0, - upOffset));
-    res.push(new Point(lrOffset, downOffset));
-    res.push(new Point(- lrOffset, downOffset));
+  	res.push(new Point(0, - upOffset));
+	res.push(new Point(lrOffset,   downOffset));
+	res.push(new Point(- lrOffset, downOffset));
 
-    return res;
+  	return res;
 }
 
-function GetPentagonPoints(diameter) {
-    var res = [];
+function GetPentagonPoints(diameter)
+{
+	var res = [];
 
-    var baseValue = diameter / 2 * 1.2;
+	var baseValue = diameter / 2 * 1.2;
 
-    res.push(new Point(0, - baseValue));
-    res.push((new Point(0, - baseValue)).rotate(new Point(0, 0), 72));
-    res.push((new Point(0, - baseValue)).rotate(new Point(0, 0), 72 * 2));
-    res.push((new Point(0, - baseValue)).rotate(new Point(0, 0), 72 * 3));
-    res.push((new Point(0, - baseValue)).rotate(new Point(0, 0), 72 * 4));
-    res.push((new Point(0, - baseValue)).rotate(new Point(0, 0), 72 * 5));
+  	res.push(new Point(0, - baseValue));
+	res.push((new Point(0, - baseValue)).rotate(new Point(0, 0), 72));
+	res.push((new Point(0, - baseValue)).rotate(new Point(0, 0), 72 * 2));
+	res.push((new Point(0, - baseValue)).rotate(new Point(0, 0), 72 * 3));
+	res.push((new Point(0, - baseValue)).rotate(new Point(0, 0), 72 * 4));
+	res.push((new Point(0, - baseValue)).rotate(new Point(0, 0), 72 * 5));
 
-    return res;
+  	return res;
 }
 
-function GetTextboxPoints(diameter, text) {
-    var res = [];
-    var width = diameter;
-    var height = diameter;
+function GetTextboxPoints(diameter, text)
+{
+	var res = [];
+	var width = diameter;
+	var height = diameter;	
+	
+	if (text)
+	{
+		var tempContext = document.createElement('canvas').getContext('2d');
+		tempContext.font = "bold " + MainTextFontSize + DefaultFont;
+		width = tempContext.measureText(text).width + diameter / 2;
+	}
 
-    if (text) {
-        var tempContext = document.createElement('canvas').getContext('2d');
-        tempContext.font = "bold " + MainTextFontSize + DefaultFont;
-        width = tempContext.measureText(text).width + diameter / 2;
-    }
+	res.push(new Point(-width / 2, -height / 2));
+	res.push(new Point(width / 2, -height / 2));
+	res.push(new Point(width / 2, height / 2));
+	res.push(new Point(-width / 2, height / 2));
 
-    res.push(new Point(-width / 2, -height / 2));
-    res.push(new Point(width / 2, -height / 2));
-    res.push(new Point(width / 2, height / 2));
-    res.push(new Point(-width / 2, height / 2));
-
-    return res;
+	return res;
 }
 
-function GetShowflakePoints(diameter) {
-    var res = [];
+function GetShowflakePoints(diameter) 
+{
+	var res = [];
 
-    var superSmallRadius = diameter * 0.8 / 2;
-    var smallRadius = diameter * 0.95 / 2;
-    var bigRadius = diameter * 1.5 / 2;
-    let angel = 8;
+	var superSmallRadius = diameter * 0.8 / 2;
+	var smallRadius = diameter * 0.95 / 2;
+	var bigRadius   = diameter * 1.5 / 2;
+	let angel = 8;
 
-    res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), - angel));
-    res.push(new Point(smallRadius, 0));
-    res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), angel));
-    res.push(new Point(bigRadius, 0).rotate(new Point(0, 0), 30));
-    res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 - angel));
-    res.push(new Point(smallRadius, 0).rotate(new Point(0, 0), 60));
-    res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + angel));
-    res.push(new Point(bigRadius, 0).rotate(new Point(0, 0), 30 + 60));
-    res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + 60 - angel));
-    res.push(new Point(smallRadius, 0).rotate(new Point(0, 0), 60 + 60));
-    res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + 60 + angel));
-    res.push(new Point(bigRadius, 0).rotate(new Point(0, 0), 30 + 60 + 60));
-    res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60 - angel));
-    res.push(new Point(smallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60));
-    res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60 + angel));
+	res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), - angel));
+	res.push(new Point(smallRadius, 0));
+	res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), angel));
+	res.push(new Point(bigRadius, 0).rotate(new Point(0, 0), 30));
+	res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 - angel));	
+	res.push(new Point(smallRadius, 0).rotate(new Point(0, 0), 60));
+	res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + angel));	
+	res.push(new Point(bigRadius, 0).rotate(new Point(0, 0), 30 + 60));
+	res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + 60 - angel));	
+	res.push(new Point(smallRadius, 0).rotate(new Point(0, 0), 60 + 60));
+	res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + 60 + angel));	
+	res.push(new Point(bigRadius, 0).rotate(new Point(0, 0), 30 + 60 + 60));	
+	res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60 - angel));	
+	res.push(new Point(smallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60));	
+	res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60 + angel));	
 
-    res.push(new Point(bigRadius, 0).rotate(new Point(0, 0), 30 + 60 + 60 + 60));
-    res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60 + 60 - angel));
-    res.push(new Point(smallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60 + 60));
-    res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60 + 60 + angel));
-    res.push(new Point(bigRadius, 0).rotate(new Point(0, 0), 30 + 60 + 60 + 60 + 60));
-    res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60 + 60 + 60 - angel));
-    res.push(new Point(smallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60 + 60 + 60));
-    res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60 + 60 + 60 + angel));
-    res.push(new Point(bigRadius, 0).rotate(new Point(0, 0), 30 + 60 + 60 + 60 + 60 + 60));
+	res.push(new Point(bigRadius, 0).rotate(new Point(0, 0), 30 + 60 + 60 + 60));
+	res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60 + 60 - angel));	
+	res.push(new Point(smallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60 + 60));	
+	res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60 + 60 + angel));	
+	res.push(new Point(bigRadius, 0).rotate(new Point(0, 0), 30 + 60 + 60 + 60 + 60));
+	res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60 + 60 + 60 - angel));	
+	res.push(new Point(smallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60 + 60 + 60));	
+	res.push(new Point(superSmallRadius, 0).rotate(new Point(0, 0), 60 + 60 + 60 + 60 + 60 + angel));	
+	res.push(new Point(bigRadius, 0).rotate(new Point(0, 0), 30 + 60 + 60 + 60 + 60 + 60));
 
-    return res;
+	return res;
 }
 
-function GetPointsForShape(shape, diameter, text = null) {
-    switch (parseInt(shape)) {
-        case VertexSquareShape: return GetSquarePoints(diameter); break;
-        case VertexTriangleShape: return GetTrianglePoints(diameter); break;
-        case VertexPentagonShape: return GetPentagonPoints(diameter); break;
-        case VertexTextboxShape: return GetTextboxPoints(diameter, text); break;
-        case VertexSnowflakeShape: return GetShowflakePoints(diameter); break;
-        default: return null; break;
-    }
+function GetPointsForShape(shape, diameter, text=null)
+{
+	switch (parseInt(shape))
+	{
+		case VertexSquareShape:   return GetSquarePoints(diameter); break;
+		case VertexTriangleShape: return GetTrianglePoints(diameter); break;
+		case VertexPentagonShape: return GetPentagonPoints(diameter); break;
+		case VertexTextboxShape: return GetTextboxPoints(diameter, text); break;
+		case VertexSnowflakeShape:   return GetShowflakePoints(diameter); break;
+		default: return null; break;
+	}
 }
 
-function GetSizeForShape(shape, diameter) {
-    switch (parseInt(shape)) {
-        case VertexSquareShape: return diameter; break;
-        case VertexTriangleShape: return diameter * 1.5; break;
-        case VertexPentagonShape: return diameter * 1.2; break;
-        case VertexTextboxShape: return diameter; break;
-        case VertexSnowflakeShape: return diameter * 1.5; break;
+function GetSizeForShape(shape, diameter)
+{
+	switch (parseInt(shape))
+	{
+		case VertexSquareShape:   return diameter; break;
+		case VertexTriangleShape: return diameter * 1.5; break;
+		case VertexPentagonShape: return diameter * 1.2; break;
+		case VertexTextboxShape: return diameter; break;
+		case VertexSnowflakeShape: return diameter * 1.5; break;
 
-        default: return diameter; break;
-    }
+		default: return diameter; break;
+	}
+}
+ 
+function BaseVertexStyle()
+{
+  this.baseStyles = [];
 }
 
-function BaseVertexStyle() {
-    this.baseStyles = [];
+BaseVertexStyle.prototype.GetStyle = function (baseStyle, object)
+{
+	this.baseStyles.forEach(function(element) {
+		var styleObject = globalApplication.GetStyle("vertex", element, object);
+		baseStyle       = styleObject.GetStyle(baseStyle, object);
+	});
+
+	if (this.hasOwnProperty('lineWidth'))
+		baseStyle.lineWidth   = this.lineWidth;
+	if (this.hasOwnProperty('strokeStyle'))
+		baseStyle.strokeStyle = this.strokeStyle;
+	if (this.hasOwnProperty('fillStyle'))
+		baseStyle.fillStyle   = this.fillStyle;
+	if (this.hasOwnProperty('mainTextColor'))
+		baseStyle.mainTextColor = this.mainTextColor;
+	if (this.hasOwnProperty('shape'))
+		baseStyle.shape = this.shape;
+	if (this.hasOwnProperty('upTextColor'))
+		baseStyle.upTextColor = this.upTextColor;
+	if (this.hasOwnProperty('commonTextPosition'))
+		baseStyle.commonTextPosition = this.commonTextPosition;
+
+	baseStyle.lineWidth = parseInt(baseStyle.lineWidth);
+
+	return this.FixNewFields(baseStyle);
 }
 
-BaseVertexStyle.prototype.GetStyle = function (baseStyle, object) {
-    this.baseStyles.forEach(function (element) {
-        var styleObject = globalApplication.GetStyle("vertex", element, object);
-        baseStyle = styleObject.GetStyle(baseStyle, object);
-    });
+BaseVertexStyle.prototype.FixNewFields = function (style)
+{
+	if (!style.hasOwnProperty('shape'))
+		style.shape = VertexCircleShape;
 
-    if (this.hasOwnProperty('lineWidth'))
-        baseStyle.lineWidth = this.lineWidth;
-    if (this.hasOwnProperty('strokeStyle'))
-        baseStyle.strokeStyle = this.strokeStyle;
-    if (this.hasOwnProperty('fillStyle'))
-        baseStyle.fillStyle = this.fillStyle;
-    if (this.hasOwnProperty('mainTextColor'))
-        baseStyle.mainTextColor = this.mainTextColor;
-    if (this.hasOwnProperty('shape'))
-        baseStyle.shape = this.shape;
-    if (this.hasOwnProperty('upTextColor'))
-        baseStyle.upTextColor = this.upTextColor;
-    if (this.hasOwnProperty('commonTextPosition'))
-        baseStyle.commonTextPosition = this.commonTextPosition;
+	if (!style.hasOwnProperty('commonTextPosition'))
+		style.commonTextPosition = CommonTextCenter;
 
-    baseStyle.lineWidth = parseInt(baseStyle.lineWidth);
-
-    return this.FixNewFields(baseStyle);
+	return style;
 }
 
-BaseVertexStyle.prototype.FixNewFields = function (style) {
-    if (!style.hasOwnProperty('shape'))
-        style.shape = VertexCircleShape;
-
-    if (!style.hasOwnProperty('commonTextPosition'))
-        style.commonTextPosition = CommonTextCenter;
-
-    return style;
+BaseVertexStyle.prototype.Clear = function ()
+{
+	delete this.lineWidth;
+	delete this.strokeStyle;
+	delete this.fillStyle;
+	delete this.mainTextColor;
+	delete this.shape;
+	delete this.upTextColor;
+	delete this.commonTextPosition;
+	delete this.lineWidth;
 }
 
-BaseVertexStyle.prototype.Clear = function () {
-    delete this.lineWidth;
-    delete this.strokeStyle;
-    delete this.fillStyle;
-    delete this.mainTextColor;
-    delete this.shape;
-    delete this.upTextColor;
-    delete this.commonTextPosition;
-    delete this.lineWidth;
-}
-
-BaseVertexStyle.prototype.ShouldLoad = function (field) {
-    return field != "baseStyles";
+BaseVertexStyle.prototype.ShouldLoad = function (field)
+{
+	return field != "baseStyles";
 }
 
 // Common style of Graphs.
-function CommonVertexStyle() {
-    BaseVertexStyle.apply(this, arguments);
+function CommonVertexStyle()
+{
+  BaseVertexStyle.apply(this, arguments);
 
-    this.lineWidth = 2;
-    this.strokeStyle = '#c7b7c7';
-    this.fillStyle = '#68aeba';
-    this.mainTextColor = '#f0d543';
-    this.shape = VertexCircleShape;
-    this.upTextColor = '#68aeba';
-    this.commonTextPosition = CommonTextCenter;
+  this.lineWidth   = 2;
+  this.strokeStyle = '#c7b7c7';
+  this.fillStyle   = '#68aeba';
+  this.mainTextColor = '#f0d543';
+  this.shape       = VertexCircleShape;
+  this.upTextColor = '#68aeba';
+  this.commonTextPosition = CommonTextCenter;
 
-    this.baseStyles = [];
+  this.baseStyles = [];
 }
 
 CommonVertexStyle.prototype = Object.create(BaseVertexStyle.prototype);
 
-function CommonPrintVertexStyle() {
-    BaseVertexStyle.apply(this, arguments);
+function CommonPrintVertexStyle()
+{
+  BaseVertexStyle.apply(this, arguments);
+  
+  this.strokeStyle = '#000000';
+  this.fillStyle   = '#FFFFFF';
+  this.mainTextColor = '#000000';
 
-    this.strokeStyle = '#000000';
-    this.fillStyle = '#FFFFFF';
-    this.mainTextColor = '#000000';
-
-    this.baseStyles.push("common");
+  this.baseStyles.push("common");
 }
 
 CommonPrintVertexStyle.prototype = Object.create(BaseVertexStyle.prototype);
 
 // Selected style of Graphs.
-function SelectedVertexStyle0() {
-    BaseVertexStyle.apply(this, arguments);
+function SelectedVertexStyle0()
+{
+	BaseVertexStyle.apply(this, arguments);
 
-    this.strokeStyle = '#f0d543';
-    this.mainTextColor = '#f0d543';
-    this.fillStyle = '#c7627a';
+	this.strokeStyle = '#f0d543';
+	this.mainTextColor  = '#f0d543';
+	this.fillStyle   = '#c7627a';
 
-    this.baseStyles.push("common");
+	this.baseStyles.push("common");
 }
 
 SelectedVertexStyle0.prototype = Object.create(BaseVertexStyle.prototype);
 
-function SelectedVertexStyle1() {
-    BaseVertexStyle.apply(this, arguments);
+function SelectedVertexStyle1()
+{
+	BaseVertexStyle.apply(this, arguments);
 
-    this.strokeStyle = '#7a9ba0';
-    this.mainTextColor = '#c3d2d5';
-    this.fillStyle = '#534641';
+	this.strokeStyle = '#7a9ba0';
+	this.mainTextColor  = '#c3d2d5';
+	this.fillStyle   = '#534641';
 
-    this.baseStyles.push("selected");
+	this.baseStyles.push("selected");
 }
 
 SelectedVertexStyle1.prototype = Object.create(BaseVertexStyle.prototype);
 
-function SelectedVertexStyle2() {
-    BaseVertexStyle.apply(this, arguments);
+function SelectedVertexStyle2()
+{
+	BaseVertexStyle.apply(this, arguments);
 
-    this.strokeStyle = '#8C4C86';
-    this.mainTextColor = '#dbbdd8';
-    this.fillStyle = '#253267';
+	this.strokeStyle = '#8C4C86';
+	this.mainTextColor  = '#dbbdd8';
+	this.fillStyle   = '#253267';
 
-    this.baseStyles.push("selected");
+	this.baseStyles.push("selected");
 }
 
 SelectedVertexStyle2.prototype = Object.create(BaseVertexStyle.prototype);
 
-function SelectedVertexStyle3() {
-    BaseVertexStyle.apply(this, arguments);
+function SelectedVertexStyle3()
+{
+	BaseVertexStyle.apply(this, arguments);
 
-    this.strokeStyle = '#6188FF';
-    this.mainTextColor = '#6188FF';
-    this.fillStyle = '#E97CF9';
+	this.strokeStyle = '#6188FF';
+	this.mainTextColor  = '#6188FF';
+	this.fillStyle   = '#E97CF9';
 
-    this.baseStyles.push("selected");
+	this.baseStyles.push("selected");
 }
 
 SelectedVertexStyle3.prototype = Object.create(BaseVertexStyle.prototype);
 
-function SelectedVertexStyle4() {
-    BaseVertexStyle.apply(this, arguments);
+function SelectedVertexStyle4()
+{
+	BaseVertexStyle.apply(this, arguments);
 
-    this.strokeStyle = '#C6B484';
-    this.mainTextColor = '#C6B484';
-    this.fillStyle = '#E0DEE1';
+	this.strokeStyle = '#C6B484';
+	this.mainTextColor  = '#C6B484';
+	this.fillStyle   = '#E0DEE1';
 
-    this.baseStyles.push("selected");
+	this.baseStyles.push("selected");
 }
 
 SelectedVertexStyle4.prototype = Object.create(BaseVertexStyle.prototype);
 
-function SelectedPrintVertexStyle() {
-    BaseVertexStyle.apply(this, arguments);
+function SelectedPrintVertexStyle()
+{
+	BaseVertexStyle.apply(this, arguments);
 
-    this.strokeStyle = '#000000';
-    this.mainTextColor = '#000000';
-    this.fillStyle = '#AAAAAA';
+	this.strokeStyle   = '#000000';
+	this.mainTextColor = '#000000';
+	this.fillStyle     = '#AAAAAA';
 
-    this.baseStyles.push("printed");
+	this.baseStyles.push("printed");
 }
 
 SelectedPrintVertexStyle.prototype = Object.create(BaseVertexStyle.prototype);
 
 var DefaultSelectedGraphStyles = [new SelectedVertexStyle0(), new SelectedVertexStyle1(),
-new SelectedVertexStyle2(), new SelectedVertexStyle3(), new SelectedVertexStyle4()];
+	new SelectedVertexStyle2(), new SelectedVertexStyle3(), new SelectedVertexStyle4()];
 
 var DefaultPrintSelectedGraphStyles = [new SelectedPrintVertexStyle()];
 
-function BaseVertexDrawer(context) {
-    this.context = context;
+function BaseVertexDrawer(context)
+{ 
+  this.context = context;
 }
 
-BaseVertexDrawer.prototype.Draw = function (baseGraph, graphStyle) {
-    this.SetupStyle(graphStyle);
-    this.DrawShape(baseGraph);
+BaseVertexDrawer.prototype.Draw = function(baseGraph, graphStyle)
+{
+  this.SetupStyle(graphStyle);
+  this.DrawShape(baseGraph);
 
-    if (this.currentStyle.lineWidth != 0)
-        this.context.stroke();
+  if (this.currentStyle.lineWidth != 0)
+  	this.context.stroke();
 
-    this.context.fill();
+  this.context.fill();
 
-    var shapeSize = GetSizeForShape(graphStyle.shape, baseGraph.model.diameter + graphStyle.lineWidth);
-
-    if (graphStyle.commonTextPosition == CommonTextCenter) {
-        this.DrawCenterText(baseGraph.position, baseGraph.mainText, graphStyle.mainTextColor,
-            graphStyle.fillStyle, true, true, MainTextFontSize);
-        // Top text
-        this.DrawCenterText(baseGraph.position.add(new Point(0, - shapeSize / 2.0 - 9.0)), baseGraph.upText,
-            graphStyle.upTextColor, graphStyle.strokeStyle, false, false, TopTextFontSize);
-    }
-    else if (graphStyle.commonTextPosition == CommonTextUp) {
-        this.DrawCenterText(baseGraph.position.add(new Point(0, - shapeSize / 2.0 - 7.0)), baseGraph.mainText,
-            graphStyle.mainTextColor, graphStyle.fillStyle, true, false, MainTextFontSize);
-        // Top text
-        this.DrawCenterText(baseGraph.position.add(new Point(0, shapeSize / 2.0 + 9.0)), baseGraph.upText,
-            graphStyle.upTextColor, graphStyle.strokeStyle, false, false, TopTextFontSize);
-    }
-    /*	
-      // Bottom text
-      this.DrawCenterText(baseGraph.position.add(new Point(0, + baseGraph.model.diameter / 2.0 + 7.0)), 
-        "Text 2", graphStyle.fillStyle, false, 12.0);
-    */
+  var shapeSize = GetSizeForShape(graphStyle.shape, baseGraph.model.diameter + graphStyle.lineWidth);
+  
+  if (graphStyle.commonTextPosition == CommonTextCenter)
+  {
+  	this.DrawCenterText(baseGraph.position, baseGraph.mainText, graphStyle.mainTextColor, 
+						graphStyle.fillStyle, true, true, MainTextFontSize);  
+  	// Top text
+  	this.DrawCenterText(baseGraph.position.add(new Point(0, - shapeSize / 2.0 - 9.0)), baseGraph.upText, 
+						graphStyle.upTextColor, graphStyle.strokeStyle, false, false, TopTextFontSize);
+  }
+  else if (graphStyle.commonTextPosition == CommonTextUp)
+  {
+	this.DrawCenterText(baseGraph.position.add(new Point(0, - shapeSize / 2.0 - 7.0)), baseGraph.mainText, 
+						graphStyle.mainTextColor, graphStyle.fillStyle, true, false, MainTextFontSize);  
+	// Top text
+	this.DrawCenterText(baseGraph.position.add(new Point(0, shapeSize / 2.0 + 9.0)), baseGraph.upText, 
+						graphStyle.upTextColor, graphStyle.strokeStyle, false, false, TopTextFontSize);
+  }
+/*	
+  // Bottom text
+  this.DrawCenterText(baseGraph.position.add(new Point(0, + baseGraph.model.diameter / 2.0 + 7.0)), 
+	"Text 2", graphStyle.fillStyle, false, 12.0);
+*/
 }
 
-BaseVertexDrawer.prototype.SetupStyle = function (style) {
-    this.currentStyle = style;
-    this.context.lineWidth = style.lineWidth;
-    this.context.strokeStyle = style.strokeStyle;
-    this.context.fillStyle = style.fillStyle;
+BaseVertexDrawer.prototype.SetupStyle = function(style)
+{
+  this.currentStyle = style;
+  this.context.lineWidth   = style.lineWidth;
+  this.context.strokeStyle = style.strokeStyle;
+  this.context.fillStyle   = style.fillStyle;
 }
 
-BaseVertexDrawer.prototype.DrawShape = function (baseGraph) {
-    this.context.beginPath();
-    if (this.currentStyle.shape == VertexCircleShape) {
-        this.context.arc(baseGraph.position.x, baseGraph.position.y, baseGraph.model.diameter / 2.0, 0, 2 * Math.PI);
-    }
-    else {
-        var points = GetPointsForShape(this.currentStyle.shape, baseGraph.model.diameter, baseGraph.mainText);
+BaseVertexDrawer.prototype.DrawShape = function(baseGraph)
+{
+  this.context.beginPath();
+  if (this.currentStyle.shape == VertexCircleShape)
+  {
+  	this.context.arc(baseGraph.position.x, baseGraph.position.y, baseGraph.model.diameter / 2.0, 0, 2 * Math.PI);
+  }
+  else
+  {
+	var points = GetPointsForShape(this.currentStyle.shape, baseGraph.model.diameter, baseGraph.mainText);
 
-        this.context.moveTo(baseGraph.position.x + points[points.length - 1].x, baseGraph.position.y + points[points.length - 1].y);
+	this.context.moveTo(baseGraph.position.x + points[points.length - 1].x, baseGraph.position.y + points[points.length - 1].y);
 
-        var context = this.context;
+	var context = this.context;
 
-        points.forEach(function (point) {
-            context.lineTo(baseGraph.position.x + point.x, baseGraph.position.y + point.y);
-        });
-    }
+	points.forEach(function(point) {
+		context.lineTo(baseGraph.position.x + point.x, baseGraph.position.y + point.y);
+	  });
+  }
 
-    this.context.closePath();
+  this.context.closePath();
 }
 
-BaseVertexDrawer.prototype.DrawText = function (position, text, color, outlineColor, outline, font) {
-    this.context.fillStyle = color;
-    this.context.font = font;
+BaseVertexDrawer.prototype.DrawText = function(position, text, color, outlineColor, outline, font)
+{
+	this.context.fillStyle = color;
+	this.context.font = font;
     this.context.lineWidth = 4;
     this.context.strokeStyle = outlineColor;
 
-    if (outline) {
+    if (outline)
+    {
         this.context.save();
         this.context.lineJoin = 'round';
         this.context.strokeText(text, position.x, position.y);
         this.context.restore();
     }
-
+    
     this.context.fillText(text, position.x, position.y);
 }
 
-BaseVertexDrawer.prototype.DrawCenterText = function (position, text, color, outlineColor, bold, outline, size) {
-    this.context.textBaseline = "middle";
-    this.context.font = (bold ? "bold " : "") + size + DefaultFont;
-    var textWidth = this.context.measureText(text).width;
-    this.DrawText(new Point(position.x - textWidth / 2, position.y), text, color, outlineColor, outline, this.context.font);
+BaseVertexDrawer.prototype.DrawCenterText = function(position, text, color, outlineColor, bold, outline, size)
+{
+	this.context.textBaseline="middle";
+	this.context.font = (bold ? "bold " : "") + size + DefaultFont;
+	var textWidth  = this.context.measureText(text).width;	
+	this.DrawText(new Point(position.x - textWidth / 2, position.y), text, color, outlineColor, outline, this.context.font);
 }
 
 /**
@@ -1683,58 +1829,62 @@ BaseVertexDrawer.prototype.DrawCenterText = function (position, text, color, out
  */
 
 
-const lineDashTypes = [
-    [],
-    [4, 4],
-    [12, 12],
-    [16, 4, 4, 4],
-];
+ const lineDashTypes = [
+          [],
+          [4, 4],
+          [12, 12],
+          [16, 4, 4, 4],
+        ];
 
 // Common text position
 const WeightTextCenter = 0,
-    WeightTextUp = 1;
+      WeightTextUp     = 1;
 
-function BaseEdgeStyle() {
-    this.baseStyles = [];
+ function BaseEdgeStyle()
+ {
+   this.baseStyles = [];
+ }
+ 
+ BaseEdgeStyle.prototype.GetStyle = function (baseStyle, object)
+ {
+   this.baseStyles.forEach(function(element) {
+     var styleObject = globalApplication.GetStyle("edge", element, object);
+     baseStyle       = styleObject.GetStyle(baseStyle, object);
+   });
+ 
+   if (this.hasOwnProperty('weightText'))
+     baseStyle.weightText   = this.weightText;
+   if (this.hasOwnProperty('strokeStyle'))
+     baseStyle.strokeStyle = this.strokeStyle;
+   if (this.hasOwnProperty('fillStyle'))
+     baseStyle.fillStyle   = this.fillStyle;
+   if (this.hasOwnProperty('textPadding'))
+     baseStyle.textPadding = this.textPadding;
+   if (this.hasOwnProperty('textStrokeWidth'))
+     baseStyle.textStrokeWidth = this.textStrokeWidth;
+   if (this.hasOwnProperty('lineDash'))
+     baseStyle.lineDash = this.lineDash;
+   if (this.hasOwnProperty('additionalTextColor'))
+     baseStyle.additionalTextColor = this.additionalTextColor;
+   if (this.hasOwnProperty('weightPosition'))
+     baseStyle.weightPosition = this.weightPosition;
+ 
+   return this.FixNewFields(baseStyle);
+}
+  
+BaseEdgeStyle.prototype.FixNewFields = function (style)
+{
+  if (!style.hasOwnProperty('lineDash'))
+    style.lineDash = 0;
+
+  if (!style.hasOwnProperty('weightPosition'))
+    style.weightPosition = WeightTextCenter;
+
+  return style;
 }
 
-BaseEdgeStyle.prototype.GetStyle = function (baseStyle, object) {
-    this.baseStyles.forEach(function (element) {
-        var styleObject = globalApplication.GetStyle("edge", element, object);
-        baseStyle = styleObject.GetStyle(baseStyle, object);
-    });
-
-    if (this.hasOwnProperty('weightText'))
-        baseStyle.weightText = this.weightText;
-    if (this.hasOwnProperty('strokeStyle'))
-        baseStyle.strokeStyle = this.strokeStyle;
-    if (this.hasOwnProperty('fillStyle'))
-        baseStyle.fillStyle = this.fillStyle;
-    if (this.hasOwnProperty('textPadding'))
-        baseStyle.textPadding = this.textPadding;
-    if (this.hasOwnProperty('textStrokeWidth'))
-        baseStyle.textStrokeWidth = this.textStrokeWidth;
-    if (this.hasOwnProperty('lineDash'))
-        baseStyle.lineDash = this.lineDash;
-    if (this.hasOwnProperty('additionalTextColor'))
-        baseStyle.additionalTextColor = this.additionalTextColor;
-    if (this.hasOwnProperty('weightPosition'))
-        baseStyle.weightPosition = this.weightPosition;
-
-    return this.FixNewFields(baseStyle);
-}
-
-BaseEdgeStyle.prototype.FixNewFields = function (style) {
-    if (!style.hasOwnProperty('lineDash'))
-        style.lineDash = 0;
-
-    if (!style.hasOwnProperty('weightPosition'))
-        style.weightPosition = WeightTextCenter;
-
-    return style;
-}
-
-BaseEdgeStyle.prototype.Clear = function () {
+ BaseEdgeStyle.prototype.Clear = function ()
+ {
     delete this.weightText;
     delete this.strokeStyle;
     delete this.fillStyle;
@@ -1743,319 +1893,356 @@ BaseEdgeStyle.prototype.Clear = function () {
     delete this.lineDash;
     delete this.additionalTextColor;
     delete this.weightPosition;
-}
+ }
 
-BaseEdgeStyle.prototype.ShouldLoad = function (field) {
-    return field != "baseStyles";
-}
+ BaseEdgeStyle.prototype.ShouldLoad = function (field)
+ {
+   return field != "baseStyles";
+ }
+ 
+function CommonEdgeStyle()
+{
+  BaseEdgeStyle.apply(this, arguments);
 
-function CommonEdgeStyle() {
-    BaseEdgeStyle.apply(this, arguments);
-
-    this.strokeStyle = '#c7b7c7';
-    this.weightText = '#f0d543';
-    this.fillStyle = '#68aeba';
-    this.textPadding = 4;
-    this.textStrokeWidth = 2;
-    this.lineDash = 0;
-    this.additionalTextColor = '#c7b7c7';
-    this.weightPosition = WeightTextCenter;
+	this.strokeStyle = '#c7b7c7';
+	this.weightText  = '#f0d543';
+ 	this.fillStyle   = '#68aeba';
+ 	this.textPadding = 4;
+	this.textStrokeWidth = 2;
+  this.lineDash = 0;
+  this.additionalTextColor = '#c7b7c7';
+  this.weightPosition = WeightTextCenter;
 }
 
 CommonEdgeStyle.prototype = Object.create(BaseEdgeStyle.prototype);
 
-function CommonPrintEdgeStyle() {
-    BaseEdgeStyle.apply(this, arguments);
-
-    this.strokeStyle = '#000000';
-    this.weightText = '#000000';
-    this.fillStyle = '#FFFFFF';
-    this.textPadding = 4;
-    this.textStrokeWidth = 2;
+function CommonPrintEdgeStyle()
+{
+	BaseEdgeStyle.apply(this, arguments);
+    
+	this.strokeStyle = '#000000';
+	this.weightText  = '#000000';
+ 	this.fillStyle   = '#FFFFFF';
+ 	this.textPadding = 4;
+	this.textStrokeWidth = 2;
 
     this.baseStyles.push("common");
 }
 CommonPrintEdgeStyle.prototype = Object.create(BaseEdgeStyle.prototype);
 
-function SelectedEdgeStyle0() {
-    BaseEdgeStyle.apply(this, arguments);
+function SelectedEdgeStyle0()
+{
+	BaseEdgeStyle.apply(this, arguments);  
 
-    this.strokeStyle = '#f0d543';
-    this.weightText = '#f0d543';
-    this.fillStyle = '#c7627a';
+	this.strokeStyle = '#f0d543';
+	this.weightText  = '#f0d543';
+	this.fillStyle   = '#c7627a';
 
-    this.baseStyles.push("common");
+  this.baseStyles.push("common");
 }
 SelectedEdgeStyle0.prototype = Object.create(BaseEdgeStyle.prototype);
 
-function SelectedEdgeStyle1() {
-    BaseEdgeStyle.apply(this, arguments);
+function SelectedEdgeStyle1()
+{
+	BaseEdgeStyle.apply(this, arguments);  
 
-    this.strokeStyle = '#8FBF83';
-    this.weightText = '#8FBF83';
-    this.fillStyle = '#F9F9D5';
+	this.strokeStyle = '#8FBF83';
+	this.weightText  = '#8FBF83';
+	this.fillStyle   = '#F9F9D5';
 
-    this.baseStyles.push("selected");
+  this.baseStyles.push("selected");
 }
 SelectedEdgeStyle1.prototype = Object.create(BaseEdgeStyle.prototype);
 
-function SelectedEdgeStyle2() {
-    BaseEdgeStyle.apply(this, arguments);
+function SelectedEdgeStyle2()
+{
+	BaseEdgeStyle.apply(this, arguments);  
 
-    this.strokeStyle = '#8C4C86';
-    this.weightText = '#8C4C86';
-    this.fillStyle = '#253267';
+	this.strokeStyle = '#8C4C86';
+	this.weightText  = '#8C4C86';
+	this.fillStyle   = '#253267';
 
-    this.baseStyles.push("selected");
+  this.baseStyles.push("selected");
 }
 SelectedEdgeStyle2.prototype = Object.create(BaseEdgeStyle.prototype);
 
 
-function SelectedEdgeStyle3() {
-    BaseEdgeStyle.apply(this, arguments);
+function SelectedEdgeStyle3()
+{
+	BaseEdgeStyle.apply(this, arguments);  
 
-    this.strokeStyle = '#6188FF';
-    this.weightText = '#6188FF';
-    this.fillStyle = '#E97CF9';
+	this.strokeStyle = '#6188FF';
+	this.weightText  = '#6188FF';
+	this.fillStyle   = '#E97CF9';
 
-    this.baseStyles.push("selected");
+  this.baseStyles.push("selected");
 }
 SelectedEdgeStyle3.prototype = Object.create(BaseEdgeStyle.prototype);
 
 
-function SelectedEdgeStyle4() {
-    BaseEdgeStyle.apply(this, arguments);
+function SelectedEdgeStyle4()
+{
+	BaseEdgeStyle.apply(this, arguments);  
 
-    this.strokeStyle = '#C6B484';
-    this.weightText = '#C6B484';
-    this.fillStyle = '#E0DEE1';
+	this.strokeStyle = '#C6B484';
+	this.weightText  = '#C6B484';
+	this.fillStyle   = '#E0DEE1';
 
-    this.baseStyles.push("selected");
+  this.baseStyles.push("selected");
 }
 SelectedEdgeStyle4.prototype = Object.create(BaseEdgeStyle.prototype);
 
-function SelectedEdgePrintStyle() {
-    BaseEdgeStyle.apply(this, arguments);
+function SelectedEdgePrintStyle()
+{
+	BaseEdgeStyle.apply(this, arguments);  
 
-    this.strokeStyle = '#AAAAAA';
-    this.weightText = '#000000';
-    this.fillStyle = '#AAAAAA';
+	this.strokeStyle = '#AAAAAA';
+	this.weightText  = '#000000';
+	this.fillStyle   = '#AAAAAA';
 
-    this.baseStyles.push("printed");
+  this.baseStyles.push("printed");
 }
 SelectedEdgePrintStyle.prototype = Object.create(BaseEdgeStyle.prototype);
 
-var DefaultSelectedEdgeStyles = [new SelectedEdgeStyle0(), new SelectedEdgeStyle1(),
-new SelectedEdgeStyle2(), new SelectedEdgeStyle3(), new SelectedEdgeStyle4()];
+var DefaultSelectedEdgeStyles      = [new SelectedEdgeStyle0(), new SelectedEdgeStyle1(), 
+	new SelectedEdgeStyle2(), new SelectedEdgeStyle3(), new SelectedEdgeStyle4()];
 
 var DefaultPrintSelectedEdgeStyles = [new SelectedEdgePrintStyle()];
 
-function BaseEdgeDrawer(context, drawObjects) {
-    if (drawObjects === undefined) {
-        drawObjects = null;
-    }
-
-    this.context = context;
-
-    this.drawObject = null;
-    this.drawArc = null;
-    this.startArrowDirection = null;
-    this.finishArrowDirection = null;
-    this.textCenterObject = null;
-    this.getPointOnArc = null;
-
-    if (drawObjects) {
-        if (drawObjects.hasOwnProperty("drawObject"))
-            this.drawObject = drawObjects.drawObject;
-        if (drawObjects.hasOwnProperty("drawArc"))
-            this.drawArc = drawObjects.drawArc;
-        if (drawObjects.hasOwnProperty("startArrowDirection"))
-            this.startArrowDirection = drawObjects.startArrowDirection;
-        if (drawObjects.hasOwnProperty("finishArrowDirection"))
-            this.finishArrowDirection = drawObjects.finishArrowDirection;
-        if (drawObjects.hasOwnProperty("textCenterObject"))
-            this.textCenterObject = drawObjects.textCenterObject;
-        if (drawObjects.hasOwnProperty("getPointOnArc"))
-            this.getPointOnArc = drawObjects.getPointOnArc;
-    }
+function BaseEdgeDrawer(context, drawObjects)
+{ 
+  if (drawObjects === undefined) 
+  {
+    drawObjects = null;
+  }
+    
+  this.context = context;
+    
+  this.drawObject = null;
+  this.drawArc = null;
+  this.startArrowDirection  = null;
+  this.finishArrowDirection = null;
+  this.textCenterObject    = null;
+  this.getPointOnArc       = null;   
+    
+  if (drawObjects)
+  {
+    if (drawObjects.hasOwnProperty("drawObject"))
+      this.drawObject = drawObjects.drawObject;
+    if (drawObjects.hasOwnProperty("drawArc"))
+      this.drawArc = drawObjects.drawArc;
+    if (drawObjects.hasOwnProperty("startArrowDirection"))
+      this.startArrowDirection = drawObjects.startArrowDirection;
+    if (drawObjects.hasOwnProperty("finishArrowDirection"))
+      this.finishArrowDirection = drawObjects.finishArrowDirection;
+    if (drawObjects.hasOwnProperty("textCenterObject"))
+      this.textCenterObject = drawObjects.textCenterObject;
+    if (drawObjects.hasOwnProperty("getPointOnArc"))
+      this.getPointOnArc = drawObjects.getPointOnArc;
+  }
 }
 
 // todo: comment this
-BaseEdgeDrawer.prototype.Draw = function (baseEdge, arcStyle) {
-    if (this.drawObject && this.drawObject != this) {
-        this.drawObject.Draw(baseEdge, arcStyle);
-        return;
+BaseEdgeDrawer.prototype.Draw = function(baseEdge, arcStyle) 
+{
+  if (this.drawObject && this.drawObject != this)
+  {
+    this.drawObject.Draw(baseEdge, arcStyle);
+    return;
+  }
+    
+  this.SetupStyle(baseEdge, arcStyle);
+    
+  var lengthArrow = Math.max(baseEdge.model.width * 4, 8);
+  var widthArrow  =  Math.max(baseEdge.model.width * 2, 4);
+  var position1 = baseEdge.vertex1.position;
+  var position2 = baseEdge.vertex2.position;
+  var direction = position1.subtract(position2); 
+  direction.normalize(1.0);
+  var positions = baseEdge.GetEdgePositionsShift();
+  
+  var hasStartStyle  = !position1.equals(position2) && baseEdge.GetStartEdgeStyle() != "";
+  var hasFinishStyle = !position1.equals(position2) && baseEdge.GetFinishEdgeStyle() != "";
+    
+  var arcPos1 = positions[0];
+  var arcPos2 = positions[1];
+
+  if (hasStartStyle)
+  {
+    var dirArrow = this.GetStartArrowDirection(positions[0], positions[1], lengthArrow);
+    arcPos1 = arcPos1.add(dirArrow.multiply(lengthArrow / 2));
+  }
+
+  if (hasFinishStyle)
+  {
+    var dirArrow = this.GetFinishArrowDirection(positions[0], positions[1], lengthArrow);
+    arcPos2 = arcPos2.add(dirArrow.multiply(-lengthArrow / 2));
+  }
+
+  this.DrawArc (arcPos1, arcPos2, arcStyle);
+
+  this.context.fillStyle = this.context.strokeStyle;
+  this.context.lineWidth = 0;
+
+  if (hasStartStyle)
+  {
+    this.DrawArrow(positions[0], this.GetStartArrowDirection(positions[0], positions[1], lengthArrow), lengthArrow, widthArrow);
+  }
+  if (hasFinishStyle)
+  {
+    this.DrawArrow(positions[1], this.GetFinishArrowDirection(positions[0], positions[1], lengthArrow), lengthArrow, widthArrow);
+  }
+    
+  this.SetupStyle(baseEdge, arcStyle);
+
+  if (arcStyle.weightPosition == WeightTextCenter)
+  {
+    if (baseEdge.GetText().length > 0)
+    {
+      this.DrawWeight(positions[0], positions[1], baseEdge.GetText(), arcStyle, false);
     }
 
-    this.SetupStyle(baseEdge, arcStyle);
-
-    var lengthArrow = Math.max(baseEdge.model.width * 4, 8);
-    var widthArrow = Math.max(baseEdge.model.width * 2, 4);
-    var position1 = baseEdge.vertex1.position;
-    var position2 = baseEdge.vertex2.position;
-    var direction = position1.subtract(position2);
-    direction.normalize(1.0);
-    var positions = baseEdge.GetEdgePositionsShift();
-
-    var hasStartStyle = !position1.equals(position2) && baseEdge.GetStartEdgeStyle() != "";
-    var hasFinishStyle = !position1.equals(position2) && baseEdge.GetFinishEdgeStyle() != "";
-
-    var arcPos1 = positions[0];
-    var arcPos2 = positions[1];
-
-    if (hasStartStyle) {
-        var dirArrow = this.GetStartArrowDirection(positions[0], positions[1], lengthArrow);
-        arcPos1 = arcPos1.add(dirArrow.multiply(lengthArrow / 2));
+    if (baseEdge.GetUpText().length > 0)
+    {
+      this.DrawUpText(positions[0], positions[1], baseEdge.GetUpText(), arcStyle, false, arcStyle.additionalTextColor, baseEdge.model.width / 2 + 20, null);
     }
-
-    if (hasFinishStyle) {
-        var dirArrow = this.GetFinishArrowDirection(positions[0], positions[1], lengthArrow);
-        arcPos2 = arcPos2.add(dirArrow.multiply(-lengthArrow / 2));
+  }
+  else if (arcStyle.weightPosition == WeightTextUp)
+  {
+    if (baseEdge.GetText().length > 0)
+    {
+      this.DrawUpText(positions[0], positions[1], baseEdge.GetText(), arcStyle, false, arcStyle.weightText, baseEdge.model.width / 2 + 10, "16px");
     }
-
-    this.DrawArc(arcPos1, arcPos2, arcStyle);
-
-    this.context.fillStyle = this.context.strokeStyle;
-    this.context.lineWidth = 0;
-
-    if (hasStartStyle) {
-        this.DrawArrow(positions[0], this.GetStartArrowDirection(positions[0], positions[1], lengthArrow), lengthArrow, widthArrow);
+    
+    if (baseEdge.GetUpText().length > 0)
+    {
+      this.DrawUpText(positions[0], positions[1], baseEdge.GetUpText(), arcStyle, false, arcStyle.additionalTextColor, - baseEdge.model.width / 2 - 15, null);
     }
-    if (hasFinishStyle) {
-        this.DrawArrow(positions[1], this.GetFinishArrowDirection(positions[0], positions[1], lengthArrow), lengthArrow, widthArrow);
-    }
-
-    this.SetupStyle(baseEdge, arcStyle);
-
-    if (arcStyle.weightPosition == WeightTextCenter) {
-        if (baseEdge.GetText().length > 0) {
-            this.DrawWeight(positions[0], positions[1], baseEdge.GetText(), arcStyle, false);
-        }
-
-        if (baseEdge.GetUpText().length > 0) {
-            this.DrawUpText(positions[0], positions[1], baseEdge.GetUpText(), arcStyle, false, arcStyle.additionalTextColor, baseEdge.model.width / 2 + 20, null);
-        }
-    }
-    else if (arcStyle.weightPosition == WeightTextUp) {
-        if (baseEdge.GetText().length > 0) {
-            this.DrawUpText(positions[0], positions[1], baseEdge.GetText(), arcStyle, false, arcStyle.weightText, baseEdge.model.width / 2 + 10, "16px");
-        }
-
-        if (baseEdge.GetUpText().length > 0) {
-            this.DrawUpText(positions[0], positions[1], baseEdge.GetUpText(), arcStyle, false, arcStyle.additionalTextColor, - baseEdge.model.width / 2 - 15, null);
-        }
-    }
+  }
 }
 
 
-BaseEdgeDrawer.prototype.SetupStyle = function (baseEdge, arcStyle) {
-    this.context.lineWidth = baseEdge.model.width;
-    this.context.strokeStyle = arcStyle.strokeStyle;
-    this.context.fillStyle = arcStyle.fillStyle;
-    this.model = baseEdge.model;
-    this.style = arcStyle;
+BaseEdgeDrawer.prototype.SetupStyle = function(baseEdge, arcStyle)
+{
+  this.context.lineWidth   = baseEdge.model.width;
+  this.context.strokeStyle = arcStyle.strokeStyle;
+  this.context.fillStyle   = arcStyle.fillStyle;
+  this.model               = baseEdge.model;
+  this.style               = arcStyle;
 }
 
-BaseEdgeDrawer.prototype.DrawArc = function (position1, position2, arcStyle) {
-    if (this.drawArc && this.drawArc != this) {
-        this.drawArc.DrawArc(position1, position2, arcStyle);
-        return;
-    }
-
-    this.context.setLineDash(lineDashTypes[arcStyle.lineDash]);
-    if (position1.equals(position2)) {
-        this.context.beginPath();
-        this.context.arc(position1.x - Math.cos(this.model.GetLoopShiftAngel()) * this.model.GetLoopSize(),
-            position1.y - Math.sin(this.model.GetLoopShiftAngel()) * this.model.GetLoopSize(), this.model.GetLoopSize(), 0, 2 * Math.PI);
-        this.context.stroke();
-    }
-    else {
-        this.context.beginPath();
-        this.context.moveTo(position1.x, position1.y);
-        this.context.lineTo(position2.x, position2.y);
-        this.context.stroke();
-    }
-    this.context.setLineDash([]);
-}
-
-BaseEdgeDrawer.prototype.DrawWeight = function (position1, position2, text, arcStyle, hasPair) {
-    var centerPoint = this.GetTextCenterPoint(position1, position2, hasPair, arcStyle);
-
-    this.context.font = "bold 16px sans-serif";
-    this.context.textBaseline = "middle";
-    this.context.lineWidth = arcStyle.textStrokeWidth;
-    this.context.fillStyle = arcStyle.fillStyle;
-
-    var widthText = this.context.measureText(text).width;
-
+BaseEdgeDrawer.prototype.DrawArc = function(position1, position2, arcStyle)
+{
+  if (this.drawArc && this.drawArc != this)
+  {
+      this.drawArc.DrawArc(position1, position2, arcStyle);
+      return;
+  }
+   
+  this.context.setLineDash(lineDashTypes[arcStyle.lineDash]);
+  if (position1.equals(position2))
+  {
     this.context.beginPath();
-    this.context.rect(centerPoint.x - widthText / 2 - arcStyle.textPadding / 2,
-        centerPoint.y - 8 - arcStyle.textPadding / 2,
-        widthText + arcStyle.textPadding, 16 + arcStyle.textPadding);
-    this.context.closePath();
-    this.context.fill();
+    this.context.arc(position1.x - Math.cos(this.model.GetLoopShiftAngel()) * this.model.GetLoopSize(), 
+                     position1.y - Math.sin(this.model.GetLoopShiftAngel()) * this.model.GetLoopSize(), this.model.GetLoopSize(), 0, 2 * Math.PI);
     this.context.stroke();
-
-    this.context.fillStyle = arcStyle.weightText;
-    this.context.fillText(text, centerPoint.x - widthText / 2, centerPoint.y);
-}
-
-BaseEdgeDrawer.prototype.DrawUpText = function (position1, position2, text, arcStyle, hasPair, color, offset, fontSize) {
-    var centerPoint = this.GetTextCenterPoint(position1, position2, hasPair, arcStyle);
-
-    this.context.font = fontSize == null ? "bold 12px sans-serif" : "bold " + fontSize + " sans-serif";
-    this.context.textBaseline = "middle";
-
-    var widthText = this.context.measureText(text).width;
-
-    this.context.fillStyle = color;
-
-    var vectorEdge = new Point(position2.x - position1.x, position2.y - position1.y);
-    var angleRadians = Math.atan2(vectorEdge.y, vectorEdge.x);
-    if (angleRadians > Math.PI / 2 || angleRadians < -Math.PI / 2) {
-        vectorEdge = new Point(position1.x - position2.x, position1.y - position2.y);
-        angleRadians = Math.atan2(vectorEdge.y, vectorEdge.x);
-    }
-    var normalize = vectorEdge.normal().normalizeCopy(offset);
-    this.context.save();
-    this.context.translate(centerPoint.x - normalize.x, centerPoint.y - normalize.y);
-    this.context.rotate(angleRadians);
-    this.context.textAlign = "center";
-
-    this.context.fillText(text, 0, 0);
-
-    this.context.restore();
-}
-
-BaseEdgeDrawer.prototype.DrawArrow = function (position, direction, length, width) {
-    var normal = direction.normal();
-
-    var pointOnLine = position.subtract(direction.multiply(length));
-    var point1 = pointOnLine.add(normal.multiply(width));
-    var point2 = pointOnLine.add(normal.multiply(-width));
-
+  }
+  else
+  {
     this.context.beginPath();
-    this.context.moveTo(position.x, position.y);
-    this.context.lineTo(point1.x, point1.y);
-    this.context.lineTo(point2.x, point2.y);
-    this.context.lineTo(position.x, position.y);
-    this.context.closePath();
-    this.context.fill();
+    this.context.moveTo(position1.x, position1.y);
+    this.context.lineTo(position2.x, position2.y);
+    this.context.stroke();
+  }
+  this.context.setLineDash([]);  
 }
 
-BaseEdgeDrawer.prototype.GetStartArrowDirection = function (position1, position2, lengthArrow) {
-    if (this.startArrowDirection && this.startArrowDirection != this) {
-        return this.startArrowDirection.GetStartArrowDirection(position1, position2, lengthArrow);
-    }
+BaseEdgeDrawer.prototype.DrawWeight = function(position1, position2, text, arcStyle, hasPair)
+{ 
+  var centerPoint = this.GetTextCenterPoint(position1, position2, hasPair, arcStyle);
+        
+  this.context.font         = "bold 16px sans-serif";
+  this.context.textBaseline = "middle";
+  this.context.lineWidth    = arcStyle.textStrokeWidth;
+  this.context.fillStyle    = arcStyle.fillStyle;	
 
+  var widthText = this.context.measureText(text).width;
+
+  this.context.beginPath();
+  this.context.rect(centerPoint.x - widthText / 2 - arcStyle.textPadding / 2, 
+                    centerPoint.y - 8 - arcStyle.textPadding / 2, 
+                    widthText + arcStyle.textPadding, 16 + arcStyle.textPadding);
+  this.context.closePath();
+  this.context.fill();
+  this.context.stroke ();
+
+  this.context.fillStyle = arcStyle.weightText;	
+  this.context.fillText(text, centerPoint.x - widthText / 2, centerPoint.y);
+}
+
+BaseEdgeDrawer.prototype.DrawUpText = function(position1, position2, text, arcStyle, hasPair, color, offset, fontSize)
+{ 
+  var centerPoint = this.GetTextCenterPoint(position1, position2, hasPair, arcStyle);
+        
+  this.context.font         = fontSize == null ? "bold 12px sans-serif" : "bold " + fontSize + " sans-serif";
+  this.context.textBaseline = "middle";
+
+  var widthText = this.context.measureText(text).width;
+
+  this.context.fillStyle = color;	
+
+  var vectorEdge   = new Point(position2.x - position1.x, position2.y - position1.y);
+  var angleRadians = Math.atan2(vectorEdge.y, vectorEdge.x);
+  if (angleRadians > Math.PI / 2 || angleRadians < -Math.PI / 2)
+  {
+    vectorEdge   = new Point(position1.x - position2.x, position1.y - position2.y);
+    angleRadians = Math.atan2(vectorEdge.y, vectorEdge.x);          
+  }
+  var normalize    = vectorEdge.normal().normalizeCopy(offset);
+  this.context.save();
+  this.context.translate(centerPoint.x - normalize.x, centerPoint.y - normalize.y);
+  this.context.rotate(angleRadians);
+  this.context.textAlign = "center";
+    
+  this.context.fillText(text, 0, 0);
+
+  this.context.restore();
+}
+
+BaseEdgeDrawer.prototype.DrawArrow = function(position, direction, length, width) 
+{
+  var normal = direction.normal();
+  
+  var pointOnLine = position.subtract(direction.multiply(length));
+  var point1 = pointOnLine.add(normal.multiply(width));
+  var point2 = pointOnLine.add(normal.multiply(-width));
+  
+  this.context.beginPath();
+  this.context.moveTo(position.x, position.y);
+  this.context.lineTo(point1.x, point1.y);
+  this.context.lineTo(point2.x, point2.y);
+  this.context.lineTo(position.x, position.y);
+  this.context.closePath();
+  this.context.fill();
+}
+
+BaseEdgeDrawer.prototype.GetStartArrowDirection = function(position1, position2, lengthArrow) 
+{
+    if (this.startArrowDirection && this.startArrowDirection != this)
+    {
+      return this.startArrowDirection.GetStartArrowDirection(position1, position2, lengthArrow);
+    }
+    
     var direction = position1.subtract(position2);
     direction.normalize(1.0);
     return direction;
 }
 
-BaseEdgeDrawer.prototype.GetFinishArrowDirection = function (position1, position2, lengthArrow) {
-    if (this.finishArrowDirection && this.finishArrowDirection != this) {
-        return this.finishArrowDirection.GetFinishArrowDirection(position1, position2, lengthArrow);
+BaseEdgeDrawer.prototype.GetFinishArrowDirection = function(position1, position2, lengthArrow) 
+{
+    if (this.finishArrowDirection && this.finishArrowDirection != this)
+    {
+      return this.finishArrowDirection.GetFinishArrowDirection(position1, position2, lengthArrow);
     }
 
     var direction = position2.subtract(position1);
@@ -2063,61 +2250,70 @@ BaseEdgeDrawer.prototype.GetFinishArrowDirection = function (position1, position
     return direction;
 }
 
-BaseEdgeDrawer.prototype.GetTextCenterPoint = function (position1, position2, hasPair, arcStyle) {
-    if (this.textCenterObject && this.textCenterObject != this) {
-        return this.textCenterObject.GetTextCenterPoint(position1, position2, hasPair, arcStyle);
-    }
-
-    var textShift = Math.min(12 / position1.subtract(position2).length(), 0.4);
-    var centerPoint = Point.interpolate(position1, position2, 0.5);
-    if (position1.equals(position2)) {
-        let sinVal = Math.sin(this.model.GetLoopShiftAngel());
-        let cosVal = Math.cos(this.model.GetLoopShiftAngel());
-        centerPoint.x = centerPoint.x - cosVal * this.model.GetLoopSize();
-        centerPoint.y = centerPoint.y - (sinVal + Math.sign(sinVal) * 1.0) * this.model.GetLoopSize();
-    }
-
-    return centerPoint;
+BaseEdgeDrawer.prototype.GetTextCenterPoint = function (position1, position2, hasPair, arcStyle)
+{
+  if (this.textCenterObject && this.textCenterObject != this)
+  {
+    return this.textCenterObject.GetTextCenterPoint(position1, position2, hasPair, arcStyle);
+  }
+    
+  var textShift   = Math.min(12 / position1.subtract(position2).length(), 0.4);
+  var centerPoint = Point.interpolate(position1, position2, 0.5);
+  if (position1.equals(position2))
+  {
+      let sinVal = Math.sin(this.model.GetLoopShiftAngel());
+      let cosVal = Math.cos(this.model.GetLoopShiftAngel());
+      centerPoint.x = centerPoint.x - cosVal * this.model.GetLoopSize();
+      centerPoint.y = centerPoint.y - (sinVal + Math.sign(sinVal) * 1.0)  * this.model.GetLoopSize();
+  } 
+    
+  return centerPoint;
 }
 
-BaseEdgeDrawer.prototype.GetPointOnArc = function (position1, position2, percent) {
-    if (this.getPointOnArc && this.getPointOnArc != this) {
-        return this.getPointOnArc.GetPointOnArc(position1, position2, percent);
+BaseEdgeDrawer.prototype.GetPointOnArc = function (position1, position2, percent)
+{
+    if (this.getPointOnArc && this.getPointOnArc != this)
+    {
+      return this.getPointOnArc.GetPointOnArc(position1, position2, percent);
     }
-
-    return Point.interpolate(position1, position2, percent);
+    
+  return Point.interpolate(position1, position2, percent);
 }
 
-function ProgressArcDrawer(context, baseDrawer, progress) {
-    this.context = context;
+function ProgressArcDrawer(context, baseDrawer, progress)
+{
+    this.context    = context;
     this.baseDrawer = baseDrawer;
-    this.progress = progress;
+    this.progress   = progress;
 }
 
 ProgressArcDrawer.prototype = Object.create(BaseEdgeDrawer.prototype);
 
 
-ProgressArcDrawer.prototype.Draw = function (baseEdge, arcStyle) {
+ProgressArcDrawer.prototype.Draw = function(baseEdge, arcStyle)
+{
     this.baseDrawer.Draw(baseEdge, arcStyle);
-
+    
     this.context.lineWidth = 10;
-
+    
     var positions = baseEdge.GetEdgePositionsShift();
     var progressSize = 10;
-
-    if (positions[0].equals(positions[1])) {
+    
+    if (positions[0].equals(positions[1]))
+    {
         var sizeInRadian = progressSize / (2 * Math.PI * this.baseDrawer.model.GetLoopSize()) * 6;
-
+        
         this.context.beginPath();
         this.context.arc(positions[0].x - Math.cos(this.baseDrawer.model.GetLoopShiftAngel()) * this.baseDrawer.model.GetLoopSize(),
-            positions[0].y - Math.sin(this.baseDrawer.model.GetLoopShiftAngel()) * this.baseDrawer.model.GetLoopSize(), this.baseDrawer.model.GetLoopSize(), this.progress * 2 * Math.PI, this.progress * 2 * Math.PI + sizeInRadian);
+                         positions[0].y - Math.sin(this.baseDrawer.model.GetLoopShiftAngel()) * this.baseDrawer.model.GetLoopSize(), this.baseDrawer.model.GetLoopSize(), this.progress * 2 * Math.PI, this.progress * 2 * Math.PI + sizeInRadian);
         this.context.stroke();
     }
-    else {
-        var startPosition = this.baseDrawer.GetPointOnArc(positions[0], positions[1], this.progress);
-        var vectorOffset = positions[0].subtract(positions[1]).normalizeCopy(progressSize);
+    else
+    {
+        var startPosition  = this.baseDrawer.GetPointOnArc(positions[0], positions[1], this.progress);
+        var vectorOffset   = positions[0].subtract(positions[1]).normalizeCopy(progressSize);
         var finishPosition = startPosition.add(vectorOffset);
-
+        
         this.context.beginPath();
         this.context.moveTo(startPosition.x, startPosition.y);
         this.context.lineTo(finishPosition.x, finishPosition.y);
@@ -2126,106 +2322,122 @@ ProgressArcDrawer.prototype.Draw = function (baseEdge, arcStyle) {
 }
 
 
-function CurvedArcDrawer(context, model) {
+function CurvedArcDrawer(context, model)
+{
     this.context = context;
-    this.model = model;
+    this.model   = model;
 }
 
 CurvedArcDrawer.prototype = Object.create(BaseEdgeDrawer.prototype);
 
-CurvedArcDrawer.prototype.DrawArc = function (position1, position2, arcStyle) {
-    this.context.setLineDash(lineDashTypes[arcStyle.lineDash]);
-    if (position1.equals(position2)) {
-        this.context.beginPath();
-        this.context.arc(position1.x - Math.cos(this.model.GetLoopShiftAngel()) * this.model.GetLoopSize(),
-            position1.y - Math.sin(this.model.GetLoopShiftAngel()) * this.model.GetLoopSize(), this.model.GetLoopSize(), 0, 2 * Math.PI);
-        this.context.closePath();
-        this.context.stroke();
-    }
-    else {
-        var points = this.model.GetBezierPoints(position1, position2);
-        var firstBezierPoint = points[0];
-        var secondBezierPoint = points[1];
-
-        this.context.beginPath();
-        this.context.moveTo(position1.x, position1.y);
-        this.context.bezierCurveTo(firstBezierPoint.x, firstBezierPoint.y, secondBezierPoint.x, secondBezierPoint.y, position2.x, position2.y);
-        this.context.stroke();
-    }
-    this.context.setLineDash([]);
+CurvedArcDrawer.prototype.DrawArc = function(position1, position2, arcStyle)
+{
+  this.context.setLineDash(lineDashTypes[arcStyle.lineDash]);
+  if (position1.equals(position2))
+  {
+    this.context.beginPath();
+    this.context.arc(position1.x - Math.cos(this.model.GetLoopShiftAngel()) * this.model.GetLoopSize(), 
+                     position1.y - Math.sin(this.model.GetLoopShiftAngel()) * this.model.GetLoopSize(), this.model.GetLoopSize(), 0, 2 * Math.PI);
+    this.context.closePath();
+    this.context.stroke();
+  }
+  else
+  {
+    var points = this.model.GetBezierPoints(position1, position2);
+    var firstBezierPoint  = points[0];  
+    var secondBezierPoint = points[1];
+    
+    this.context.beginPath();
+    this.context.moveTo(position1.x, position1.y);
+    this.context.bezierCurveTo(firstBezierPoint.x, firstBezierPoint.y, secondBezierPoint.x, secondBezierPoint.y, position2.x, position2.y);
+    this.context.stroke(); 
+  }
+  this.context.setLineDash([]);
 }
 
-CurvedArcDrawer.prototype.GetStartArrowDirection = function (position1, position2, lengthArrow) {
+CurvedArcDrawer.prototype.GetStartArrowDirection = function(position1, position2, lengthArrow) 
+{
     var dist = position1.distance(position2);
     var direction = position1.subtract(this.model.GetCurvePoint(position1, position2, lengthArrow / dist));
     direction.normalize(1.0);
     return direction;
 }
 
-CurvedArcDrawer.prototype.GetFinishArrowDirection = function (position1, position2, lengthArrow) {
-    var dist = position1.distance(position2);
+CurvedArcDrawer.prototype.GetFinishArrowDirection = function(position1, position2, lengthArrow) 
+{
+    var dist      = position1.distance(position2);
     var direction = position2.subtract(this.model.GetCurvePoint(position1, position2, 1.0 - lengthArrow / dist));
     direction.normalize(1.0);
     return direction;
 }
 
-CurvedArcDrawer.prototype.GetTextCenterPoint = function (position1, position2, hasPair, arcStyle) {
-    var centerPoint = this.model.GetCurvePoint(position1, position2, 0.5)
-    if (position1.equals(position2)) {
-        let sinVal = Math.sin(this.model.GetLoopShiftAngel());
-        let cosVal = Math.cos(this.model.GetLoopShiftAngel());
-        centerPoint.x = centerPoint.x - cosVal * this.model.GetLoopSize();
-        centerPoint.y = centerPoint.y - (sinVal + Math.sign(sinVal) * 1.0) * this.model.GetLoopSize();
-    }
-
-    return centerPoint;
+CurvedArcDrawer.prototype.GetTextCenterPoint = function (position1, position2, hasPair, arcStyle)
+{
+  var centerPoint = this.model.GetCurvePoint(position1, position2, 0.5)
+  if (position1.equals(position2))
+  {
+    let sinVal = Math.sin(this.model.GetLoopShiftAngel());
+    let cosVal = Math.cos(this.model.GetLoopShiftAngel());
+    centerPoint.x = centerPoint.x - cosVal * this.model.GetLoopSize();
+    centerPoint.y = centerPoint.y - (sinVal + Math.sign(sinVal) * 1.0)  * this.model.GetLoopSize();
+  } 
+    
+  return centerPoint;
 }
 
-CurvedArcDrawer.prototype.GetPointOnArc = function (position1, position2, percent) {
-    return this.model.GetCurvePoint(position1, position2, percent);
+CurvedArcDrawer.prototype.GetPointOnArc = function (position1, position2, percent)
+{   
+  return this.model.GetCurvePoint(position1, position2, percent);
 }
 /**
  * Graph drawer.
  */
-
-
-function CommonBackgroundStyle() {
-    this.commonColor = '#ffffff';
-    this.commonOpacity = 1.0;
+ 
+ 
+function CommonBackgroundStyle()
+{
+	this.commonColor   = '#ffffff';
+	this.commonOpacity = 1.0;
 }
 
-CommonBackgroundStyle.prototype.Clear = function () {
-    delete this.commonColor;
-    delete this.commonOpacity;
+CommonBackgroundStyle.prototype.Clear = function ()
+{
+  delete this.commonColor;
+  delete this.commonOpacity;
 }
 
-CommonBackgroundStyle.prototype.ShouldLoad = function (field) {
-    return true;
+CommonBackgroundStyle.prototype.ShouldLoad = function (field)
+{
+  return true;
 }
 
 PrintBackgroundStyle.prototype = Object.create(CommonBackgroundStyle.prototype);
 
-function PrintBackgroundStyle() {
-    CommonBackgroundStyle.apply(this, arguments);
+function PrintBackgroundStyle()
+{
+  CommonBackgroundStyle.apply(this, arguments);
 
-    this.commonColor = '#ffffff';
-    this.commonOpacity = 1.0;
+	this.commonColor   = '#ffffff';
+	this.commonOpacity = 1.0;
 }
 
-function BaseBackgroundDrawer(context) {
-    this.context = context;
+function BaseBackgroundDrawer(context)
+{   
+  this.context = context;
 }
 
-BaseBackgroundDrawer.prototype.Draw = function (style, width, height, position, scale) {
+BaseBackgroundDrawer.prototype.Draw = function(style, width, height, position, scale) 
+{
     var context = this.context;
-
+    
     var rect = new Rect(position, position.add(new Point(width / scale, height / scale)));
-
+    
     context.clearRect(-rect.minPoint.x, -rect.minPoint.y, rect.size().x + 1, rect.size().y + 1);
-
-    if (style.commonOpacity > 0.0) {
+    
+    if (style.commonOpacity > 0.0)
+    {
         context.globalAlpha = style.commonOpacity;
-        context.fillStyle = style.commonColor;
+        context.fillStyle   = style.commonColor;
         context.fillRect(-rect.minPoint.x, -rect.minPoint.y, rect.size().x + 1, rect.size().y + 1);
         context.globalAlpha = 1.0;
     }
@@ -2268,7 +2480,6 @@ var g_AlgorithmIds = [];
 
 // Call this function to register your factory algorithm.
 function RegisterAlgorithm(factory) {
-    console.log("RegisterAlgorithm ----------------------------", factory);
     g_Algorithms.push(factory);
     g_AlgorithmIds.push(factory(null).getId());
 }
@@ -2386,7 +2597,7 @@ BaseAlgorithmEx.prototype.CalculateAlgorithm = function (algorithmName, otherPar
 
     var graph = this.graph;
     var ignoreNodes = {};   // khởi tạo đối tượng trống để lưu danh sách các đỉnh sẽ bị bỏ qua nếu ignoreSeparateNodes == true
-
+    
     if (ignoreSeparateNodes)
         for (var i = 0; i < graph.vertices.length; i++)
             if (!graph.HasConnectedNodes(graph.vertices[i]))
@@ -2403,8 +2614,6 @@ BaseAlgorithmEx.prototype.CalculateAlgorithm = function (algorithmName, otherPar
     console.log(xml);
 
     var processResult = function (msg) {
-        console.log("====================== processResult ======================");
-        console.log(msg);
         /*  
             *Ví dụ xml được log ra của thuật toán dijkstra 
             * start 4, end 6
@@ -2525,10 +2734,10 @@ BaseAlgorithmEx.prototype.CalculateAlgorithm = function (algorithmName, otherPar
             });
         });
 
-        console.log("pathObjects", pathObjects);    // danh sách cạnh và danh sách đỉnh
-        console.log("properties", properties);      // lưu lowestDistance, index, highlightNode của tất cả các đỉnh
-        console.log("result", result);              // lưu result
-        console.log("====================== end ======================");
+        // console.log("pathObjects", pathObjects);    // danh sách cạnh và danh sách đỉnh
+        // console.log("properties", properties);      // lưu lowestDistance, index, highlightNode của tất cả các đỉnh
+        // console.log("result", result);              // lưu result
+        // console.log("====================== end ======================");
 
         resultCallback(pathObjects, properties, result);
     };
@@ -3469,7 +3678,29 @@ AddGraphHandler.prototype.ChangedType = function () {
     this.app.SetEnumVerticesType(enumVertexsText.options[enumVertexsText.selectedIndex].value);
 }
 
+/*
+ * Tree handler.
+ *
+ */
+function TreeHandler(app) {
+    this.app = app;
+}
 
+TreeHandler.prototype.RestoreAll = function () {
+}
+
+TreeHandler.prototype.GetMessage = function (local) {
+    console.log("TreeHandler.getMessage", this.message);
+    return "AVL TREE";
+}
+
+TreeHandler.prototype.InitControls = function () {
+    AVL();
+}
+
+// TreeHandler.prototype.InitControls = function () {
+//     AVL();
+// }
 
 /**
  * Connection Graph handler.
@@ -4857,72 +5088,80 @@ SetupBackgroundStyle.prototype.show = function () {
  */
 
 
-function GraphMLCreator(nodes, arcs, ignoreNodes = {}) {
-    this.nodes = nodes;
-    this.arcs = arcs;
-    this.ignoreNodes = ignoreNodes;
+function GraphMLCreator(nodes, arcs, ignoreNodes = {})
+{
+	this.nodes = nodes;
+	this.arcs = arcs;
+	this.ignoreNodes = ignoreNodes;	
 }
 
 
-GraphMLCreator.prototype.GetXMLString = function () {
-    var mainHeader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml>";
-    var directedHeader = "<graph id=\"Graph\" edgedefault=\"directed\">";
-    var undirectedHeader = "<graph id=\"Graph\" edgedefault=\"undirected\">";
+GraphMLCreator.prototype.GetXMLString = function()
+{
+	var mainHeader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml>";
+	var directedHeader   = "<graph id=\"Graph\" edgedefault=\"directed\">";	
+	var undirectedHeader = "<graph id=\"Graph\" edgedefault=\"undirected\">";
+	
+	var defaultWeight = 1.0;
+	var weightKeyId  = "\"d0\"";
+	var weightNode = "<key id="+ weightKeyId + " for=\"node\" attr.name=\"weight\" attr.type=\"double\">" +
+			"<default>" + defaultWeight + "</default>" +
+			"</key>";
+	
+	var xmlBody = "";
+	  
+	for (var i = 0; i < this.nodes.length; i++)
+	{
+		if (!this.ignoreNodes.hasOwnProperty(this.nodes[i].id))
+			xmlBody = xmlBody + "<node id=\"" + this.nodes[i].id + "\"/>";
+	}
+	var hasDirected = false;
+	for (var i = 0; i < this.arcs.length; i++)
+	{
+		if (this.arcs[i].isDirect)
+		{
+			hasDirected = true;
+			break;
+		}
+	}		
+	for (var i = 0; i < this.arcs.length; i++)
+	{
+	    var weightData = "";
+	    var arc = this.arcs[i];
 
-    var defaultWeight = 1.0;
-    var weightKeyId = "\"d0\"";
-    var weightNode = "<key id=" + weightKeyId + " for=\"node\" attr.name=\"weight\" attr.type=\"double\">" +
-        "<default>" + defaultWeight + "</default>" +
-        "</key>";
+		if (this.arcs[i].weight != defaultWeight)
+		{
+		    weightData = "<data key=" + weightKeyId + ">" + arc.weight + "</data>";
+		}
 
-    var xmlBody = "";
-
-    for (var i = 0; i < this.nodes.length; i++) {
-        if (!this.ignoreNodes.hasOwnProperty(this.nodes[i].id))
-            xmlBody = xmlBody + "<node id=\"" + this.nodes[i].id + "\"/>";
-    }
-    var hasDirected = false;
-    for (var i = 0; i < this.arcs.length; i++) {
-        if (this.arcs[i].isDirect) {
-            hasDirected = true;
-            break;
-        }
-    }
-    for (var i = 0; i < this.arcs.length; i++) {
-        var weightData = "";
-        var arc = this.arcs[i];
-
-        if (this.arcs[i].weight != defaultWeight) {
-            weightData = "<data key=" + weightKeyId + ">" + arc.weight + "</data>";
-        }
-
-        xmlBody = xmlBody + "<edge source=\"" + arc.vertex1.id + "\" target=\""
-            + arc.vertex2.id + "\" " +
-            (arc.isDirect != hasDirected ? (hasDirected ? "directed=\"false\"" : "directed=\"true\"") : "") +
-            " id=\"" + arc.id + "\"";
-
-        xmlBody = xmlBody + ((weightData != "") ? ">" + weightData + "</edge>" : "/>")
-    }
-    xml = mainHeader + weightNode + (hasDirected ? directedHeader : undirectedHeader) + xmlBody + "</graph></graphml>"
-    return xml;
+		xmlBody = xmlBody + "<edge source=\"" + arc.vertex1.id + "\" target=\""
+			+ arc.vertex2.id + "\" " +
+			(arc.isDirect != hasDirected ? (hasDirected ? "directed=\"false\"" : "directed=\"true\"") : "") +
+		    " id=\"" + arc.id + "\"";
+			
+		xmlBody = xmlBody +	((weightData != "") ? ">" + weightData + "</edge>" : "/>")
+	}	
+	xml = mainHeader + weightNode + (hasDirected ? directedHeader : undirectedHeader) + xmlBody + "</graph></graphml>"
+	return xml;
 }
 /**
  * Graph class.
  *
  */
 
-
-function Graph() {
-    // List of vertex.
-    this.vertices = [];
-    // List of arcs.
-    this.edges = [];
-    // Unique Id of new graph.
-    this.uidGraph = 0;
-    // Unique Id of new edge.
-    this.uidEdge = 10000;
-    // Has direction edge.
-    this.hasDirect = false;
+ 
+function Graph()
+{
+	// List of vertex.
+	this.vertices = [];
+	// List of arcs.
+	this.edges   = [];
+	// Unique Id of new graph.
+	this.uidGraph = 0;
+	// Unique Id of new edge.
+	this.uidEdge = 10000;
+	// Has direction edge.
+	this.hasDirect = false;
     // Is graph multi
     this.isMultiGraph = false;	// đa đồ thị là đồ thị có thể nhiều cạnh cùng một cặp đỉnh
 };
@@ -4934,1130 +5173,1323 @@ Graph.prototype.maxVertices = 1000;
 // Offset for edges ids.
 Graph.prototype.edgesOffset = 10000;
 
-Graph.prototype.AddNewVertex = function (vertex) {
-    if (this.vertices.length <= this.maxVertices) {
-        vertex.SetId(this.uidGraph);
-        this.uidGraph = this.uidGraph + 1;
-        this.vertices.push(vertex);
-    }
-    return this.vertices.length - 1;
+Graph.prototype.AddNewVertex = function(vertex)
+{
+	if (this.vertices.length <= this.maxVertices)
+	{
+		vertex.SetId (this.uidGraph);
+		this.uidGraph = this.uidGraph + 1;
+		this.vertices.push(vertex);
+	}
+	return this.vertices.length - 1;
 }
 
-Graph.prototype.ClearGraph = function () {
-    // List of vertex.
-    this.vertices = [];
-    // List of arcs.
-    this.edges = [];
-    // Unique Id of new graph.
-    this.uidGraph = 0;
-    // Unique Id of new edge.
-    this.uidEdge = 10000;
-    // Has direction edge.
-    this.hasDirect = false;
+Graph.prototype.ClearGraph = function() {
+	// List of vertex.
+	this.vertices = [];
+	// List of arcs.
+	this.edges   = [];
+	// Unique Id of new graph.
+	this.uidGraph = 0;
+	// Unique Id of new edge.
+	this.uidEdge = 10000;
+	// Has direction edge.
+	this.hasDirect = false;
     // Is graph multi
     this.isMultiGraph = false;
 }
 
-Graph.prototype.AddNewEdgeSafe = function (graph1, graph2, isDirect, weight, replaceIfExists = true) {
-    return this.AddNewEdge(new BaseEdge(graph1, graph2, isDirect, weight), replaceIfExists);
+Graph.prototype.AddNewEdgeSafe = function(graph1, graph2, isDirect, weight, replaceIfExists = true)
+{
+	return this.AddNewEdge(new BaseEdge(graph1, graph2, isDirect, weight), replaceIfExists);
 }
 
-Graph.prototype.AddNewEdge = function (edge, replaceIfExists) {
+Graph.prototype.AddNewEdge = function(edge, replaceIfExists)
+{
     edge.id = this.uidEdge;
     this.uidEdge = this.uidEdge + 1;
-
-    var edge1 = this.FindEdgeAny(edge.vertex1.id, edge.vertex2.id);
-    var edgeRevert = this.FindEdgeAny(edge.vertex2.id, edge.vertex1.id);
-    if (!edge.isDirect) {
-        if (edge1 != null && replaceIfExists)
-            this.DeleteEdge(edge1);
-        if (edgeRevert != null && replaceIfExists)
-            this.DeleteEdge(edgeRevert);
-
-        this.edges.push(edge);
-    }
-    else {
-        if (edge1 != null && replaceIfExists)
-            this.DeleteEdge(edge1);
-        if (edgeRevert != null && !edgeRevert.isDirect && replaceIfExists)
-            this.DeleteEdge(edgeRevert);
-
-        this.edges.push(edge);
-    }
-
+    
+	var edge1      = this.FindEdgeAny(edge.vertex1.id, edge.vertex2.id);
+	var edgeRevert = this.FindEdgeAny(edge.vertex2.id, edge.vertex1.id);
+	if (!edge.isDirect)
+	{
+		if (edge1 != null && replaceIfExists)
+			this.DeleteEdge(edge1);
+		if (edgeRevert != null && replaceIfExists)
+			this.DeleteEdge(edgeRevert);
+        
+		this.edges.push(edge);
+	}
+	else
+	{
+		if (edge1 != null && replaceIfExists)
+			this.DeleteEdge(edge1);
+		if (edgeRevert != null && !edgeRevert.isDirect && replaceIfExists)
+			this.DeleteEdge(edgeRevert);
+		
+		this.edges.push(edge);
+	}
+    
     this.isMultiGraph = this.checkMutiGraph();
-
-    return this.edges.length - 1;
+	
+	return this.edges.length - 1;
 }
 
 
-Graph.prototype.DeleteEdge = function (edgeObject) {
-    var index = this.edges.indexOf(edgeObject);
-    if (index > -1) {
-        this.edges.splice(index, 1);
-    }
-
+Graph.prototype.DeleteEdge = function(edgeObject)
+{
+	var index = this.edges.indexOf(edgeObject);
+	if (index > -1) 
+	{
+		this.edges.splice(index, 1);
+	}
+    
     this.isMultiGraph = this.checkMutiGraph();
 }
 // hàm xóa đỉnh: xóa đỉnh và cả các cạnh liên quan đến đỉnh đó
-Graph.prototype.DeleteVertex = function (vertexObject) {
-    var index = this.vertices.indexOf(vertexObject);
-    if (index > -1) {
-        for (var i = 0; i < this.edges.length; i++) {
-            if (this.edges[i].vertex1 == vertexObject || this.edges[i].vertex2 == vertexObject) {
-                this.DeleteEdge(this.edges[i]);
-                i--; // i trừ 1 để có thể duyệt phần từ kế tiếp
-                //vì sau khi xóa một phần từ độ dài mảng sẽ giảm xuống 1 các phần từ sau phần từ bị xóa sẽ giảm index xuống 1
-            }
-        }
-        this.vertices.splice(index, 1);
-    }
+Graph.prototype.DeleteVertex = function(vertexObject)
+{
+	var index = this.vertices.indexOf(vertexObject);
+	if (index > -1) 
+	{
+		for (var i = 0; i < this.edges.length; i++)
+		{
+			if (this.edges[i].vertex1 == vertexObject || this.edges[i].vertex2 == vertexObject)
+			{
+				this.DeleteEdge(this.edges[i]);
+				i--; // i trừ 1 để có thể duyệt phần từ kế tiếp
+						//vì sau khi xóa một phần từ độ dài mảng sẽ giảm xuống 1 các phần từ sau phần từ bị xóa sẽ giảm index xuống 1
+			}
+		}
+		this.vertices.splice(index, 1);
+	}
 }
 
-Graph.prototype.HasConnectedNodes = function (vertexObject) {
-    var res = false;
+Graph.prototype.HasConnectedNodes = function(vertexObject)
+{
+	var res = false;
 
-    var index = this.vertices.indexOf(vertexObject);
-    if (index > -1) {
-        for (var i = 0; i < this.edges.length; i++) {
-            if (this.edges[i].vertex1 == vertexObject || this.edges[i].vertex2 == vertexObject) {
-                res = true;
-                break;
-            }
-        }
-    }
+	var index = this.vertices.indexOf(vertexObject);
+	if (index > -1) 
+	{
+ 		for (var i = 0; i < this.edges.length; i++)
+		{
+			if (this.edges[i].vertex1 == vertexObject || this.edges[i].vertex2 == vertexObject)
+			{
+				res = true;
+				break;
+			}
+		}
+	}
 
-    return res;
+	return res;
 }
 
-Graph.prototype.FindVertex = function (id) {
-    var res = null;
-    for (var i = 0; i < this.vertices.length; i++) {
-        if (this.vertices[i].id == id) {
-            res = this.vertices[i];
-            break;
-        }
-    }
-
-    return res;
+Graph.prototype.FindVertex = function(id)
+{
+	var res = null;
+	for (var i = 0; i < this.vertices.length; i++)
+	{
+		if (this.vertices[i].id == id)
+		{
+			res = this.vertices[i];
+			break;
+		}
+	}
+	
+	return res;
 }
 
-Graph.prototype.FindVertexByTitle = function (title) {
-    var res = null;
-    for (var i = 0; i < this.vertices.length; i++) {
-        if (this.vertices[i].mainText == title) {
-            res = this.vertices[i];
-            break;
-        }
-    }
-
-    return res;
+Graph.prototype.FindVertexByTitle = function(title)
+{
+	var res = null;
+	for (var i = 0; i < this.vertices.length; i++)
+	{
+		if (this.vertices[i].mainText == title)
+		{
+			res = this.vertices[i];
+			break;
+		}
+	}
+	
+	return res;
 }
 
 // deprecated
-Graph.prototype.FindEdge = function (id1, id2) {
-    return this.FindEdgeAny(id1, id2);
+Graph.prototype.FindEdge = function(id1, id2)
+{
+	return this.FindEdgeAny(id1, id2);
 }
 
-Graph.prototype.FindEdgeById = function (edgeId) {
+Graph.prototype.FindEdgeById = function(edgeId)
+{
     var res = null;
-    for (var i = 0; i < this.edges.length; i++) {
-        if (this.edges[i].id == edgeId) {
+    for (var i = 0; i < this.edges.length; i++)
+    {
+        if (this.edges[i].id == edgeId)
+        {
             res = this.edges[i];
             break;
         }
     }
-
+	
     return res;
 }
 
-Graph.prototype.FindEdgeAny = function (id1, id2) {
-    var res = null;
-    for (var i = 0; i < this.edges.length; i++) {
-        if ((this.edges[i].vertex1.id == id1 && this.edges[i].vertex2.id == id2)
-            || (!this.edges[i].isDirect && this.edges[i].vertex1.id == id2 && this.edges[i].vertex2.id == id1)) {
-            res = this.edges[i];
-            break;
-        }
-    }
-
-    return res;
+Graph.prototype.FindEdgeAny = function(id1, id2)
+{
+	var res = null;
+	for (var i = 0; i < this.edges.length; i++)
+	{
+		if ((this.edges[i].vertex1.id == id1 && this.edges[i].vertex2.id == id2)
+		     || (!this.edges[i].isDirect && this.edges[i].vertex1.id == id2 && this.edges[i].vertex2.id == id1))
+		{
+			res = this.edges[i];
+			break;
+		}
+	}
+	
+	return res;
 }
 
 // trả về cạnh có khoảng cách ngắn nhất nối 2 đỉnh id1, id2
-Graph.prototype.FindEdgeMin = function (id1, id2) {
-    var res = null;
+Graph.prototype.FindEdgeMin = function(id1, id2)
+{
+	var res       = null;
     var minWeight = this.infinity;
-    for (var i = 0; i < this.edges.length; i++) {
+	for (var i = 0; i < this.edges.length; i++)
+	{
         var edge = this.edges[i];
-        if ((edge.vertex1.id == id1 && edge.vertex2.id == id2)
-            || (!edge.isDirect && edge.vertex1.id == id2 && edge.vertex2.id == id1)) {
-            if (edge.weight < minWeight) {
-                res = edge;
+		if ((edge.vertex1.id == id1 && edge.vertex2.id == id2)
+		    || (!edge.isDirect && edge.vertex1.id == id2 && edge.vertex2.id == id1))
+		{
+            if (edge.weight < minWeight)
+            {
+                res       = edge;
                 minWeight = edge.weight;
             }
-        }
-    }
-
-    return res;
+		}
+	}
+	
+	return res;
 }
 
-Graph.prototype.FindEdgeMax = function (id1, id2) {
-    var res = null;
+Graph.prototype.FindEdgeMax = function(id1, id2)
+{
+	var res       = null;
     var maxWeight = 0;
-    for (var i = 0; i < this.edges.length; i++) {
+	for (var i = 0; i < this.edges.length; i++)
+	{
         var edge = this.edges[i];
-        if ((edge.vertex1.id == id1 && edge.vertex2.id == id2)
-            || (!edge.isDirect && edge.vertex1.id == id2 && edge.vertex2.id == id1)) {
-            if (edge.weight > maxWeight) {
-                res = edge;
+		if ((edge.vertex1.id == id1 && edge.vertex2.id == id2)
+		     || (!edge.isDirect && edge.vertex1.id == id2 && edge.vertex2.id == id1))
+		{
+            if (edge.weight > maxWeight)
+            {
+                res       = edge;
                 maxWeight = edge.weight;
             }
-        }
-    }
-
-    return res;
+		}
+	}
+	
+	return res;
 }
 
-Graph.prototype.FindEdgeMinIgnoreDirection = function (id1, id2) {
-    var res = null;
+Graph.prototype.FindEdgeMinIgnoreDirection = function(id1, id2)
+{
+	var res       = null;
     var minWeight = this.infinity;
-    for (var i = 0; i < this.edges.length; i++) {
+	for (var i = 0; i < this.edges.length; i++)
+	{
         var edge = this.edges[i];
-        if ((edge.vertex1.id == id1 && edge.vertex2.id == id2)
-            || (edge.vertex1.id == id2 && edge.vertex2.id == id1)) {
-            if (edge.weight < minWeight) {
-                res = edge;
+		if ((edge.vertex1.id == id1 && edge.vertex2.id == id2)
+		     || (edge.vertex1.id == id2 && edge.vertex2.id == id1))
+		{
+            if (edge.weight < minWeight)
+            {
+                res       = edge;
                 minWeight = edge.weight;
             }
-        }
-    }
-
-    return res;
+		}
+	}
+	
+	return res;
 }
 
-Graph.prototype.FindAllEdges = function (id1, id2) {
-    var res = [];
-    for (var i = 0; i < this.edges.length; i++) {
+Graph.prototype.FindAllEdges = function(id1, id2)
+{
+	var res       = [];
+	for (var i = 0; i < this.edges.length; i++)
+	{
         var edge = this.edges[i];
-        if ((edge.vertex1.id == id1 && edge.vertex2.id == id2)
-            || (!edge.isDirect && edge.vertex1.id == id2 && edge.vertex2.id == id1)) {
-            res.push(edge);
-        }
-    }
-
-    return res;
+		if ((edge.vertex1.id == id1 && edge.vertex2.id == id2)
+		     || (!edge.isDirect && edge.vertex1.id == id2 && edge.vertex2.id == id1))
+		{
+			res.push(edge);
+		}
+	}
+	
+	return res;
 }
 
-Graph.prototype.GetAdjacencyMatrixStr = function () {
-    var matrix = "";
-    for (var i = 0; i < this.vertices.length; i++) {
-        for (var j = 0; j < this.vertices.length; j++) {
-            var edge = this.FindEdgeMin(this.vertices[i].id, this.vertices[j].id);
-            if (edge != null) {
-                matrix += edge.weight;
-            }
-            else {
-                matrix += "0";
-            }
-
-            if (j != this.vertices.length) {
-                matrix += ", ";
-            }
-
-        }
-        matrix = matrix + "\n";
-    }
-
-    return matrix;
+Graph.prototype.GetAdjacencyMatrixStr = function ()
+{
+	var matrix = "";
+	for (var i = 0; i < this.vertices.length; i++)
+	{
+		for (var j = 0; j < this.vertices.length; j++)
+		{	
+			var edge = this.FindEdgeMin (this.vertices[i].id, this.vertices[j].id);
+			if (edge != null)
+			{
+				matrix += edge.weight;
+			}
+			else
+			{
+				matrix += "0";
+			}
+			
+			if (j != this.vertices.length)
+			{
+				matrix += ", ";
+			}
+			
+		}
+		matrix = matrix + "\n";
+	}
+	
+	return matrix;
 }
 
-Graph.prototype.GetAdjacencyMatrix = function () {
+Graph.prototype.GetAdjacencyMatrix = function ()
+{
     var matrix = [];
-
-    for (var i = 0; i < this.vertices.length; i++) {
+    
+    for (var i = 0; i < this.vertices.length; i ++)
+    {
         matrix.push([]);
         var v1 = this.vertices[i];
-        for (var j = 0; j < this.vertices.length; j++) {
+        for (var j = 0; j < this.vertices.length; j ++)
+        {
             var v2 = this.vertices[j];
             var edge = this.FindEdgeMin(v1.id, v2.id);
-            if (edge != null) {
+            if (edge != null)
+            {
                 matrix[i][j] = edge.GetWeight();
             }
-            else {
-                matrix[i][j] = this.infinity;
+            else
+            {
+                matrix[i][j] = this.infinity;               
             }
         }
     }
-
+    
     return matrix;
 }
 
-Graph.prototype.TestAdjacencyMatrix = function (matrix, rowsObj, colsObj, separator) {
-    if (separator === undefined) {
-        separator = ",";
+Graph.prototype.TestAdjacencyMatrix = function (matrix, rowsObj, colsObj, separator)
+{
+    if(separator === undefined) 
+    {
+      separator = ",";
     }
+    
+	var bGoodFormat = true;
+	rowsObj.rows = [];
+	rowsObj.rows = matrix.split ("\n");
+	for (j = 0; j < rowsObj.rows.length; ++j)
+	{
+		//rowsObj.rows[j] = rowsObj.rows[j].replace(/ /g,'');
+		if (rowsObj.rows[j] === "")
+		{
+			rowsObj.rows.splice(j--, 1);
+		}
+	}
+	
+	colsObj.cols = [];
+	for (var i = 0; i < rowsObj.rows.length; i++)
+	{
+		colsObj.cols[i] = this.SplitMatrixString(rowsObj.rows[i], separator);//rowsObj.rows[i].split (",");
+		for (j = 0; j < colsObj.cols[i].length; ++j)
+		{
+			if (colsObj.cols[i][j] === "")
+			{
+				colsObj.cols[i].splice(j--, 1);
+			}
+		}
+		if (colsObj.cols[i].length != rowsObj.rows.length)
+		{
+			bGoodFormat = false;
+			break;
+		}
+	}
 
-    var bGoodFormat = true;
-    rowsObj.rows = [];
-    rowsObj.rows = matrix.split("\n");
-    for (j = 0; j < rowsObj.rows.length; ++j) {
-        //rowsObj.rows[j] = rowsObj.rows[j].replace(/ /g,'');
-        if (rowsObj.rows[j] === "") {
-            rowsObj.rows.splice(j--, 1);
-        }
-    }
-
-    colsObj.cols = [];
-    for (var i = 0; i < rowsObj.rows.length; i++) {
-        colsObj.cols[i] = this.SplitMatrixString(rowsObj.rows[i], separator);//rowsObj.rows[i].split (",");
-        for (j = 0; j < colsObj.cols[i].length; ++j) {
-            if (colsObj.cols[i][j] === "") {
-                colsObj.cols[i].splice(j--, 1);
-            }
-        }
-        if (colsObj.cols[i].length != rowsObj.rows.length) {
-            bGoodFormat = false;
-            break;
-        }
-    }
-
-    return bGoodFormat;
+	return bGoodFormat;
 }
 
-Graph.prototype.TestPair = function (pair) {
-    let lines = pair.split("\n");
-    // Check:
-    // a - b
-    // a > b
+Graph.prototype.TestPair = function (pair)
+{
+	let lines = pair.split ("\n");
+	// Check:
+	// a - b
+	// a > b
     // a < b
-    // a-(1)-b
-    // a-(1)>b
-    // a<(1)-b
-    let regExp = [
-        /^.+-.+$/g,
-        /^.+\>.+$/g,
-        /^.+<.+$/g,
-        /^.+-\(\d+\.?\d+\)-.+$/g,
-        /^.+-\(\d+\.?\d+\)\>.+$/g,
-        /^.+<\(\d+\.?\d+\)\-.+$/g
-    ];
-    let res = true;
-    for (let i = 0; i < lines.length; ++i) {
-        let resLine = false;
-        let line = lines[i];
-        if (line == "") {
-            continue;
-        }
-        for (let j = 0; j < regExp.length; ++j) {
-            if (line.match(regExp[j])) {
-                resLine = true;
-            }
-        }
-        res = resLine && res;
-    }
+	// a-(1)-b
+	// a-(1)>b
+	// a<(1)-b
+	let regExp = [
+		/^.+-.+$/g,
+		/^.+\>.+$/g,
+		/^.+<.+$/g,
+		/^.+-\(\d+\.?\d+\)-.+$/g,
+		/^.+-\(\d+\.?\d+\)\>.+$/g,
+		/^.+<\(\d+\.?\d+\)\-.+$/g
+	];
+	let res = true;
+	for (let i = 0; i < lines.length; ++i)
+	{
+		let resLine = false;
+		let line = lines[i];
+		if (line == "") {
+			continue;
+		}
+		for (let j = 0; j < regExp.length; ++j) {
+			if (line.match(regExp[j])) {
+				resLine = true;
+			}
+		}
+		res = resLine && res;
+	}
 
-    return res;
+	return res;
 }
 
 
-Graph.prototype.IsVerticesHaveSamePosition = function (position, vertexCount) {
-    var res = false;
+Graph.prototype.IsVerticesHaveSamePosition = function (position, vertexCount)
+{
+	var res = false;
 
-    for (var j = 0; j < Math.min(this.vertices.length, vertexCount); j++) {
-        if (position.distance(this.vertices[j].position) < this.vertices[j].model.diameter * 2) {
-            res = true;
-            break;
-        }
-    }
+	for (var j = 0; j < Math.min(this.vertices.length, vertexCount); j++)
+	{
+		if (position.distance(this.vertices[j].position) < this.vertices[j].model.diameter * 2)
+		{
+			res = true;
+			break;
+		}
+	}
 
-    return res;
+	return res;
 }
 
 Graph.prototype.GetRandomPosition = function (viewportSize) {
-    return new Point(Math.random() * viewportSize.x, Math.random() * viewportSize.y);
+	return new Point(Math.random() * viewportSize.x, Math.random() * viewportSize.y);
 }
 
-Graph.prototype.GetRandomPositionOfVertex = function (matrix, vertexIndex, viewportSize) {
-    var point = new Point(0, 0);
+Graph.prototype.GetRandomPositionOfVertex = function (matrix, vertexIndex, viewportSize)
+{
+	var point = new Point(0, 0);
 
-    var relatedVertex = [];
+	var relatedVertex = [];
 
-    for (var j = 0; j < matrix.length; j++) {
-        if (j < this.vertices.length && (cols[vertexIndex][j] > 0 || cols[j][vertexIndex] > 0) && j != vertexIndex) {
-            relatedVertex.push(this.vertices[j]);
-        }
-    }
+	for (var j = 0; j < matrix.length; j++)
+	{
+		if (j < this.vertices.length && (cols[vertexIndex][j] > 0 || cols[j][vertexIndex] > 0) && j != vertexIndex)
+		{
+			relatedVertex.push(this.vertices[j]);
+		}
+	}
 
 
-    var diameter = (new VertexModel()).diameter;
+	var diameter = (new VertexModel()).diameter;
 
-    if (relatedVertex.length > 1) {
-        for (var j = 0; j < relatedVertex.length; j++) {
-            point = point.add(relatedVertex[j].position);
-        }
+	if (relatedVertex.length > 1)
+	{
+		for (var j = 0; j < relatedVertex.length; j++)
+		{
+			point = point.add(relatedVertex[j].position);
+		}
 
-        point = point.multiply(1 / relatedVertex.length);
+		point = point.multiply(1 / relatedVertex.length);
 
-        point.offset(Math.random() * diameter + (Math.random() ? -1 : 1) * 2 * diameter, Math.random() * diameter + (Math.random() ? -1 : 1) * 2 * diameter);
-    }
-    else {
-        point = new Point(Math.random() * viewportSize.x, Math.random() * viewportSize.y);
-    }
+		point.offset (Math.random() * diameter + (Math.random() ? -1 : 1) * 2 * diameter, Math.random() * diameter + (Math.random() ? -1 : 1) * 2 * diameter);
+	}
+	else
+	{
+		point = new Point(Math.random() * viewportSize.x, Math.random() * viewportSize.y);
+	}
 
-    if (this.IsVerticesHaveSamePosition(point, matrix.length)) {
-        point.offset(Math.random() * diameter + + (Math.random() ? -1 : 1) * 4 * diameter,
-            Math.random() * diameter + + (Math.random() ? -1 : 1) * 4 * diameter);
-    }
+	if (this.IsVerticesHaveSamePosition (point, matrix.length))
+	{ 
+		point.offset (Math.random() * diameter + + (Math.random() ? -1 : 1) * 4 * diameter, 
+			Math.random() * diameter + + (Math.random() ? -1 : 1) * 4 * diameter);
+	}
 
-    // Clamp
-    point.x = Math.min(Math.max(point.x, diameter), viewportSize.x);
-    point.y = Math.min(Math.max(point.y, diameter), viewportSize.y);
+	// Clamp
+	point.x = Math.min(Math.max(point.x, diameter), viewportSize.x);
+	point.y = Math.min(Math.max(point.y, diameter), viewportSize.y);
 
-    return point;
+	return point;
 }
 
-Graph.prototype.VerticesReposition = function (viewportSize, newVertices) {
-    var maxGravityDistanceSqr = Math.max(viewportSize.x, viewportSize.y) / 5.0;
-    maxGravityDistanceSqr = maxGravityDistanceSqr * maxGravityDistanceSqr;
-    //Math.min(viewportSize.x, viewportSize.y) / 2.0;
-    var velocityDamping = 0.85;
-    var diameter = (new VertexModel()).diameter;
-    var maxDistance = diameter * 3;
-    var gravityDistanceSqr = 10 * (maxDistance * maxDistance);
-    var edgeGravityKof = 10 / (maxDistance);
-    var kCenterForce = 10 / (maxDistance * 10);
-    var centerPoint = viewportSize.multiply(0.5);
-    var velocityMax = maxDistance * 10;
-
-    var edgesMatrix = {};
-    for (var i = 0; i < this.edges.length; i++) {
+Graph.prototype.VerticesReposition = function (viewportSize, newVertices)
+{
+   var maxGravityDistanceSqr = Math.max(viewportSize.x, viewportSize.y) / 5.0;
+   maxGravityDistanceSqr  = maxGravityDistanceSqr * maxGravityDistanceSqr;
+   //Math.min(viewportSize.x, viewportSize.y) / 2.0;
+   var velocityDamping    = 0.85;
+   var diameter = (new VertexModel()).diameter;
+   var maxDistance = diameter * 3;
+   var gravityDistanceSqr =  10  * (maxDistance * maxDistance);
+   var edgeGravityKof     =  10  / (maxDistance);
+   var kCenterForce       =  10  / (maxDistance * 10);
+   var centerPoint = viewportSize.multiply(0.5);
+   var velocityMax = maxDistance * 10;
+    
+   var edgesMatrix = {};   
+   for (var i = 0; i < this.edges.length; i++)
+   {  
         edgesMatrix[this.edges[i].vertex1.id + this.edges[i].vertex2.id * 1000] = 1;
         edgesMatrix[this.edges[i].vertex2.id + this.edges[i].vertex1.id * 1000] = 1;
-    }
+   }
+   
+   var startAngel = Math.random() * 180.0;
+   for(i = 0; i < newVertices.length; i++) // loop through vertices
+   {
+      newVertices[i].position.orbit(new Point(viewportSize.x / 2, viewportSize.y / 2), (viewportSize.x - diameter * 2) / 2, 
+					(viewportSize.y - diameter * 2) / 2, 360 * i / newVertices.length + startAngel);
+   }
+    
+   var k = 0;
+   var bChanged = true;
+   while (k < 1000 && bChanged)
+   {
+      var vertexData = [];
+      for(i = 0; i < newVertices.length; i++) // loop through vertices
+      {
+         // Has no in newVertices.
+         var currentVertex = {};
+         currentVertex.object    = newVertices[i];
+         currentVertex.net_force = new Point (0, 0);
+         currentVertex.velocity   = new Point (0, 0);
+         vertexData.push(currentVertex);
 
-    var startAngel = Math.random() * 180.0;
-    for (i = 0; i < newVertices.length; i++) // loop through vertices
-    {
-        newVertices[i].position.orbit(new Point(viewportSize.x / 2, viewportSize.y / 2), (viewportSize.x - diameter * 2) / 2,
-            (viewportSize.y - diameter * 2) / 2, 360 * i / newVertices.length + startAngel);
-    }
-
-    var k = 0;
-    var bChanged = true;
-    while (k < 1000 && bChanged) {
-        var vertexData = [];
-        for (i = 0; i < newVertices.length; i++) // loop through vertices
-        {
-            // Has no in newVertices.
-            var currentVertex = {};
-            currentVertex.object = newVertices[i];
-            currentVertex.net_force = new Point(0, 0);
-            currentVertex.velocity = new Point(0, 0);
-            vertexData.push(currentVertex);
-
-            for (j = 0; j < this.vertices.length; j++) // loop through other vertices
+         for(j = 0; j < this.vertices.length; j++) // loop through other vertices
+         {
+            otherVertex = this.vertices[j];
+      
+            if (otherVertex == currentVertex.object) continue;
+             
+            // squared distance between "u" and "v" in 2D space
+            var rsq = currentVertex.object.position.distanceSqr(otherVertex.position);
+            
+            
             {
-                otherVertex = this.vertices[j];
+              // counting the repulsion between two vertices
+              var force = (currentVertex.object.position.subtract(otherVertex.position)).normalize(gravityDistanceSqr / rsq);
+              currentVertex.net_force = currentVertex.net_force.add(force);
+            }
+         }
 
-                if (otherVertex == currentVertex.object) continue;
-
-                // squared distance between "u" and "v" in 2D space
-                var rsq = currentVertex.object.position.distanceSqr(otherVertex.position);
-
-
+         for(j = 0; j < this.vertices.length; j++) // loop through edges
+         {
+            otherVertex = this.vertices[j];
+            if (edgesMatrix.hasOwnProperty(currentVertex.object.id + 1000 * otherVertex.id))
+            {
+                var distance = currentVertex.object.position.distance(otherVertex.position);
+                
+                if (distance > maxDistance)
                 {
-                    // counting the repulsion between two vertices
-                    var force = (currentVertex.object.position.subtract(otherVertex.position)).normalize(gravityDistanceSqr / rsq);
+                    // counting the attraction
+                    var force = (otherVertex.position.subtract(currentVertex.object.position)).normalize(edgeGravityKof * (distance - maxDistance));
                     currentVertex.net_force = currentVertex.net_force.add(force);
                 }
             }
+         }
+          
+         // Calculate force to center of world.
+         var distanceToCenter = centerPoint.distance(currentVertex.object.position);
+         var force = centerPoint.subtract(currentVertex.object.position).normalize(distanceToCenter * kCenterForce);
+         currentVertex.net_force = currentVertex.net_force.add(force);
+          
+         // counting the velocity (with damping 0.85)
+         currentVertex.velocity = currentVertex.velocity.add(currentVertex.net_force);
+     }
 
-            for (j = 0; j < this.vertices.length; j++) // loop through edges
-            {
-                otherVertex = this.vertices[j];
-                if (edgesMatrix.hasOwnProperty(currentVertex.object.id + 1000 * otherVertex.id)) {
-                    var distance = currentVertex.object.position.distance(otherVertex.position);
+     bChanged = false;
 
-                    if (distance > maxDistance) {
-                        // counting the attraction
-                        var force = (otherVertex.position.subtract(currentVertex.object.position)).normalize(edgeGravityKof * (distance - maxDistance));
-                        currentVertex.net_force = currentVertex.net_force.add(force);
-                    }
-                }
-            }
-
-            // Calculate force to center of world.
-            var distanceToCenter = centerPoint.distance(currentVertex.object.position);
-            var force = centerPoint.subtract(currentVertex.object.position).normalize(distanceToCenter * kCenterForce);
-            currentVertex.net_force = currentVertex.net_force.add(force);
-
-            // counting the velocity (with damping 0.85)
-            currentVertex.velocity = currentVertex.velocity.add(currentVertex.net_force);
-        }
-
-        bChanged = false;
-
-        for (i = 0; i < vertexData.length; i++) // set new positions
+     for(i = 0; i < vertexData.length; i++) // set new positions
+     {
+        var v = vertexData[i];
+        var velocity = v.velocity;
+        if (velocity.length() > velocityMax)
         {
-            var v = vertexData[i];
-            var velocity = v.velocity;
-            if (velocity.length() > velocityMax) {
-                velocity = velocity.normalize(velocityMax);
-            }
-            v.object.position = v.object.position.add(velocity);
-            if (velocity.length() >= 1) {
-                bChanged = true;
-            }
+            velocity = velocity.normalize(velocityMax);
         }
-        k++;
-    }
-
-
-    // Looks like something going wrong and will use circle algorithm for reposition.
-    var bbox = this.getGraphBBox();
-    if (bbox.size().length() > viewportSize.length() * 1000) {
-        for (i = 0; i < newVertices.length; i++) // loop through vertices
+        v.object.position = v.object.position.add(velocity);
+        if (velocity.length() >= 1)
         {
-            newVertices[i].position.orbit(new Point(viewportSize.x / 2, viewportSize.y / 2), (viewportSize.x - diameter * 2) / 2,
-                (viewportSize.y - diameter * 2) / 2, 360 * i / newVertices.length + startAngel);
+		  bChanged = true;
         }
-    }
-    else {
-        // Try to rotate graph to fill small area.
-        var count = 10;
-        var angle = 360.0 / count;
-        var viewportAspect = viewportSize.x / viewportSize.y;
-        var bestIndex = 0;
-        var graphSize = bbox.size();
-        var bestAspect = graphSize.x / graphSize.y;
-        var center = bbox.center();
-
-        for (var i = 1; i < count; i++) {
-            for (j = 0; j < newVertices.length; j++) // loop through vertices
-            {
-                newVertices[j].position.rotate(center, angle);
-            }
-
-            var newBBox = this.getGraphBBox();
-            var newAspect = newBBox.size().x / newBBox.size().y;
-            if (Math.abs(newAspect - viewportAspect) < Math.abs(bestAspect - viewportAspect)) {
-                bestAspect = newAspect;
-                bestIndex = i;
-            }
-        }
-
-        // Rotate to best aspect.
-        for (j = 0; j < newVertices.length; j++) // loop through vertices
-        {
-            newVertices[j].position.rotate(center, - angle * (count - bestIndex - 1));
-        }
-    }
+     }
+     k++;
+   }
+    
+    
+   // Looks like something going wrong and will use circle algorithm for reposition.
+   var bbox = this.getGraphBBox();
+   if (bbox.size().length() > viewportSize.length() * 1000)
+   {
+       for(i = 0; i < newVertices.length; i++) // loop through vertices
+       {
+           newVertices[i].position.orbit(new Point(viewportSize.x / 2, viewportSize.y / 2), (viewportSize.x - diameter * 2) / 2,
+                                         (viewportSize.y - diameter * 2) / 2, 360 * i / newVertices.length + startAngel);
+       }
+   }
+   else
+   {
+       // Try to rotate graph to fill small area.
+       var count = 10;
+       var angle  = 360.0 / count;
+       var viewportAspect = viewportSize.x / viewportSize.y;
+       var bestIndex = 0;
+       var graphSize  = bbox.size();
+       var bestAspect = graphSize.x / graphSize.y;
+       var center     = bbox.center();
+       
+       for (var i = 1; i < count; i++)
+       {
+           for(j = 0; j < newVertices.length; j++) // loop through vertices
+           {
+               newVertices[j].position.rotate(center, angle);
+           }
+           
+           var newBBox   = this.getGraphBBox();
+           var newAspect = newBBox.size().x / newBBox.size().y;
+           if (Math.abs(newAspect - viewportAspect) < Math.abs(bestAspect - viewportAspect))
+           {
+               bestAspect = newAspect;
+               bestIndex = i;
+           }
+       }
+       
+       // Rotate to best aspect.
+       for(j = 0; j < newVertices.length; j++) // loop through vertices
+       {
+           newVertices[j].position.rotate(center, - angle * (count - bestIndex - 1));
+       }
+   }
 }
 
-Graph.prototype.SetAdjacencyMatrix = function (matrix, viewportSize, currentEnumVerticesType, separator) {
-    if (separator === undefined) {
-        separator = ",";
+Graph.prototype.SetAdjacencyMatrix = function (matrix, viewportSize, currentEnumVerticesType, separator)
+{
+    if (separator === undefined) 
+    {
+      separator = ",";
     }
+    
+	var rowsObj = {};
+	var colsObj = {};
 
-    var rowsObj = {};
-    var colsObj = {};
+	//ViewportSize = viewportSize.subtract(new Point((new VertexModel()).diameter * 2, (new VertexModel()).diameter * 2));
 
-    //ViewportSize = viewportSize.subtract(new Point((new VertexModel()).diameter * 2, (new VertexModel()).diameter * 2));
-
-    if (this.TestAdjacencyMatrix(matrix, rowsObj, colsObj, separator)) {
-        rows = rowsObj.rows;
-        cols = colsObj.cols;
-
+	if (this.TestAdjacencyMatrix(matrix, rowsObj, colsObj, separator))
+	{
+		rows = rowsObj.rows;
+		cols = colsObj.cols;
+        
         var clonedEdge = this.edges.slice(0);
-        for (var i = 0; i < clonedEdge.length; i++) {
-            this.DeleteEdge(clonedEdge[i]);
-        }
-
-        var newVertices = [];
+		for (var i = 0; i < clonedEdge.length; i++)
+		{
+			this.DeleteEdge (clonedEdge[i]);
+		}
+		
+		var newVertices = [];
         var bWeightGraph = false;
-
-        for (var i = 0; i < rows.length; i++) {
-            for (var j = 0; j < rows.length; j++) {
-                if (j >= this.vertices.length) {
-                    var newPos = this.GetRandomPositionOfVertex(matrix, j, viewportSize);
+        
+		for (var i = 0; i < rows.length; i++)
+		{
+			for (var j = 0; j < rows.length; j++)
+			{
+				if (j >= this.vertices.length)
+				{
+					var newPos = this.GetRandomPositionOfVertex (matrix, j, viewportSize);
                     newVertices.push(new BaseVertex(newPos.x, newPos.y, currentEnumVerticesType));
-                    this.AddNewVertex(newVertices[newVertices.length - 1]);
-                }
-
-                if (cols[i][j] > 0) {
-                    var nEdgeIndex = this.AddNewEdgeSafe(this.vertices[i], this.vertices[j], cols[i][j] != cols[j][i], cols[i][j], true);
-                    this.FixEdgeCurve(nEdgeIndex);
-                    if (nEdgeIndex >= 0) {
+					this.AddNewVertex(newVertices[newVertices.length - 1]);
+				}
+				
+				if (cols[i][j] > 0)
+				{
+					var nEdgeIndex = this.AddNewEdgeSafe(this.vertices[i], this.vertices[j], cols[i][j] != cols[j][i], cols[i][j], true);
+					this.FixEdgeCurve(nEdgeIndex);
+                    if (nEdgeIndex >= 0)
+                    {
                         bWeightGraph = bWeightGraph || this.edges[nEdgeIndex].weight != 1;
                     }
-                }
-            }
-        }
-
+				}
+			}
+		}
+        
         // Set use weight false, because we have unweighted graph.
-        if (!bWeightGraph) {
-            this.edges.forEach(function (part, index, theArray) {
-                theArray[index].useWeight = false;
-            });
+        if (!bWeightGraph)
+        {
+            this.edges.forEach(function(part, index, theArray) {
+                               theArray[index].useWeight = false;
+                               });
         }
 
-        for (var i = rows.length; i < Math.max(this.vertices.length, rows.length); i++) {
-            this.DeleteVertex(this.vertices[i]);
-            i--;
-        }
+		for (var i = rows.length; i < Math.max(this.vertices.length, rows.length); i++)
+		{
+			this.DeleteVertex(this.vertices[i]);
+			i--;
+		}                        
 
         this.VerticesReposition(viewportSize, newVertices);
-    }
+	}	
 }
 
-Graph.prototype.SetPair = function (pairs, viewportSize, currentEnumVerticesType) {
-    if (this.TestPair(pairs)) {
-        this.ClearGraph();
+Graph.prototype.SetPair = function (pairs, viewportSize, currentEnumVerticesType)
+{
+	if (this.TestPair(pairs))
+	{
+		this.ClearGraph();
+		
+		let lines = pairs.split ("\n");
+		// Extract:
+		// a - b
+		// a > b
+		// a < b
+		// a-(1)-b
+		// a-(1)>b
+		// a<(1)-b
+		let regExp = [
+			/^(.+)-(.+)$/g,
+			/^(.+)\>(.+)$/g,
+			/^(.+)<(.+)$/g,
+			/^(.+)-\((\d+|\d+\.?\d+)\)-(.+)$/g,
+			/^(.+)-\((\d+|\d+\.?\d+)\)\>(.+)$/g,
+			/^(.+)<\((\d+|\d+\.?\d+)\)\-(.+)$/g,
+		];
 
-        let lines = pairs.split("\n");
-        // Extract:
-        // a - b
-        // a > b
-        // a < b
-        // a-(1)-b
-        // a-(1)>b
-        // a<(1)-b
-        let regExp = [
-            /^(.+)-(.+)$/g,
-            /^(.+)\>(.+)$/g,
-            /^(.+)<(.+)$/g,
-            /^(.+)-\((\d+|\d+\.?\d+)\)-(.+)$/g,
-            /^(.+)-\((\d+|\d+\.?\d+)\)\>(.+)$/g,
-            /^(.+)<\((\d+|\d+\.?\d+)\)\-(.+)$/g,
-        ];
+		let bWeightGraph = false;
+		var newVertices = [];
 
-        let bWeightGraph = false;
-        var newVertices = [];
+		for (var i = 0; i < lines.length; i++)
+		{
+			let line = lines[i];
+			if (line == "") {
+				continue;
+			}
 
-        for (var i = 0; i < lines.length; i++) {
-            let line = lines[i];
-            if (line == "") {
-                continue;
-            }
+			for (let j = regExp.length - 1; j >= 0; --j) {
+				if (!line.match(regExp[j])) {
+					continue;
+				}
 
-            for (let j = regExp.length - 1; j >= 0; --j) {
-                if (!line.match(regExp[j])) {
-                    continue;
-                }
+				let groupes = Array.from(line.matchAll(regExp[j]));
+				let groupe  = groupes[0];
+				let vetext1Title = groupe[1];
+				let vertex1 = this.FindVertexByTitle(vetext1Title);
+				if (vertex1 == null) {
+					let newPosition = this.GetRandomPosition(viewportSize);
+					vertex1 = this.vertices[this.AddNewVertex(new BaseVertex(newPosition.x, newPosition.y, currentEnumVerticesType))];
+					vertex1.mainText = vetext1Title;
+					newVertices.push(vertex1);
+				}
+				let vetext2Title = groupe[j <= 2 ? 2 : 3];
+				let vertex2 = this.FindVertexByTitle(vetext2Title);
+				if (vertex2 == null) {
+					let newPosition = this.GetRandomPosition(viewportSize);
+					vertex2 = this.vertices[this.AddNewVertex(new BaseVertex(newPosition.x, newPosition.y, currentEnumVerticesType))];
+					vertex2.mainText = vetext2Title;
+					newVertices.push(vertex2);
+				}
+				let isDirect = j == 1 || j == 2 ||  j == 4 || j == 5;
+				let weight = 1;
+				if (j > 2) {
+					weight = groupe[2];
+					bWeightGraph = true;
+				}
+				let isRevertEdge = j == 2 || j == 5;
 
-                let groupes = Array.from(line.matchAll(regExp[j]));
-                let groupe = groupes[0];
-                let vetext1Title = groupe[1];
-                let vertex1 = this.FindVertexByTitle(vetext1Title);
-                if (vertex1 == null) {
-                    let newPosition = this.GetRandomPosition(viewportSize);
-                    vertex1 = this.vertices[this.AddNewVertex(new BaseVertex(newPosition.x, newPosition.y, currentEnumVerticesType))];
-                    vertex1.mainText = vetext1Title;
-                    newVertices.push(vertex1);
-                }
-                let vetext2Title = groupe[j <= 2 ? 2 : 3];
-                let vertex2 = this.FindVertexByTitle(vetext2Title);
-                if (vertex2 == null) {
-                    let newPosition = this.GetRandomPosition(viewportSize);
-                    vertex2 = this.vertices[this.AddNewVertex(new BaseVertex(newPosition.x, newPosition.y, currentEnumVerticesType))];
-                    vertex2.mainText = vetext2Title;
-                    newVertices.push(vertex2);
-                }
-                let isDirect = j == 1 || j == 2 || j == 4 || j == 5;
-                let weight = 1;
-                if (j > 2) {
-                    weight = groupe[2];
-                    bWeightGraph = true;
-                }
-                let isRevertEdge = j == 2 || j == 5;
-
-                let nEdgeIndex = this.AddNewEdgeSafe(isRevertEdge ? vertex2 : vertex1, isRevertEdge ? vertex1 : vertex2, isDirect, weight, false);
-                this.FixEdgeCurve(nEdgeIndex);
-                break;
-            }
-        }
-
+				let nEdgeIndex = this.AddNewEdgeSafe(isRevertEdge ? vertex2 : vertex1, isRevertEdge ? vertex1 : vertex2, isDirect, weight, false);
+				this.FixEdgeCurve(nEdgeIndex);
+				break;
+			}
+		}
+		
         // Set use weight false, because we have unweighted graph.
-        if (!bWeightGraph) {
-            this.edges.forEach(function (part, index, theArray) {
-                theArray[index].useWeight = false;
-            });
+        if (!bWeightGraph)
+        {
+            this.edges.forEach(function(part, index, theArray) {
+                               theArray[index].useWeight = false;
+                               });
         }
-
-        this.VerticesReposition(viewportSize, newVertices);
-    }
+		
+		this.VerticesReposition(viewportSize, newVertices);
+	}	
 }
 
 
-Graph.prototype.TestIncidenceMatrix = function (matrix, rowsObj, colsObj, separator) {
-    if (separator === undefined) {
-        separator = ",";
+Graph.prototype.TestIncidenceMatrix = function (matrix, rowsObj, colsObj, separator)
+{
+    if (separator === undefined) 
+    {
+      separator = ",";
     }
+    
+	var bGoodFormat = true;
+	rowsObj.rows = [];
+	rowsObj.rows = matrix.split ("\n");
+	for (j = 0; j < rowsObj.rows.length; ++j)
+	{
+		if (rowsObj.rows[j] === "")
+		{
+			rowsObj.rows.splice(j--, 1);
+		}
+	}
+	colsObj.cols = [];
+	var columnCount = 0;
+	for (var i = 0; i < rowsObj.rows.length; i++)
+	{
+		colsObj.cols[i] = this.SplitMatrixString(rowsObj.rows[i], separator);//rowsObj.rows[i].split (",");
+		for (j = 0; j < colsObj.cols[i].length; ++j)
+		{
+			if (colsObj.cols[i][j] === "")
+			{
+				colsObj.cols[i].splice(j--, 1);
+			}
+		}
+		if (i == 0)
+		{
+			columnCount = colsObj.cols[i].length;
+		}
+		if (colsObj.cols[i].length != columnCount)
+		{
+			bGoodFormat = false;
+			break;
+		}
+	}
 
-    var bGoodFormat = true;
-    rowsObj.rows = [];
-    rowsObj.rows = matrix.split("\n");
-    for (j = 0; j < rowsObj.rows.length; ++j) {
-        if (rowsObj.rows[j] === "") {
-            rowsObj.rows.splice(j--, 1);
-        }
-    }
-    colsObj.cols = [];
-    var columnCount = 0;
-    for (var i = 0; i < rowsObj.rows.length; i++) {
-        colsObj.cols[i] = this.SplitMatrixString(rowsObj.rows[i], separator);//rowsObj.rows[i].split (",");
-        for (j = 0; j < colsObj.cols[i].length; ++j) {
-            if (colsObj.cols[i][j] === "") {
-                colsObj.cols[i].splice(j--, 1);
-            }
-        }
-        if (i == 0) {
-            columnCount = colsObj.cols[i].length;
-        }
-        if (colsObj.cols[i].length != columnCount) {
-            bGoodFormat = false;
-            break;
-        }
-    }
 
+	if (bGoodFormat)
+	{
+		for (var i = 0; i < colsObj.cols[0].length; i++)
+		{
+			var values = [];
+			for (j = 0; j < colsObj.cols.length; ++j)
+			{
+				if (colsObj.cols[j][i] != 0)
+				{
+					values.push(colsObj.cols[j][i]);
+				}
+			}
 
-    if (bGoodFormat) {
-        for (var i = 0; i < colsObj.cols[0].length; i++) {
-            var values = [];
-            for (j = 0; j < colsObj.cols.length; ++j) {
-                if (colsObj.cols[j][i] != 0) {
-                    values.push(colsObj.cols[j][i]);
-                }
-            }
+			if (!(values.length <= 1 ||  (values.length == 2 && (values[0] == values[1] || values[0] == -values[1]))))
+			{
+				bGoodFormat = false;
+				break;
+			}
+		}
+	}
 
-            if (!(values.length <= 1 || (values.length == 2 && (values[0] == values[1] || values[0] == -values[1])))) {
-                bGoodFormat = false;
-                break;
-            }
-        }
-    }
-
-    return bGoodFormat;
+	return bGoodFormat;
 }
 
-Graph.prototype.SetIncidenceMatrix = function (matrix, viewportSize, currentEnumVerticesType) {
-    var rowsObj = {};
-    var colsObj = {};
+Graph.prototype.SetIncidenceMatrix = function (matrix, viewportSize, currentEnumVerticesType)
+{
+	var rowsObj = {};
+	var colsObj = {};
 
-    //ViewportSize = viewportSize.subtract(new Point((new VertexModel()).diameter * 2, (new VertexModel()).diameter * 2));
-    if (this.TestIncidenceMatrix(matrix, rowsObj, colsObj)) {
-        rows = rowsObj.rows;
-        cols = colsObj.cols;
+	//ViewportSize = viewportSize.subtract(new Point((new VertexModel()).diameter * 2, (new VertexModel()).diameter * 2));
+	if (this.TestIncidenceMatrix(matrix, rowsObj, colsObj))
+	{
+		rows = rowsObj.rows;
+		cols = colsObj.cols;
         var clonedEdge = this.edges.slice(0);
-        for (var i = 0; i < clonedEdge.length; i++) {
-            this.DeleteEdge(clonedEdge[i]);
-        }
-        var newVertices = [];
+		for (var i = 0; i < clonedEdge.length; i++)
+		{
+			this.DeleteEdge (clonedEdge[i]);
+		}
+		var newVertices = [];
         var bWeightGraph = false;
-        for (var i = 0; i < cols[0].length; i++) {
-            var edgeValue = [];
-            var edgeIndex = [];
-            for (var j = 0; j < cols.length; j++) {
-                if (j >= this.vertices.length) {
+		for (var i = 0; i < cols[0].length; i++)
+		{
+			var edgeValue = [];
+			var edgeIndex = [];
+			for (var j = 0; j < cols.length; j++)
+			{
+				if (j >= this.vertices.length)
+				{
 
-                    var newPos = new Point(0, 0);//this.GetRandomPositionOfVertex (matrix, j, viewportSize);
+					var newPos = new Point(0, 0);//this.GetRandomPositionOfVertex (matrix, j, viewportSize);
                     newVertices.push(new BaseVertex(newPos.x, newPos.y, currentEnumVerticesType));
-                    this.AddNewVertex(newVertices[newVertices.length - 1]);
-                }
+					this.AddNewVertex(newVertices[newVertices.length - 1]);
+				}				
 
-                if (cols[j][i] != 0) {
-                    edgeValue.push(cols[j][i]);
-                    edgeIndex.push(j);
-                }
-            }
+				if (cols[j][i] != 0)
+				{
+				  edgeValue.push(cols[j][i]);
+				  edgeIndex.push(j);
+				}
+			}
 
-            if (edgeIndex.length == 1) {
-                edgeValue.push(edgeValue[0]);
-                edgeIndex.push(edgeIndex[0]);
-            }
+			if (edgeIndex.length == 1)
+			{
+				edgeValue.push(edgeValue[0]);
+				edgeIndex.push(edgeIndex[0]);
+			}
 
-            if (edgeIndex.length == 2) {
-                if (edgeValue[0] != edgeValue[1]) {
-                    if (edgeValue[1] > 0) {
-                        edgeValue = edgeValue.swap(0, 1);
-                        edgeIndex = edgeIndex.swap(0, 1);
-                    }
-                }
-
+			if (edgeIndex.length == 2)
+			{       
+				if (edgeValue[0] != edgeValue[1])
+				{
+					if (edgeValue[1] > 0)
+					{
+						edgeValue = edgeValue.swap(0, 1);
+						edgeIndex = edgeIndex.swap(0, 1);
+                	}
+				}
+                
                 var nEdgeIndex = this.AddNewEdgeSafe(this.vertices[edgeIndex[0]], this.vertices[edgeIndex[1]],
-                    edgeValue[0] != edgeValue[1], Math.abs(edgeValue[1]), false);
+                                                     edgeValue[0] != edgeValue[1], Math.abs(edgeValue[1]), false);
 
                 this.FixEdgeCurve(nEdgeIndex);
-                if (nEdgeIndex >= 0) {
+                if (nEdgeIndex >= 0)
+                {
                     bWeightGraph = bWeightGraph || this.edges[nEdgeIndex].weight != 1;
                 }
-            }
-        }
-
+			}
+		}
+        
         // Set use weight false, because we have unweighted graph.
-        if (!bWeightGraph) {
-            this.edges.forEach(function (part, index, theArray) {
-                theArray[index].useWeight = false;
-            });
+        if (!bWeightGraph)
+        {
+            this.edges.forEach(function(part, index, theArray) {
+                               theArray[index].useWeight = false;
+                               });
         }
 
-        for (var i = cols.length; i < Math.max(this.vertices.length, cols.length); i++) {
-            this.DeleteVertex(this.vertices[i]);
-            i--;
-        }
+		for (var i = cols.length; i < Math.max(this.vertices.length, cols.length); i++)
+		{
+			this.DeleteVertex(this.vertices[i]);
+			i--;             
+		}                        
 
-        this.VerticesReposition(viewportSize, newVertices);
-    }
+          	this.VerticesReposition(viewportSize, newVertices);
+	}	
 }
 
-Graph.prototype.GetIncidenceMatrix = function () {
-    var matrix = "";
-    for (var i = 0; i < this.vertices.length; i++) {
-        for (var j = 0; j < this.edges.length; j++) {
-            if (this.edges[j].vertex1 == this.vertices[i]) {
-                matrix += this.edges[j].weight;
-            }
-            else if (this.edges[j].vertex2 == this.vertices[i] && !this.edges[j].isDirect) {
-                matrix += this.edges[j].weight;
-            }
-            else if (this.edges[j].vertex2 == this.vertices[i] && this.edges[j].isDirect) {
-                matrix += -this.edges[j].weight;
-            }
-            else {
-                matrix += "0";
-            }
-
-            if (j != this.edges.length - 1) {
-                matrix += ", ";
-            }
-
-        }
-        matrix = matrix + "\n";
-    }
-
-    return matrix;
+Graph.prototype.GetIncidenceMatrix = function ()
+{
+	var matrix = "";
+	for (var i = 0; i < this.vertices.length; i++)
+	{
+		for (var j = 0; j < this.edges.length; j++)
+		{	
+			if (this.edges[j].vertex1 == this.vertices[i])
+			{
+				matrix += this.edges[j].weight;
+			}
+			else if (this.edges[j].vertex2 == this.vertices[i] && !this.edges[j].isDirect)
+			{
+				matrix += this.edges[j].weight;
+			}
+			else if (this.edges[j].vertex2 == this.vertices[i] && this.edges[j].isDirect)
+			{
+				matrix += -this.edges[j].weight;
+			}
+			else
+			{
+				matrix += "0";
+			}
+			
+			if (j != this.edges.length - 1)
+			{
+				matrix += ", ";
+			}
+			
+		}
+		matrix = matrix + "\n";
+	}
+	
+	return matrix;
 }
 
-Graph.prototype.SplitMatrixString = function (line, separator) {
-    if (separator === undefined) {
-        separator = ",";
+Graph.prototype.SplitMatrixString = function (line, separator)
+{
+  if (separator === undefined) 
+  {
+    separator = ",";
+  }
+    
+  var res = [];
+  var i = 0;
+
+  // For case: 00110101101
+  var isZeroOneLine = true;
+
+  for (i = 0; i < line.length; i++)
+  {
+    if (line.charAt(i) != '0' && line.charAt(i) != '1')
+    {
+      isZeroOneLine = false;
+      break;
     }
+  } 
 
-    var res = [];
-    var i = 0;
-
-    // For case: 00110101101
-    var isZeroOneLine = true;
-
-    for (i = 0; i < line.length; i++) {
-        if (line.charAt(i) != '0' && line.charAt(i) != '1') {
-            isZeroOneLine = false;
-            break;
-        }
+  if (!isZeroOneLine)
+  {
+    if (separator != ",")
+    {
+        line = line.replace(/,/g, ".");
     }
-
-    if (!isZeroOneLine) {
-        if (separator != ",") {
-            line = line.replace(/,/g, ".");
+    for (i = 0; i < line.length; i++)
+    {
+      // add , if we use space as separator
+      if (("0123456789.-e").indexOf(line.charAt(i)) < 0 )
+      {
+        if (i > 0)
+        { 
+          res.push(line.substr(0, i));
         }
-        for (i = 0; i < line.length; i++) {
-            // add , if we use space as separator
-            if (("0123456789.-e").indexOf(line.charAt(i)) < 0) {
-                if (i > 0) {
-                    res.push(line.substr(0, i));
-                }
-                if (i == 0) {
-                    i = 1;
-                }
-                line = line.substr(i, line.length - i);
-                i = -1;
-            }
+        if (i == 0) 
+        {
+          i = 1;
         }
-        if (line.length > 0) {
-            res.push(line);
-        }
+        line = line.substr(i, line.length - i);
+        i = -1;
+      }
     }
-    else {
-        for (i = 0; i < line.length; i++) {
-            res.push(line.charAt(i));
-        }
+    if (line.length > 0)
+    {
+      res.push(line);
     }
+  }
+  else
+  {
+    for (i = 0; i < line.length; i++)
+    {
+      res.push(line.charAt(i));
+    }
+  }
 
-    console.log(res);
-    return res;
+  console.log(res);
+  return res;
 }
 
 
-Graph.prototype.SaveToXML = function (additionalData) {
-    var mainHeader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml>";
-    var header = "<graph id=\"Graph\" uidGraph=\"" + this.uidGraph + "\"" + " uidEdge=\"" + this.uidEdge + "\">";
+Graph.prototype.SaveToXML = function (additionalData)
+{
+	var mainHeader = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><graphml>";
+	var header   = "<graph id=\"Graph\" uidGraph=\"" + this.uidGraph + "\"" + " uidEdge=\"" + this.uidEdge + "\">";
 
-    var xmlBody = "";
+	var xmlBody = "";
+	  
+	for (var i = 0; i < this.vertices.length; i++)
+	{
+		xmlBody = xmlBody + this.vertices[i].SaveToXML();
+	}
 
-    for (var i = 0; i < this.vertices.length; i++) {
-        xmlBody = xmlBody + this.vertices[i].SaveToXML();
-    }
+	xmlBody = xmlBody + "";
 
-    xmlBody = xmlBody + "";
+	for (var i = 0; i < this.edges.length; i++)
+	{
+		xmlBody = xmlBody + this.edges[i].SaveToXML();
+	}
 
-    for (var i = 0; i < this.edges.length; i++) {
-        xmlBody = xmlBody + this.edges[i].SaveToXML();
-    }
-
-    xmlBody = xmlBody + "";
-
+	xmlBody = xmlBody + "";
+    
     additionalField = "";
-    if (additionalData.length > 0) {
+    if (additionalData.length > 0)
+    {
         additionalField = "<additional data=\"" + additionalData + "\"/>"
     }
 
-    return mainHeader + header + xmlBody + "</graph>" + additionalField + "</graphml>";
+	return mainHeader + header + xmlBody + "</graph>" + additionalField + "</graphml>";
 }
 
-Graph.prototype.LoadFromXML = function (xmlText, additionalData) {
-    xmlDoc = $.parseXML(xmlText);
-    var $xml = $(xmlDoc);
+Graph.prototype.LoadFromXML = function (xmlText, additionalData)
+{
+	xmlDoc = $.parseXML( xmlText );
+	var $xml = $( xmlDoc );
 
-    $graphs = $xml.find("graph");
+	$graphs = $xml.find( "graph" );	
 
-    var loadedGraphId = 0;
-    var loadedEdgeId = 0;
-
-    $graphs.each(function () {
-        loadedGraphId = parseInt($(this).attr('uidGraph'));
-        loadedEdgeId = parseInt($(this).attr('uidEdge'));
-    });
-
+	var loadedGraphId = 0;
+	var loadedEdgeId = 0;
+    
+	$graphs.each(function(){
+		loadedGraphId = parseInt($(this).attr('uidGraph'));
+		loadedEdgeId  = parseInt($(this).attr('uidEdge'));
+	});
+    
     // Backward compatibility
-    if (isNaN(loadedEdgeId)) {
+    if (isNaN(loadedEdgeId))
+    {
         loadedEdgeId = this.edgesOffset;
-    } else if (loadedEdgeId < this.edgesOffset) {
-        loadedEdgeId = this.edgesOffset;
-    }
+    } else if (loadedEdgeId < this.edgesOffset)
+	{
+		loadedEdgeId = this.edgesOffset;
+	}
 
-    this.uidGraph = loadedGraphId;
-    this.uidEdge = loadedEdgeId;
+	this.uidGraph = loadedGraphId;
+	this.uidEdge  = loadedEdgeId;
 
-    $nodes = $xml.find("node");
+	$nodes = $xml.find( "node" );	
 
-    var vertices = [];
-
-    $nodes.each(function () {
-        var vertex = new BaseVertex();
-        vertex.LoadFromXML($(this));
+	var vertices = [];
+    
+	$nodes.each(function(){
+		var vertex = new BaseVertex();
+		vertex.LoadFromXML($(this));
         vertices.push(vertex);
-    });
-    this.vertices = vertices;
+	});
+	this.vertices = vertices;
 
-    $edges = $xml.find("edge");
+	$edges = $xml.find( "edge" );
 
-    var edges = [];
-    var graph = this;
-    $edges.each(function () {
-        var edge = new BaseEdge();
-        edge.LoadFromXML($(this), graph);
-        // Fix case with wrong id.
-        if (edge.id < graph.uidEdge) {
-            edge.id = graph.uidEdge;
-            graph.uidEdge++;
-        }
-        edges.push(edge);
-    });
+	var edges = [];	
+	var graph = this;
+	$edges.each(function(){
+		var edge = new BaseEdge();
+		edge.LoadFromXML($(this), graph);
+		// Fix case with wrong id.
+		if (edge.id < graph.uidEdge) {
+			edge.id = graph.uidEdge;
+			graph.uidEdge++;
+		}
+		edges.push(edge);
+	});
 
-    this.edges = edges;
-
-    $additional = $xml.find("additional");
-    if ($additional.length != 0 && additionalData != null) {
+	this.edges = edges;
+    
+    $additional = $xml.find( "additional" );
+    if ($additional.length != 0 && additionalData != null)
+    {
         additionalData["data"] = $additional.attr('data');
     }
-
+    
     this.isMultiGraph = this.checkMutiGraph();
 }
 
-Graph.prototype.hasDirectEdge = function () {
-    var res = false;
-    for (var i = 0; i < this.edges.length; i++) {
-        if (this.edges[i].isDirect) {
-            res = true;
-            break;
+Graph.prototype.hasDirectEdge = function ()
+{
+	var res = false;
+	for (var i = 0; i < this.edges.length; i++)
+	{
+		if(this.edges[i].isDirect)
+		{
+			res = true;
+			break;
+		}
+	}
+	
+	return res;
+}
+
+Graph.prototype.hasUndirectEdge = function ()
+{
+	var res = false;
+	for (var i = 0; i < this.edges.length; i++)
+	{
+		if(!this.edges[i].isDirect)
+		{
+			res = true;
+			break;
+		}
+	}
+	
+	return res;
+}
+
+Graph.prototype.hasEdges = function ()
+{
+	return this.edges.length > 0;
+}
+
+Graph.prototype.clampPositions = function (viewportSize)
+{
+	var diameter = (new VertexModel()).diameter;
+
+     	for(i = 0; i < this.vertices.length; i++) // set new positions
+     	{
+       		this.vertices[i].position.x = Math.min(Math.max(this.vertices[i].position.x, diameter), viewportSize.x - diameter);
+        	this.vertices[i].position.y = Math.min(Math.max(this.vertices[i].position.y, diameter), viewportSize.y - diameter);
         }
-    }
-
-    return res;
-}
-
-Graph.prototype.hasUndirectEdge = function () {
-    var res = false;
-    for (var i = 0; i < this.edges.length; i++) {
-        if (!this.edges[i].isDirect) {
-            res = true;
-            break;
-        }
-    }
-
-    return res;
-}
-
-Graph.prototype.hasEdges = function () {
-    return this.edges.length > 0;
-}
-
-Graph.prototype.clampPositions = function (viewportSize) {
-    var diameter = (new VertexModel()).diameter;
-
-    for (i = 0; i < this.vertices.length; i++) // set new positions
-    {
-        this.vertices[i].position.x = Math.min(Math.max(this.vertices[i].position.x, diameter), viewportSize.x - diameter);
-        this.vertices[i].position.y = Math.min(Math.max(this.vertices[i].position.y, diameter), viewportSize.y - diameter);
-    }
 }
 
 // Use to setup scaling.
-Graph.prototype.getGraphBBox = function (viewportSize) {
+Graph.prototype.getGraphBBox = function (viewportSize)
+{
     var pointMin = new Point(1e5, 1e5);
     var pointMax = new Point(-1e5, -1e5);
     var diameter = (new VertexModel()).diameter;
-
-    for (i = 0; i < this.vertices.length; i++) {
+    
+    for(i = 0; i < this.vertices.length; i++)
+    {
         var vertex = this.vertices[i];
-        var factor = vertex.diameterFactor();
+		var factor = vertex.diameterFactor();
         var deltaVector = new Point(factor.x * diameter, factor.y * diameter);
         pointMin = pointMin.min(vertex.position.subtract(deltaVector));
         pointMax = pointMax.max(vertex.position.add(deltaVector));
     }
-
+    
     var max_curve_length = 32;
-
-    for (i = 0; i < this.edges.length; i++) {
+    
+    for(i = 0; i < this.edges.length; i++)
+    {
         var edge = this.edges[i];
-
-        if (edge.model.type == EdgeModels.curve) {
+        
+        if (edge.model.type == EdgeModels.curve)
+        {
             var max_curve = edge.vertex2.position.subtract(edge.vertex1.position).length() / max_curve_length;
-
-            for (j = 0; j < max_curve; j++) {
-                var point = edge.model.GetCurvePoint(edge.vertex1.position, edge.vertex2.position, j / max_curve);
-                var deltaVector = new Point(max_curve_length, max_curve_length);
-                pointMin = pointMin.min(point.subtract(deltaVector));
-                pointMax = pointMax.max(point.add(deltaVector));
+            
+            for (j = 0; j < max_curve; j++)
+            {
+              var point = edge.model.GetCurvePoint(edge.vertex1.position, edge.vertex2.position, j / max_curve);
+              var deltaVector = new Point(max_curve_length, max_curve_length);
+              pointMin = pointMin.min(point.subtract(deltaVector));
+              pointMax = pointMax.max(point.add(deltaVector));
             }
         }
     }
-
+    
     return new Rect(pointMin, pointMax);
 }
 
-Graph.prototype.hasPair = function (edge) {
-    return this.FindPairFor(edge) != null;
+Graph.prototype.hasPair = function (edge)
+{
+	return this.FindPairFor(edge) != null;
 }
 
-Graph.prototype.FindPairFor = function (edge) {
+Graph.prototype.FindPairFor = function (edge)
+{
     var res = this.getNeighborEdges(edge);
-
-    return res.length == 1 ? res[0] : null;
+	
+	return res.length == 1 ? res[0] : null;
 }
 
-Graph.prototype.getNeighborEdges = function (edge) {
-    var res = [];
-
-    for (var i = 0; i < this.edges.length; i++) {
+Graph.prototype.getNeighborEdges = function (edge)
+{
+	var res = [];
+    
+	for (var i = 0; i < this.edges.length; i++)
+	{
         var curEdge = this.edges[i];
         if (curEdge == edge)
             continue;
-
-        if ((curEdge.vertex1.id == edge.vertex1.id &&
-            curEdge.vertex2.id == edge.vertex2.id) ||
-            (curEdge.vertex1.id == edge.vertex2.id &&
-                curEdge.vertex2.id == edge.vertex1.id)) {
-            res.push(curEdge);
-        }
-    }
-
-    return res;
+            
+		if ((curEdge.vertex1.id == edge.vertex1.id  && 
+             curEdge.vertex2.id == edge.vertex2.id) ||
+            (curEdge.vertex1.id == edge.vertex2.id  && 
+             curEdge.vertex2.id == edge.vertex1.id))
+		{
+			res.push(curEdge);
+		}
+	}
+	
+	return res;
 }
 
-Graph.prototype.checkMutiGraph = function () {
-    var res = false;
-
-    var start = {};
-
-    for (var i = 0; i < this.edges.length; i++) {
+Graph.prototype.checkMutiGraph = function ()
+{
+	var res = false;
+    
+    var start  = {};
+    
+	for (var i = 0; i < this.edges.length; i++)
+	{
         var edge = this.edges[i];
-        if (start.hasOwnProperty(edge.vertex1.id) &&
-            start[edge.vertex1.id] == edge.vertex2.id) {
+        if (start.hasOwnProperty(edge.vertex1.id) && 
+            start[edge.vertex1.id] == edge.vertex2.id)
+        {
             res = true;
             break;
         }
-
+        
         start[edge.vertex1.id] = edge.vertex2.id;
-        if (!edge.isDirect) {
-            if (start.hasOwnProperty(edge.vertex2.id) &&
-                start[edge.vertex2.id] == edge.vertex1.id) {
+        if (!edge.isDirect)
+        {
+            if (start.hasOwnProperty(edge.vertex2.id) && 
+                start[edge.vertex2.id] == edge.vertex1.id)
+            {
                 res = true;
                 break;
             }
-
+            
             start[edge.vertex2.id] = edge.vertex1.id;
         }
-    }
-
-    return res;
+	}
+	
+	return res;
 }
 
-Graph.prototype.isMulti = function () {
-    return this.isMultiGraph;
+Graph.prototype.isMulti = function ()
+{
+	return this.isMultiGraph;
 }
 
-Graph.prototype.isNeedReposition = function () {
+Graph.prototype.isNeedReposition = function ()
+{
     var res = false;
-    for (var i = 0; i < this.vertices.length; i++) {
-        res = res || this.vertices[i].IsUndefinedPosition();
-    }
+	for (var i = 0; i < this.vertices.length; i++)
+	{
+		res = res || this.vertices[i].IsUndefinedPosition();
+	}
     return res;
 }
 
 // kiểm tra xem 2 đỉnh đã tồn tại cạnh cũ chưa, nếu đã có tứ là cạnh mới này cần vẽ cong
-Graph.prototype.FixEdgeCurve = function (edgeIndex) {
+Graph.prototype.FixEdgeCurve = function (edgeIndex)
+{
     var edgeObject = this.edges[edgeIndex];
-    var hasPair = this.hasPair(edgeObject);
+    var hasPair    = this.hasPair(edgeObject);
     var neighborEdges = this.getNeighborEdges(edgeObject);
-
-    if (hasPair) {
+    
+    if (hasPair)
+    {
         if (edgeObject.model.default)
             edgeObject.model.type = EdgeModels.curve; // set type cho cạnh để khi vẽ xác định được cần vẽ cạnh cong
-
+        
         var pairEdge = this.FindPairFor(edgeObject);
-        if (pairEdge.model.default) {
+        if (pairEdge.model.default)
+        {
             pairEdge.model.type = EdgeModels.curve;
             if (pairEdge.vertex1 == edgeObject.vertex1 && pairEdge.vertex2 == edgeObject.vertex2)
                 pairEdge.model.curveValue = -pairEdge.model.curveValue;
         }
     }
-    else if (neighborEdges.length >= 2) {
+    else if (neighborEdges.length >= 2)
+    {
         var curve = this.GetAvailableCurveValue(neighborEdges, edgeObject);
-        if (edgeObject.model.default) {
-            edgeObject.model.type = EdgeModels.curve;
+        if (edgeObject.model.default)
+        {
+            edgeObject.model.type        = EdgeModels.curve;
             edgeObject.model.curveValue = curve;
         }
     }
 }
 
-Graph.prototype.GetAvailableCurveValue = function (neighborEdges, originalEdge) {
+Graph.prototype.GetAvailableCurveValue = function(neighborEdges, originalEdge)
+{
     var values = [];
-
-    for (var i = 0; i < neighborEdges.length; i++) {
-        var edge = neighborEdges[i];
-        var sameDirection = (originalEdge.vertex1.id == edge.vertex1.id);
-        if (edge.model.type == EdgeModels.curve) {
-            values[(sameDirection ? edge.model.curveValue : -edge.model.curveValue)] = true;
-        }
+    
+    for (var i = 0; i < neighborEdges.length; i ++)
+    {
+      var edge          = neighborEdges[i];
+      var sameDirection = (originalEdge.vertex1.id == edge.vertex1.id);
+      if (edge.model.type == EdgeModels.curve)
+      {
+        values[(sameDirection ? edge.model.curveValue : -edge.model.curveValue)] = true;
+      }
     }
-
-    var changeValue = DefaultHandler.prototype.curveValue;
+    
+    var changeValue  = DefaultHandler.prototype.curveValue;
     var defaultValue = 0.0;
-    var maxSearch = 10;
-
-    for (var i = 1; i < maxSearch; i++) {
+    var maxSearch    = 10;
+    
+    for (var i = 1; i < maxSearch; i ++)
+    {
         value = i * changeValue;
         if (!values.hasOwnProperty(value))
             return value;
@@ -6066,40 +6498,49 @@ Graph.prototype.GetAvailableCurveValue = function (neighborEdges, originalEdge) 
         if (!values.hasOwnProperty(value))
             return value;
     }
-
+    
     return defaultValue;
 }
 
-Graph.prototype.reverseAllEdges = function () {
-    for (var i = 0; i < this.edges.length; i++) {
-        if (this.edges[i].isDirect) {
-            let v1 = this.edges[i].vertex1;
-            this.edges[i].vertex1 = this.edges[i].vertex2;
-            this.edges[i].vertex2 = v1;
-        }
-    }
+Graph.prototype.reverseAllEdges = function ()
+{
+	for (var i = 0; i < this.edges.length; i++)
+	{
+		if(this.edges[i].isDirect)
+		{
+			let v1 = this.edges[i].vertex1;
+			this.edges[i].vertex1 = this.edges[i].vertex2;
+			this.edges[i].vertex2 = v1;
+		}
+	}
 
-    this.isMultiGraph = this.checkMutiGraph();
+	this.isMultiGraph = this.checkMutiGraph();
 }
 
-Graph.prototype.makeAllEdgesDirected = function () {
-    for (var i = 0; i < this.edges.length; i++) {
-        if (!this.edges[i].isDirect) {
-            this.edges[i].isDirect = true;
-        }
-    }
+Graph.prototype.makeAllEdgesDirected = function ()
+{
+	for (var i = 0; i < this.edges.length; i++)
+	{
+		if(!this.edges[i].isDirect)
+		{
+			this.edges[i].isDirect = true;
+		}
+	}
 
-    this.isMultiGraph = this.checkMutiGraph();
+	this.isMultiGraph = this.checkMutiGraph();
 }
 
-Graph.prototype.makeAllEdgesUndirected = function () {
-    for (var i = 0; i < this.edges.length; i++) {
-        if (this.edges[i].isDirect) {
-            this.edges[i].isDirect = false;
-        }
-    }
+Graph.prototype.makeAllEdgesUndirected = function ()
+{
+	for (var i = 0; i < this.edges.length; i++)
+	{
+		if(this.edges[i].isDirect)
+		{
+			this.edges[i].isDirect = false;
+		}
+	}
 
-    this.isMultiGraph = this.checkMutiGraph();
+	this.isMultiGraph = this.checkMutiGraph();
 }
 /*
   Classes for creating text for vertices.
@@ -6109,29 +6550,35 @@ Graph.prototype.makeAllEdgesUndirected = function () {
 /**
  * Base Enum Vertices.
  *
- */
-function BaseEnumVertices(app, startNumber) {
+ */ 
+function BaseEnumVertices(app, startNumber)
+{
     this.app = app;
     this.startNumber = startNumber;
 }
 
-BaseEnumVertices.prototype.GetVertexText = function (id) {
-    return this.startNumber + id;
+BaseEnumVertices.prototype.GetVertexText = function(id)
+{
+	return this.startNumber + id;
 }
 
-BaseEnumVertices.prototype.GetVertexTextAsync = function (callback) {
-    callback(this);
+BaseEnumVertices.prototype.GetVertexTextAsync = function(callback)
+{
+    callback (this);
 }
 
-BaseEnumVertices.prototype.GetText = function () {
-    return this.startNumber + ", " + (this.startNumber + 1) + ", " + (this.startNumber + 2) + "...";
+BaseEnumVertices.prototype.GetText = function()
+{
+	return this.startNumber + ", " + (this.startNumber + 1) + ", " + (this.startNumber + 2) + "...";
 }
 
-BaseEnumVertices.prototype.GetValue = function () {
-    return "Numbers" + this.startNumber;
+BaseEnumVertices.prototype.GetValue = function()
+{
+	return "Numbers" + this.startNumber;
 }
 
-function TextEnumTitle(app, title) {
+function TextEnumTitle(app, title)
+{
     BaseEnumVertices.apply(this, arguments);
     this.pattern = "";
     this.title = title;
@@ -6141,7 +6588,8 @@ function TextEnumTitle(app, title) {
 // inheritance.
 TextEnumTitle.prototype = Object.create(BaseEnumVertices.prototype);
 
-TextEnumTitle.prototype.GetVertexText = function (id) {
+TextEnumTitle.prototype.GetVertexText = function(id)
+{
     return this.title;
 }
 
@@ -6151,56 +6599,64 @@ TextEnumTitle.prototype.GetVertexText = function (id) {
  * Text Enum
  *
  */
-function TextEnumVertices(app) {
-    BaseEnumVertices.apply(this, arguments);
-    this.pattern = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+function TextEnumVertices(app)
+{
+	BaseEnumVertices.apply(this, arguments);
+	this.pattern = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
 }
 
 
 // inheritance.
 TextEnumVertices.prototype = Object.create(BaseEnumVertices.prototype);
 
-TextEnumVertices.prototype.GetVertexText = function (id) {
-    var res = "";
+TextEnumVertices.prototype.GetVertexText = function(id)
+{
+	var res = "";
 
     res = this.pattern[id % this.pattern.length] + res;
 
-    while (id >= this.pattern.length) {
-        id = Math.floor(id / this.pattern.length) - 1;
-        res = this.pattern[id % this.pattern.length] + res;
-    }
+	while (id >= this.pattern.length)
+	{
+	   id  = Math.floor(id / this.pattern.length) - 1;
+	   res = this.pattern[id % this.pattern.length] + res;
+	}
 
-    return res;
+	return res;
 }
 
 
-TextEnumVertices.prototype.GetText = function () {
-    return "A, B, ... Z";
+TextEnumVertices.prototype.GetText = function()
+{
+	return "A, B, ... Z";
 }
 
-TextEnumVertices.prototype.GetValue = function () {
-    return "Latin";
+TextEnumVertices.prototype.GetValue = function()
+{
+	return "Latin";
 }
 
 /**
  * Text Enum
  *
  */
-function TextEnumVerticesCyr(app) {
-    TextEnumVertices.apply(this, arguments);
-    this.pattern = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
+function TextEnumVerticesCyr(app)
+{
+	TextEnumVertices.apply(this, arguments);
+	this.pattern = "АБВГДЕЖЗИЙКЛМНОПРСТУФХЦЧШЩЪЫЬЭЮЯ";
 }
 
 
 // inheritance.
 TextEnumVerticesCyr.prototype = Object.create(TextEnumVertices.prototype);
 
-TextEnumVerticesCyr.prototype.GetText = function () {
-    return "А, Б, ... Я";
+TextEnumVerticesCyr.prototype.GetText = function()
+{
+	return "А, Б, ... Я";
 }
 
-TextEnumVerticesCyr.prototype.GetValue = function () {
-    return "Cyrillic";
+TextEnumVerticesCyr.prototype.GetValue = function()
+{
+	return "Cyrillic";
 }
 
 
@@ -6208,28 +6664,32 @@ TextEnumVerticesCyr.prototype.GetValue = function () {
  * Text Enum
  *
  */
-function TextEnumVerticesGreek(app) {
-    TextEnumVertices.apply(this, arguments);
-    this.pattern = "ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ";
+function TextEnumVerticesGreek(app)
+{
+	TextEnumVertices.apply(this, arguments);
+	this.pattern = "ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩ";
 }
 
 
 // inheritance.
 TextEnumVerticesGreek.prototype = Object.create(TextEnumVertices.prototype);
 
-TextEnumVerticesGreek.prototype.GetText = function () {
-    return "Α, Β, ... Ω";
+TextEnumVerticesGreek.prototype.GetText = function()
+{
+	return "Α, Β, ... Ω";
 }
 
-TextEnumVerticesGreek.prototype.GetValue = function () {
-    return "Greek";
+TextEnumVerticesGreek.prototype.GetValue = function()
+{
+	return "Greek";
 }
 
 /**
  * Text Enum
  *
  */
-function TextEnumVerticesCustom(app) {
+function TextEnumVerticesCustom(app)
+{
     BaseEnumVertices.apply(this, arguments);
     this.pattern = "";
 }
@@ -6239,45 +6699,49 @@ function TextEnumVerticesCustom(app) {
 // inheritance.
 TextEnumVerticesCustom.prototype = Object.create(BaseEnumVertices.prototype);
 
-TextEnumVerticesCustom.prototype.GetText = function () {
+TextEnumVerticesCustom.prototype.GetText = function()
+{
     return g_customEnumVertex;
 }
 
-TextEnumVerticesCustom.prototype.GetValue = function () {
+TextEnumVerticesCustom.prototype.GetValue = function()
+{
     return "Custom";
 }
 
-TextEnumVerticesCustom.prototype.GetVertexTextAsync = function (callback) {
+TextEnumVerticesCustom.prototype.GetVertexTextAsync = function(callback)
+{
     this.ShowDialog(callback, g_addVertex, g_addVertex, "A");
 }
 
 
-TextEnumVerticesCustom.prototype.ShowDialog = function (callback, buttonText, titleTitle, title) {
+TextEnumVerticesCustom.prototype.ShowDialog = function(callback, buttonText, titleTitle, title)
+{
     var dialogButtons = {};
     app = this.app;
-    dialogButtons[buttonText] = function () {
+    dialogButtons[buttonText] = function() {
         app.PushToStack("RenameVertex");
 
         callback(new TextEnumTitle(app, $("#VertexTitle").val()));
-        $(this).dialog("close");
+        $( this ).dialog( "close" );
     };
-
-    $("#addVertex").dialog({
-        resizable: false,
-        height: "auto",
-        width: "auto",
-        modal: true,
-        title: titleTitle,
-        buttons: dialogButtons,
-        dialogClass: 'EdgeDialog',
-        open: function () {
-            $(this).off('submit').on('submit', function () {
-                return false;
-            });
-            $("#VertexTitle").val(title);
-            $("#VertexTitle").focus();
-        }
-    });
+    
+    $( "#addVertex" ).dialog({
+                             resizable: false,
+                             height: "auto",
+                             width:  "auto",
+                             modal: true,
+                             title: titleTitle,
+                             buttons: dialogButtons,
+                             dialogClass: 'EdgeDialog',
+                             open: function () {
+                                        $(this).off('submit').on('submit', function () {
+                                                      return false;
+                                                      });
+                                        $("#VertexTitle").val(title);
+                                        $("#VertexTitle").focus();
+                                }
+                             });
 }
 /**
  * This is main application class.
@@ -6906,7 +7370,7 @@ Application.prototype.FindAllEdges = function (id1, id2) {
 }
 
 Application.prototype.SetHandlerMode = function (mode) {
-    var manipulationHandlers = ["default", "addGraph", "addArc", "delete", "findPath", "connectedComponent", "eulerianLoop"];
+    var manipulationHandlers = ["default", "addGraph", "addArc", "delete", "findPath", "connectedComponent", "eulerianLoop", "tree"];
 
     if (this.handler && (g_AlgorithmIds.indexOf(mode) >= 0 || manipulationHandlers.indexOf(mode) >= 0)) {
         this.handler.RestoreAll();
@@ -6914,6 +7378,9 @@ Application.prototype.SetHandlerMode = function (mode) {
 
     if (mode == "default") {
         this.handler = new DefaultHandler(this);
+    }
+    else if (mode == "tree") {
+        this.handler = new TreeHandler(this);
     }
     else if (mode == "addGraph") {
         this.handler = new AddGraphHandler(this);
@@ -7104,10 +7571,60 @@ Application.prototype.onPostLoadEvent = function () {
 Application.prototype.onLoad = function () {
     this.canvas = this.document.getElementById('canvas');
 
+    this.document.getElementById('tree').onclick = function () {
+        console.log("========================= tree mode =========================")
+        document.getElementById("AlgorithmSpecificControls").style.display = 'block';
+        document.getElementById("AlgorithmSpecificControlsBST").style.display = 'none';
+        document.getElementById("GraphControls").style.display = 'none';
+
+        document.getElementById("canvas-tree").style.display = 'block';
+        document.getElementById("canvasSection").style.display = 'none';
+        document.getElementById("canvas-bst").style.display = 'none';
+
+        AVL();
+    }
+
+    this.document.getElementById('bst').onclick = function () {
+        console.log("========================= bst mode 2 =========================")
+        document.getElementById("AlgorithmSpecificControls").style.display = 'none';
+        document.getElementById("AlgorithmSpecificControlsBST").style.display = 'block';
+        document.getElementById("GraphControls").style.display = 'none';
+
+        document.getElementById("canvas-tree").style.display = 'block';
+        document.getElementById("canvasSection").style.display = 'none';
+        document.getElementById("canvas-bst").style.display = 'none';
+
+
+        BST();
+    }
+
+    var self = this;
+
+    this.document.getElementById('graph_algo').onclick = function () {
+        console.log("========================= graph_algo =========================")
+
+        document.getElementById("GraphControls").style.display = 'block';
+        document.getElementById("AlgorithmSpecificControls").style.display = 'none';
+        document.getElementById("AlgorithmSpecificControlsBST").style.display = 'none';
+
+        document.getElementById("canvas-tree").style.display = 'none';
+        document.getElementById("canvasSection").style.display = 'block';
+        document.getElementById("canvas-bst").style.display = 'none';
+
+
+        document.getElementById("message").innerText = "Graph's Algorithms";
+
+        // self.SetDefaultHandler();
+
+        // self.updateMessage();
+        // self.redrawGraph();
+    }
+
     this.SetDefaultHandler();
 
     this.updateMessage();
     this.redrawGraph();
+
 }
 
 Application.prototype.NeedRedraw = function () {
@@ -8150,89 +8667,105 @@ var algorithmsVersion = 2;
 var application = new Application(document, window);
 
 var waitCounter = false;
-var fullscreen = false;
+var fullscreen  = false;
 
 // Theo dõi hành động của người dùng
-var userAction = function (str) {
-    if (typeof window.yaCounter25827098 !== "undefined") {
+var userAction = function(str)
+{
+    if (typeof window.yaCounter25827098 !== "undefined")
+    {
         console.log(g_language + "/" + str);
         window.yaCounter25827098.hit(window.location.protocol + "//" + window.location.hostname + (g_language != "ru" ? "/" + g_language : "") + "/UserAction#" + str);
     }
-    else if (!waitCounter) {
+    else if (!waitCounter)
+    {
         waitCounter = true;
-        setTimeout(function () {
-            userAction(str);
-        }, 2000);
+        setTimeout(function()
+                   {
+                     userAction(str);
+                   }, 2000);
     }
 }
 
-var isIe = (navigator.userAgent.toLowerCase().indexOf("msie") != -1
-    || navigator.userAgent.toLowerCase().indexOf("trident") != -1);
+var isIe = (navigator.userAgent.toLowerCase().indexOf("msie") != -1 
+           || navigator.userAgent.toLowerCase().indexOf("trident") != -1);
 
 var buttonsList = ['AddGraph', 'ConnectGraphs', 'DeleteObject', 'Default'];
 var g_ctrlPressed = false;
 
-function restButtons(me) {
+function restButtons (me)
+{
     var needSetDefault = false;
-    for (var i = 0; i < buttonsList.length; i++) {
-        if (buttonsList[i] != me) {
-            document.getElementById(buttonsList[i]).className = "btn btn-default btn-sm";
-        }
-        else {
-            if (document.getElementById(buttonsList[i]).className != "btn btn-default btn-sm") {
-                needSetDefault = true;
-            }
-        }
-    }
-    if (needSetDefault) {
-        document.getElementById(buttonsList[i]).className = "btn btn-primary btn-sm";
-    }
-    else {
-        document.getElementById(me).className = "btn btn-primary btn-sm";
-    }
+	for (var i = 0; i < buttonsList.length; i ++)
+	{
+		if (buttonsList[i] != me)
+		{
+			document.getElementById(buttonsList[i]).className = "btn btn-default btn-sm";
+		}
+		else
+		{
+			if (document.getElementById(buttonsList[i]).className != "btn btn-default btn-sm")
+			{
+				needSetDefault = true;	
+			}
+		}
+	}
+	if (needSetDefault)
+	{
+		document.getElementById(buttonsList[i]).className = "btn btn-primary btn-sm";
+	}
+	else
+	{
+		document.getElementById(me).className = "btn btn-primary btn-sm";
+	}
 }
 
 var single = 0;
 
-function resizeCanvas() {
-    var adv = document.getElementById('bottom_info');
-    var canvas = document.getElementById('canvas');
-    canvas.width = document.getElementById('canvasSection').offsetWidth;
-    var mainContainer = document.getElementById('mainContainer');
-    var offset = (mainContainer.offsetTop + mainContainer.offsetHeight) - (canvas.offsetTop + canvas.offsetHeight) + ($("#footerContent").css("display") === 'block' ? 0 : 24);
+function resizeCanvas()
+{
+  var adv = document.getElementById('bottom_info');
+  var canvas    = document.getElementById('canvas');
+  canvas.width  = document.getElementById('canvasSection').offsetWidth;
+  var mainContainer = document.getElementById('mainContainer');
+  var offset = (mainContainer.offsetTop + mainContainer.offsetHeight) - (canvas.offsetTop + canvas.offsetHeight) + ($("#footerContent").css("display") === 'block' ? 0 : 24);
+        
+  canvas.height = $(window).height() - document.getElementById('canvas').offsetTop - (adv && $("#bottom_info").css("display") === 'block' ? document.getElementById('bottom_info').offsetHeight : 0) - ($("#footer").css("display") === 'block' ? document.getElementById('footer').offsetHeight : 0) - offset;
 
-    canvas.height = $(window).height() - document.getElementById('canvas').offsetTop - (adv && $("#bottom_info").css("display") === 'block' ? document.getElementById('bottom_info').offsetHeight : 0) - ($("#footer").css("display") === 'block' ? document.getElementById('footer').offsetHeight : 0) - offset;
-
-    application.redrawGraph();
+  application.redrawGraph();
 }
 
-function touchHandler(event) {
+function touchHandler(event)
+{
     var touches = event.changedTouches,
         first = touches[0],
         type = "";
-    switch (event.type) {
+    switch(event.type)
+    {
         case "touchstart": type = "mousedown"; break;
-        case "touchmove": type = "mousemove"; break;
-        case "touchend": type = "mouseup"; break;
+        case "touchmove":  type="mousemove"; break;        
+        case "touchend":   type="mouseup"; break;
         default: return;
     }
 
     var simulatedEvent = document.createEvent("MouseEvent");
-    simulatedEvent.initMouseEvent(type, true, true, window, 1,
-        first.screenX, first.screenY,
-        first.clientX, first.clientY, false,
-        false, false, false, 0/*left*/, null);
+    simulatedEvent.initMouseEvent(type, true, true, window, 1, 
+                              first.screenX, first.screenY, 
+                              first.clientX, first.clientY, false, 
+                              false, false, false, 0/*left*/, null);
 
-    first.target.dispatchEvent(simulatedEvent);
+	first.target.dispatchEvent(simulatedEvent);
     event.preventDefault();
 }
 
-function preLoadPage() {
-    loadTexts();
-    application.onLoad();
+function preLoadPage()
+{
+	loadTexts();
+	application.onLoad();
 }
 
-function createAlgorithmMenu() {
+function createAlgorithmMenu()
+{
     var algorithmBaseId = "Algo";
 
     // lấy danh sách tên thuật toán
@@ -8240,15 +8773,16 @@ function createAlgorithmMenu() {
     var index = 0;
 
     // lặp qua danh sách thuật toán, tạo button, sự kiện onclick button và append vào list div trên giao diện
-    for (var i = 0; i < algorithms.length; i++) {
+    for (var i = 0; i < algorithms.length; i++)
+    {
         algorithm = algorithms[i];
-
+        
         // lấy div list thuật toán theo category
-        var list = document.getElementById("algorithmCategoryElements" + algorithm.category);
-
+        var list   = document.getElementById("algorithmCategoryElements" + algorithm.category);
+        
         /* 
             *template cho các button thuật toán
-            <div class="dropdown-item" style="display: none;" id="algTopic1">
+		    <div class="dropdown-item" style="display: none;" id="algTopic1">
                 <button type="button" class="btn btn-default btn-sm" style="width: 100%; text-align: left; border: none;" id="">
                     <span class="glyphicon glyphicon-search fa-fw"></span> 
                     <span></span>
@@ -8256,54 +8790,55 @@ function createAlgorithmMenu() {
             </div>
         */
         // lấy thẻ div có id là "algTopic + category", đây là template cho các button thuật toán
-        var item = document.getElementById("algTopic" + algorithm.category);
+        var item   = document.getElementById("algTopic" + algorithm.category);
 
         // sao chép (clone) phần từ `item` để tạo ra bản sao của nó. Tham số true trong cloneNode cho biết rằng cả nội dung bên trong cũng sẽ được sao chép
-        var clone = item.cloneNode(true);
-        var button = clone.getElementsByTagName("button")[0];
+        var clone  = item.cloneNode(true);
+        var button   = clone.getElementsByTagName("button")[0];
         var textSpan = button.getElementsByTagName("span")[1];
-
+        
         button.id = algorithm.id; // gắn id cho button ví dụ: OlegSh.BFSAlgorithm
         textSpan.innerHTML = algorithm.name; // gắn tên cho button vi dụ: Breadth-first search
         clone.style.display = "block"; // hiển thị button (default của template là none)
-
+        
         buttonsList.push(algorithm.id); // thêm id của thuật toán vào buttonsList 
-
+        
         // xét sự kiện onclick cho button
-        button.onclick = function (e) {
+        button.onclick = function (e)
+        {
             e["closeThisMenu"] = true;
             userAction(this.id);
-            restButtons(this.id);
+            restButtons (this.id);
             application.SetHandlerMode(this.id);
         }
-
+        
         var eventData = {};
-        eventData.index = i;
-        eventData.object = clone;
+        eventData.index     = i;
+        eventData.object    = clone;
         eventData.algorithm = algorithm;
-
+        
         $("#openAlgorithmList").bind('click', eventData, function (_eventData) {
-            var data = _eventData.data;
+            var data      = _eventData.data;
             var algorithm = g_Algorithms[g_AlgorithmIds.indexOf(data.algorithm.id)](application.graph, application);
-
+            
             if (application.graph.isMulti() && !algorithm.IsSupportMultiGraph())
-                $(data.object).hide();
+              $(data.object).hide();
             else
-                $(data.object).show();
-        });
-
+              $(data.object).show();
+          });
+        
         list.insertBefore(clone, document.getElementById("insert" + algorithm.category));
         index++;
     }
 
 }
 
-
+    
 function handelImportGraph(files) {
     var graphFileToLoad = files[0];
 
     var fileReader = new FileReader();
-    fileReader.onload = function (fileLoadedEvent) {
+    fileReader.onload = function(fileLoadedEvent){
         var textFromFileLoaded = fileLoadedEvent.target.result;
         console.log(textFromFileLoaded);
         application.LoadGraphFromString(textFromFileLoaded);
@@ -8314,32 +8849,39 @@ function handelImportGraph(files) {
 }
 
 //* Xử lý các tương tác người dùng trên canvas, các sự kiện button và điều hướng trong ứng dụng
-function postLoadPage() {
+function postLoadPage()
+{
     application.userAction = userAction;
+    
+	application.canvas.onmousemove = function (e)
+		{
+			return application.CanvasOnMouseMove(e);
+		};
 
-    application.canvas.onmousemove = function (e) {
-        return application.CanvasOnMouseMove(e);
-    };
-
-    application.canvas.onmousedown = function (e) {
-        return application.CanvasOnMouseDown(e);
-    };
-
-    application.canvas.onmouseup = function (e) {
-        return application.CanvasOnMouseUp(e);
-    }
-
-    application.canvas.onwheel = function (e) {
+	application.canvas.onmousedown = function (e)
+		{
+			return application.CanvasOnMouseDown(e);
+		};
+		
+	application.canvas.onmouseup   = function (e)
+		{
+			return application.CanvasOnMouseUp(e);
+		}
+    
+    application.canvas.onwheel = function (e)
+    {
         var e = window.event || e; // old IE support
         var delta = Math.max(-1, Math.min(1, (e.wheelDelta || -e.detail)));
-        if (delta > 0) {
+        if (delta > 0)
+        {
             application.multCanvasScale(1.3, e);
         }
-        else {
+        else
+        {
             application.multCanvasScale(1.0 / 1.3, e);
         }
     }
-
+    
     function getCharCode(event) {
         if (event.which == null) { // IE
             return event.keyCode;
@@ -8356,14 +8898,16 @@ function postLoadPage() {
         return String.fromCharCode(getCharCode(event)); // остальные
     }
 
-    function selectHandler(buttonName, handlerName) {
+    function selectHandler(buttonName, handlerName)
+    {
         userAction(buttonName + "_shortcut");
-        restButtons(buttonName);
+			restButtons (buttonName);
         application.SetHandlerMode(handlerName);
     }
 
     // xử lý sự kiện keypress(một phím được nhấn và duy trì trạng thái bấm) được đặt cho đối tượng document.
-    document.onkeypress = function (e) {
+    document.onkeypress   = function (e)
+    {   
         // nếu một trong các sự kiện sau đang diễn ra thì sự kiện keypress sẽ không được xử lý
         // các sự kiện dưới đây là các sự kiện có xuất hiện hộp thoại dialog
         if (event.defaultPrevented
@@ -8375,7 +8919,8 @@ function postLoadPage() {
             || ($('#saveImageDialog').hasClass('ui-dialog-content') && $('#saveImageDialog').dialog('isOpen'))
             || ($('#GroupRenameDialog').hasClass('ui-dialog-content') && $('#GroupRenameDialog').dialog('isOpen'))
             || $('#developerTools').css("display") != "none"
-            || ($('#NeedAlgorithm').hasClass('ui-dialog-content') && $('#NeedAlgorithm').dialog('isOpen'))) {
+            || ($('#NeedAlgorithm').hasClass('ui-dialog-content') && $('#NeedAlgorithm').dialog('isOpen')))
+        {
             console.log("prevent");
             return; // Should do nothing if the default action has been cancelled
         }
@@ -8388,7 +8933,7 @@ function postLoadPage() {
         var isCtrl = evtobj ? evtobj.ctrlKey : false;
 
         var moveValue = 10;
-
+        
         // +, - tăng giảm scale của canvas
         if (code == 61 || code == 43) // +
         {
@@ -8398,7 +8943,7 @@ function postLoadPage() {
         {
             application.multCanvasScale(1 / 1.5);
         }
-
+        
         // W, S, A, D dịch chuyển vị trí của đồ thị trên canvas theo 4 hướng
         else if (key == 'w' || key == 'ц') // up
         {
@@ -8416,7 +8961,7 @@ function postLoadPage() {
         {
             application.onCanvasMove(new Point(-moveValue, 0));
         }
-
+        
         // V, E, R, M, Crtl+Z thực hiện chọn button và chọn handler
         else if (key == 'v' || key == 'м') // vertex
         {
@@ -8441,7 +8986,8 @@ function postLoadPage() {
         {
             selectHandler('Default', 'default');
         }
-        else if (code == 26 && isCtrl) {
+        else if (code == 26 && isCtrl)
+        {
             userAction("Key_GraphUndo");
             application.SetHandlerMode("graphUndo");
         }
@@ -8449,169 +8995,200 @@ function postLoadPage() {
 
 
     // theo dõi sự kiện nhấn phím Ctrl (windows) và Cmd (macOS) và đánh dấu vào biến g_ctrlPressed
-    $(document).keydown(function (event) {
+    $(document).keydown(function(event) {
         if (event.which == "17" || event.which == "91")
             g_ctrlPressed = true;
     });
 
-    $(document).keyup(function () {
+    $(document).keyup(function() {
         g_ctrlPressed = false;
     });
 
 
     // Xác định và điều hướng các sự kiện onclick từng element cụ thể
-    document.getElementById('ShowAdjacencyMatrix').onclick = function () {
+	document.getElementById('ShowAdjacencyMatrix').onclick = function ()
+		{
         userAction(this.id);
         application.SetHandlerMode("showAdjacencyMatrix");
     }
-    document.getElementById('ShowIncidenceMatrix').onclick = function () {
+	document.getElementById('ShowIncidenceMatrix').onclick = function ()
+		{
         userAction(this.id);
         application.SetHandlerMode("showIncidenceMatrix");
     }
-    document.getElementById('ShowDistanceMatrix').onclick = function () {
+	document.getElementById('ShowDistanceMatrix').onclick = function ()
+		{
         userAction(this.id);
         application.SetHandlerMode("showDistanceMatrix");
     }
 
-    document.getElementById('GroupRename').onclick = function () {
+	document.getElementById('GroupRename').onclick = function ()
+		{
         userAction(this.id);
         application.SetHandlerMode("GroupRename");
     }
-    document.getElementById('groupRenameButton').onclick = function () {
+	document.getElementById('groupRenameButton').onclick = function ()
+		{
         userAction(this.id);
         application.SetHandlerMode("GroupRename");
     }
 
 
-    document.getElementById('Default').onclick = function () {
+	document.getElementById('Default').onclick = function ()
+		{
         userAction(this.id);
-        restButtons('Default');
+			restButtons ('Default');
         application.SetHandlerMode("default");
         document.getElementById('Default').className = "btn btn-primary btn-sm";
     }
 
-    document.getElementById('AddGraph').onclick = function () {
+	document.getElementById('AddGraph').onclick = function ()
+		{
         userAction(this.id);
-        restButtons('AddGraph');
+			restButtons ('AddGraph');
         application.SetHandlerMode(document.getElementById('AddGraph').className != "" ? "addGraph" : "default");
     }
 
-    document.getElementById('ConnectGraphs').onclick = function () {
+	document.getElementById('ConnectGraphs').onclick = function ()
+		{
         userAction(this.id);
-        restButtons('ConnectGraphs');
+			restButtons ('ConnectGraphs');
         application.SetHandlerMode(document.getElementById('ConnectGraphs').className != "" ? "addArc" : "default");
     }
 
-    document.getElementById('DeleteObject').onclick = function () {
+	document.getElementById('DeleteObject').onclick = function ()
+		{
         userAction(this.id);
-        restButtons('DeleteObject');
+			restButtons ('DeleteObject');
         application.SetHandlerMode(document.getElementById('DeleteObject').className != "" ? "delete" : "default");
     }
 
-    document.getElementById('DeleteAll').onclick = function () {
+	document.getElementById('DeleteAll').onclick = function ()
+		{
         userAction(this.id);
         application.SetHandlerMode("deleteAll");
     }
 
 
-    document.getElementById('SaveGraph').onclick = function () {
+	document.getElementById('SaveGraph').onclick = function ()
+		{
         userAction(this.id);
         application.SetHandlerMode("saveDialog");
     }
 
-    document.getElementById('NewGraph').onclick = function () {
+	document.getElementById('NewGraph').onclick = function ()
+		{
         userAction(this.id);
         application.SetHandlerMode("deleteAll");
         application.SetDefaultTransformations();
     }
 
-    document.getElementById('SaveGraphImage').onclick = function () {
+    document.getElementById('SaveGraphImage').onclick = function ()
+    {
         userAction(this.id);
         application.SetHandlerMode("saveDialogImage");
     }
 
-    document.getElementById('SaveFullGraphImage').onclick = function () {
+    document.getElementById('SaveFullGraphImage').onclick = function ()
+    {
         userAction(this.id);
         application.SetHandlerMode("saveDialogFullImage");
     }
 
-    document.getElementById('SavePrintGraphImage').onclick = function () {
+    document.getElementById('SavePrintGraphImage').onclick = function ()
+    {
         userAction(this.id);
         application.SetHandlerMode("savePrintGraphImage");
     }
 
-    document.getElementById('SaveSvgGraphImage').onclick = function () {
+    document.getElementById('SaveSvgGraphImage').onclick = function ()
+    {
         userAction(this.id);
         application.SetHandlerMode("saveSvgGraphImage");
     }
 
-    document.getElementById('Zoom100').onclick = function () {
+    document.getElementById('Zoom100').onclick = function ()
+    {
         userAction(this.id);
         application.setCanvasScale(1.0);
     }
 
-    document.getElementById('Zoom50').onclick = function () {
+    document.getElementById('Zoom50').onclick = function ()
+    {
         userAction(this.id);
         application.setCanvasScale(50 / 100);
     }
 
-    document.getElementById('Zoom25').onclick = function () {
+    document.getElementById('Zoom25').onclick = function ()
+    {
         userAction(this.id);
         application.setCanvasScale(25 / 100);
     }
 
-    document.getElementById('ZoomFit').onclick = function () {
+    document.getElementById('ZoomFit').onclick = function ()
+    {
         userAction(this.id);
         application.OnAutoAdjustViewport();
     }
 
-    document.getElementById('ZoomIn').onclick = function () {
+    document.getElementById('ZoomIn').onclick = function ()
+    {
         userAction(this.id);
         application.multCanvasScale(1.5);
     }
 
-    document.getElementById('ZoomOut').onclick = function () {
+    document.getElementById('ZoomOut').onclick = function ()
+    {
         userAction(this.id);
         application.multCanvasScale(1.0 / 1.5);
     }
 
-    document.getElementById('MoveWorspace').onclick = function () {
+    document.getElementById('MoveWorspace').onclick = function ()
+    {
         userAction(this.id);
-        restButtons('Default');
+        restButtons ('Default');
         application.SetHandlerMode("default");
         document.getElementById('Default').className = "btn btn-primary btn-sm";
     }
-    document.getElementById('SetupVertexStyle').onclick = function () {
+    document.getElementById('SetupVertexStyle').onclick = function ()
+    {
         userAction(this.id);
         application.SetHandlerMode("setupVertexStyle");
     }
-    document.getElementById('SetupVertexStyleSelected').onclick = function () {
+    document.getElementById('SetupVertexStyleSelected').onclick = function ()
+    {
         userAction(this.id);
         application.SetHandlerMode("setupVertexStyleSelected");
     }
-    document.getElementById('SetupEdgeStyle').onclick = function () {
+    document.getElementById('SetupEdgeStyle').onclick = function ()
+    {
         userAction(this.id);
         application.SetHandlerMode("setupEdgeStyle");
     }
-    document.getElementById('SetupEdgeStyleSelected').onclick = function () {
+    document.getElementById('SetupEdgeStyleSelected').onclick = function ()
+    {
         userAction(this.id);
         application.SetHandlerMode("setupEdgeStyleSelected");
     }
-    document.getElementById('SetupBackgroundStyle').onclick = function () {
+    document.getElementById('SetupBackgroundStyle').onclick = function ()
+    {
         userAction(this.id);
         application.SetHandlerMode("setupBackgroundStyle");
     }
 
-    document.getElementById('GraphUndo').onclick = function () {
+    document.getElementById('GraphUndo').onclick = function ()
+    {
         userAction(this.id);
         application.SetHandlerMode("graphUndo");
     }
 
-    document.getElementById('runUserScript').onclick = function () {
+    document.getElementById('runUserScript').onclick = function ()
+    {
         var el = document.getElementById('userScript');
 
         var oldScript = document.getElementById("userScriptSource");
-        if (oldScript) {
+        if (oldScript)
+        {
             document.head.removeChild(oldScript);
         }
 
@@ -8624,7 +9201,8 @@ function postLoadPage() {
         application.SetHandlerMode("user.algorithm");
     }
 
-    document.getElementById('submitUserScript').onclick = function () {
+    document.getElementById('submitUserScript').onclick = function ()
+    {
         var script = document.getElementById('userScript');
         var data = "message=" + script.value + "&";
 
@@ -8634,31 +9212,35 @@ function postLoadPage() {
             data: data
         });
 
-        $("#sentAlgorithm").dialog({
+        $( "#sentAlgorithm" ).dialog({
             resizable: false,
             height: "auto",
-            width: 400,
+            width:  400,
             modal: true,
             dialogClass: 'EdgeDialog'
         });
     }
 
-    document.getElementById('devToolsZoom').onclick = function () {
+    document.getElementById('devToolsZoom').onclick = function ()
+    {
         var devTools = document.getElementById('developerTools');
-        if (devTools.hasOwnProperty("isMin") && !devTools["isMin"]) {
+        if (devTools.hasOwnProperty("isMin") && !devTools["isMin"])
+        {
             devTools["isMin"] = true;
             devTools.style.width = "30%";
         }
-        else {
+        else
+        {
             devTools["isMin"] = false;
             devTools.style.width = "100%";
         }
     }
 
-    document.getElementById('ExportGraph').onclick = function () {
+    document.getElementById('ExportGraph').onclick = function ()
+    {
         userAction(this.id);
 
-        var graphAsString = application.graph.SaveToXML("");
+        var graphAsString  = application.graph.SaveToXML("");
         var savedGraphName = application.GetNewGraphName();
 
         var element = document.createElement('a');
@@ -8673,7 +9255,8 @@ function postLoadPage() {
         document.body.removeChild(element);
     }
 
-    document.getElementById('ImportGraph').onclick = function () {
+    document.getElementById('ImportGraph').onclick = function ()
+    {
         userAction(this.id);
 
         if (ImportGraphFiles) {
@@ -8682,25 +9265,30 @@ function postLoadPage() {
     }
 
     // dropdown click chọn thuật toán
-    document.getElementById('openAlgorithmList').onclick = function () {
+    document.getElementById('openAlgorithmList').onclick = function()
+    {
         // Show menu first
-        setTimeout(function () {
+        setTimeout(function() 
+                   {
             var button = document.getElementById('openAlgorithmList');
             var buttonRect = button.getBoundingClientRect();
             var algorithmList = document.getElementById('algorithmList');
 
             var delta = buttonRect.right - algorithmList.offsetWidth;
-            if (delta < 0) {
+                        if (delta < 0)
+                        {
                 var value = (delta - 4) + "px";
                 algorithmList.style.right = value;
             }
-            else {
+                        else
+                        {
                 algorithmList.style.right = "0";
             }
         }, 1);
     }
 
-    document.getElementById('Fullscreen').onclick = function () {
+    document.getElementById('Fullscreen').onclick = function()
+    {
         var idList = ["h1Header", "h1Text", "navigation", "footerContent", "bottom_adv"];
 
         fullscreen = !fullscreen
@@ -8783,7 +9371,7 @@ function postLoadPage() {
     devTools.style.left = 0;
     resizeCanvas();
     application.onPostLoadEvent();
-
+    
     // xử lý việc đóng menu thuật toán
     // 1. khi click vào button thuật toán
     // 2. khi click ra ngoài khỏi menu
@@ -8847,7 +9435,7 @@ $(document).ready(function () {
     var isMobile = navigator.userAgent.match(/(iPad)|(iPhone)|(iPod)|(android)|(webOS)/i);
     if (!isMobile && !DisableEmscripten) {
         const jsScript = document.createElement('script');
-        jsScript.src = 'graphline/script/Graphoffline.Emscripten.js';
+        jsScript.src = 'script/Graphoffline.Emscripten.js';
         document.body.appendChild(jsScript);
         jsScript.addEventListener('load', () => {
             Module['onRuntimeInitialized'] = onRuntimeInitialized;
@@ -8889,11 +9477,12 @@ Array.prototype.swap = function (x, y) {
  */
 
 // base thuật toán duyệt đường đi
-function BaseTraversal(graph, app) {
+function BaseTraversal(graph, app)
+{
     BaseAlgorithmEx.apply(this, arguments);
     this.visited = [];
-    this.edges = [];
-    this.timer = null;
+    this.edges   = [];
+    this.timer   = null;
 }
 
 // inheritance.
@@ -8901,29 +9490,32 @@ BaseTraversal.prototype = Object.create(BaseAlgorithmEx.prototype);
 // timer interval
 BaseTraversal.prototype.timerInterval = 500;
 
-BaseTraversal.prototype.result = function (resultCallback) {
+BaseTraversal.prototype.result = function(resultCallback)
+{
     var result = {};
     result["version"] = 1;
-
+    
     return result;
 }
 
-BaseTraversal.prototype.selectVertex = function (vertex) {
-    this.visited = [];  // đỉnh đã duyệt qua
-    this.edges = [];  // danh sách cạnh
+BaseTraversal.prototype.selectVertex = function(vertex)
+{
+	this.visited = [];  // đỉnh đã duyệt qua
+    this.edges   = [];  // danh sách cạnh
 
     if (this.timer)
         clearTimeout(this.timer);
-    this.timer = null;
-
+    this.timer   = null;
+    
     this.visited.push(vertex);  // thêm đỉnh xuất phát vào danh sách đỉnh đã duyệt qua
 
     var context = this;
 
     // chạy thuật toán và xử lý việc vẽ lại đồ thị(từng cạnh) theo từng bước chạy của thuật toán
-    this.timer = setInterval(function () {
-        context.step();
-    }, this.timerInterval);
+    this.timer  = setInterval(function()
+                            {
+                                context.step();
+                            }, this.timerInterval);
 
     // chạy thuật toán và lấy kết quả của thuật toán
     this.message = this.getMainMessage();
@@ -8931,11 +9523,13 @@ BaseTraversal.prototype.selectVertex = function (vertex) {
     return true;
 }
 
-BaseTraversal.prototype.getObjectSelectedGroup = function (object) {
+BaseTraversal.prototype.getObjectSelectedGroup = function(object)
+{
     return (this.visited.includes(object) ? 1 : (this.edges.includes(object) ? 1 : 0));
 }
 
 // trả về thuật toán đã được thực thi xong chưa
-BaseTraversal.prototype.instance = function () {
+BaseTraversal.prototype.instance = function()
+{
     return false;
 }

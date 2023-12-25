@@ -88,8 +88,8 @@ AnimatedLabel.prototype.draw = function (ctx) {
 		ctx.textBaseline = 'top';
 	}
 	if (this.highlighted) {
-		ctx.strokeStyle = "#ffaaaa";
-		ctx.fillStyle = "#ff0000";
+		ctx.strokeStyle ="#c7b7c7";// "#ffaaaa";
+		ctx.fillStyle = "#c7b7c7";
 		ctx.lineWidth = this.highlightDiff;
 		ctx.strokeText(this.label, this.x, this.y);
 		//ctx.fillText(this.label, this.x, this.y);
@@ -107,8 +107,8 @@ AnimatedLabel.prototype.draw = function (ctx) {
 			var highlightStr = this.label.substring(this.highlightIndex, this.highlightIndex + 1)
 			var rightStr = this.label.substring(this.highlightIndex + 1)
 			ctx.fillText(leftStr, startingXForHighlight, this.y)
-			ctx.strokeStyle = "#FF0000";
-			ctx.fillStyle = "#FF0000";
+			ctx.strokeStyle = "#c7b7c7";
+			ctx.fillStyle = "#c7b7c7";
 			ctx.fillText(highlightStr, startingXForHighlight + this.leftWidth, this.y)
 
 

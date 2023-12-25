@@ -43,7 +43,7 @@ HighlightCircle.prototype.constructor = HighlightCircle;
 
 HighlightCircle.prototype.draw = function (ctx) {
 	ctx.globalAlpha = this.alpha;
-	ctx.strokeStyle = this.foregroundColor;
+	ctx.strokeStyle ="#c7b7c7";// this.foregroundColor;
 	ctx.lineWidth = this.thickness;
 	ctx.beginPath();
 	ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);

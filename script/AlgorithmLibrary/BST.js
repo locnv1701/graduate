@@ -27,11 +27,16 @@
 
 // Constants.
 
-BST.LINK_COLOR = "#007700";
-BST.HIGHLIGHT_CIRCLE_COLOR = "#007700";
-BST.FOREGROUND_COLOR = "#007700";
-BST.BACKGROUND_COLOR = "#EEFFEE";
-BST.PRINT_COLOR = BST.FOREGROUND_COLOR;
+// BST.LINK_COLOR = "#007700";
+BST.LINK_COLOR = "#c7b7c7";
+
+// BST.HIGHLIGHT_CIRCLE_COLOR = "#007700";
+BST.HIGHLIGHT_CIRCLE_COLOR = "#c7b7c7";
+
+BST.FOREGROUND_COLOR = "#ECD446";
+// BST.BACKGROUND_COLOR = "#EEFFEE";
+BST.BACKGROUND_COLOR = "#68aeba";
+BST.PRINT_COLOR = "#2986cc"// BST.FOREGROUND_COLOR;
 
 BST.WIDTH_DELTA  = 50;
 BST.HEIGHT_DELTA = 50;
@@ -45,20 +50,23 @@ BST.PRINT_HORIZONTAL_GAP = 50;
 
 
 function BST(am, w, h)
-{
-	this.init(am, w, h);
+{	
+	console.log("BST")
+	this.initBST(am, w, h);
 }
 
 BST.prototype = new Algorithm();
 BST.prototype.constructor = BST;
 BST.superclass = Algorithm.prototype;
 
-BST.prototype.init = function(am, w, h)
+BST.prototype.initBST = function(am, w, h)
 {
 	var sc = BST.superclass;
 	this.startingX =  w / 2;
 	this.first_print_pos_y  = h - 2 * BST.PRINT_VERTICAL_GAP;
 	this.print_max  = w - 10;
+
+	this.initEvent();
 
 	var fn = sc.init;
 	fn.call(this,am);
@@ -66,6 +74,7 @@ BST.prototype.init = function(am, w, h)
 	this.nextIndex = 0;
 	this.commands = [];
 	this.cmd("CreateLabel", 0, "", 20, 10, 0);
+	this.cmd("SETTEXT", 0, "Binary Search Tree's Algorithms");
 	this.nextIndex = 1;
 	this.animationManager.StartNewAnimation(this.commands);
 	this.animationManager.skipForward();
@@ -73,41 +82,82 @@ BST.prototype.init = function(am, w, h)
 	
 }
 
+BST.prototype.initEvent = function () {
+	console.log("open BST")
+	$("#button-dialog-insert-bst").click(function () {
+		$("#dialog-insert-node-bst").dialog('open');
+	});
+	$("#button-dialog-delete-bst").click(function () {
+		$("#dialog-delete-node-bst").dialog('open');
+	});
+	$("#button-dialog-setting-bst").click(function () {
+		$("#dialog-setting-bst").dialog('open');
+
+	});
+	$("#button-dialog-find-bst").click(function () {
+		$("#dialog-find-node-bst").dialog('open');
+	});
+}
+
 BST.prototype.addControls =  function()
 {
-	this.insertField = addControlToAlgorithmBar("Text", "");
-	this.insertField.onkeydown = this.returnSubmit(this.insertField,  this.insertCallback.bind(this), 4);
-	this.insertButton = addControlToAlgorithmBar("Button", "Insert");
+	// this.insertField = findControlElement("Text", "");
+	// this.insertField.onkeydown = this.returnSubmit(this.insertField,  this.insertCallback.bind(this), 4);
+	// this.insertButton = findControlElement("Button", "Insert");
+	// this.insertButton.onclick = this.insertCallback.bind(this);
+	// this.deleteField = findControlElement("Text", "");
+	// this.deleteField.onkeydown = this.returnSubmit(this.deleteField,  this.deleteCallback.bind(this), 4);
+	// this.deleteButton = findControlElement("Button", "Delete");
+	// this.deleteButton.onclick = this.deleteCallback.bind(this);
+	// this.findField = findControlElement("Text", "");
+	// this.findField.onkeydown = this.returnSubmit(this.findField,  this.findCallback.bind(this), 4);
+	// this.findButton = findControlElement("Button", "Find");
+	// this.findButton.onclick = this.findCallback.bind(this);
+	// this.printButton = findControlElement("Button", "Print");
+	// this.printButton.onclick = this.printCallback.bind(this);
+	console.log("bước 2: BST.prototype.addControls")
+	this.insertButton = findControlElement("Button", "BST-Insert");
 	this.insertButton.onclick = this.insertCallback.bind(this);
-	this.deleteField = addControlToAlgorithmBar("Text", "");
-	this.deleteField.onkeydown = this.returnSubmit(this.deleteField,  this.deleteCallback.bind(this), 4);
-	this.deleteButton = addControlToAlgorithmBar("Button", "Delete");
+
+	this.insertField = findControlElement("Text", "BST-Insert");
+	this.insertField.onkeydown = this.returnSubmit(this.insertField, this.insertCallback.bind(this), 4);
+
+	this.importButton = findControlElement("Button", "BST-Import");
+	this.importButton.onclick = this.importCallback.bind(this);
+
+	this.importField = findControlElement("Text", "BST-Import");
+	this.importField.onkeydown = this.returnSubmit(this.importField, this.importCallback.bind(this), 20);
+
+	this.deleteButton = findControlElement("Button", "BST-Delete");
 	this.deleteButton.onclick = this.deleteCallback.bind(this);
-	this.findField = addControlToAlgorithmBar("Text", "");
-	this.findField.onkeydown = this.returnSubmit(this.findField,  this.findCallback.bind(this), 4);
-	this.findButton = addControlToAlgorithmBar("Button", "Find");
+
+	this.deleteField = findControlElement("Text", "BST-Delete");
+	this.deleteField.onkeydown = this.returnSubmit(this.deleteField, this.deleteCallback.bind(this), 4);
+
+	this.findButton = findControlElement("Button", "BST-Find");
 	this.findButton.onclick = this.findCallback.bind(this);
-	this.printButton = addControlToAlgorithmBar("Button", "Print");
-	this.printButton.onclick = this.printCallback.bind(this);
+
+	this.findField = findControlElement("Text", "BST-Find");
+	this.findField.onkeydown = this.returnSubmit(this.findField, this.findCallback.bind(this), 4);
+
+	this.printButton1 = findControlElement("Button", "BST-PrintPreOrder");
+	this.printButton1.onclick = this.printPreOrderCallback.bind(this);
+
+	this.printButton2 = findControlElement("Button", "BST-PrintInOrder");
+	this.printButton2.onclick = this.printInOrderCallback.bind(this);
+
+	this.printButton3 = findControlElement("Button", "BST-PrintPostOrder");
+	this.printButton3.onclick = this.printPostOrderCallback.bind(this);
+
 }
 
-AVL.prototype.initEvent = function () {
-	console.log("open")
-	$("#button-dialog-insert").click(function () {
-		$("#dialog-insert-node").dialog('open');
-	});
-	$("#button-dialog-delete").click(function () {
-		$("#dialog-delete-node").dialog('open');
-	});
-	$("#button-dialog-setting").click(function () {
-		$("#dialog-setting").dialog('open');
+function findControlElement(type, name) {
+	var selector = "[id='" + name + "-" + type + "']";
 
-	});
-	$("#button-dialog-find").click(function () {
-		$("#dialog-find-node").dialog('open');
-	});
+	var res = document.querySelector(selector);
+	console.log("controlBar", res);
+	return res;
 }
-
 BST.prototype.reset = function()
 {
 	this.nextIndex = 1;
@@ -116,23 +166,54 @@ BST.prototype.reset = function()
 
 BST.prototype.insertCallback = function(event)
 {
+
+	$("#dialog-insert-node-bst").dialog('close');
+
 	var insertedValue = this.insertField.value;
 	// Get text value
-	insertedValue = this.normalizeNumber(insertedValue, 4);
-	if (insertedValue != "")
-	{
+	// insertedValue = this.normalizeNumber(insertedValue, 4);
+	if (insertedValue.trim() != "") {
 		// set text value
 		this.insertField.value = "";
 		this.implementAction(this.insertElement.bind(this), insertedValue);
 	}
 }
 
+BST.prototype.importCallback = function (event) {
+	console.log("bước 3: BST.prototype.importCallback")
+
+	$("#dialog-insert-node-bst").dialog('close');
+
+	var self = this;
+
+	var importValue = this.importField.value;
+
+	var numbersToInsert = importValue.split(",");
+	this.importField.value = "";
+
+	var actions = [];
+
+	numbersToInsert.forEach(number => {
+		if (number.trim() != "") {
+			actions.push({
+				funct: self.insertElement.bind(self),
+				val: number
+			})
+		}
+	});
+
+	this.implementListAction(actions);
+}
+
+
 BST.prototype.deleteCallback = function(event)
-{
+{	
+	$("#dialog-delete-node-bst").dialog('close');
+
 	var deletedValue = this.deleteField.value;
 	if (deletedValue != "")
 	{
-		deletedValue = this.normalizeNumber(deletedValue, 4);
+		// deletedValue = this.normalizeNumber(deletedValue, 4);
 		this.deleteField.value = "";
 		this.implementAction(this.deleteElement.bind(this),deletedValue);		
 	}
@@ -201,10 +282,209 @@ BST.prototype.printTreeRec = function(tree)
 	return;
 }
 
+BST.prototype.printPreOrderCallback = function (event) {
+	this.implementAction(this.printTreePreOrder.bind(this), "");
+}
+
+BST.prototype.printInOrderCallback = function (event) {
+	this.implementAction(this.printTreeInOrder.bind(this), "");
+}
+
+BST.prototype.printPostOrderCallback = function (event) {
+	this.implementAction(this.printTreePostOrder.bind(this), "");
+}
+
+BST.prototype.printTreePreOrder = function (unused) {
+	this.commands = [];
+	this.order = [];
+
+	this.cmd("SetText", 0, "Running...");
+
+	if (this.treeRoot != null) {
+		this.highlightID = this.nextIndex++;
+		var firstLabel = this.nextIndex;
+		this.cmd("CreateHighlightCircle", this.highlightID, BST.HIGHLIGHT_COLOR, this.treeRoot.x, this.treeRoot.y);
+		this.xPosOfNextLabel = BST.FIRST_PRINT_POS_X;
+		this.yPosOfNextLabel = this.first_print_pos_y;
+		this.preOrder(this.treeRoot);
+		this.cmd("Delete", this.highlightID);
+		this.cmd("Step");
+		for (var i = firstLabel; i < this.nextIndex; i++)
+			this.cmd("Delete", i);
+		this.nextIndex = this.highlightID;  /// Reuse objects.  Not necessary.
+	}
+
+	var stringList = this.order.map(number => number.toString());
+
+	this.cmd("SetText", 0, "Pre order traversal: " + stringList);
+
+	return this.commands;
+}
+
+BST.prototype.printTreeInOrder = function (unused) {
+	this.commands = [];
+	this.order = [];
+
+	this.cmd("SetText", 0, "Running...");
+
+	if (this.treeRoot != null) {
+		this.highlightID = this.nextIndex++;
+		var firstLabel = this.nextIndex;
+		this.cmd("CreateHighlightCircle", this.highlightID, BST.HIGHLIGHT_COLOR, this.treeRoot.x, this.treeRoot.y);
+		this.xPosOfNextLabel = BST.FIRST_PRINT_POS_X;
+		this.yPosOfNextLabel = this.first_print_pos_y;
+		this.inOrder(this.treeRoot);
+		this.cmd("Delete", this.highlightID);
+		this.cmd("Step");
+		for (var i = firstLabel; i < this.nextIndex; i++)
+			this.cmd("Delete", i);
+		this.nextIndex = this.highlightID;  /// Reuse objects.  Not necessary.
+	}
+
+	var stringList = this.order.map(number => number.toString());
+
+	this.cmd("SetText", 0, "In order traversal: " + stringList);
+
+
+	return this.commands;
+}
+
+BST.prototype.printTreePostOrder = function (unused) {
+	this.commands = [];
+	this.order = [];
+
+	this.cmd("SetText", 0, "Running...");
+
+	if (this.treeRoot != null) {
+		this.highlightID = this.nextIndex++;
+		var firstLabel = this.nextIndex;
+		this.cmd("CreateHighlightCircle", this.highlightID, BST.HIGHLIGHT_COLOR, this.treeRoot.x, this.treeRoot.y);
+		this.xPosOfNextLabel = BST.FIRST_PRINT_POS_X;
+		this.yPosOfNextLabel = this.first_print_pos_y;
+		this.postOrder(this.treeRoot);
+		this.cmd("Delete", this.highlightID);
+		this.cmd("Step");
+		for (var i = firstLabel; i < this.nextIndex; i++)
+			this.cmd("Delete", i);
+		this.nextIndex = this.highlightID;  /// Reuse objects.  Not necessary.
+	}
+
+	var stringList = this.order.map(number => number.toString());
+
+	this.cmd("SetText", 0, "Post order traversal: " + stringList);
+
+	return this.commands;
+}
+
+BST.prototype.preOrder = function (tree) {
+	this.cmd("Step");
+
+	var nextLabelID = this.nextIndex++;
+	this.cmd("CreateLabel", nextLabelID, tree.data, tree.x, tree.y);
+	this.order.push(tree.data);
+	this.cmd("SetForegroundColor", nextLabelID, BST.PRINT_COLOR);
+	this.cmd("Move", nextLabelID, this.xPosOfNextLabel, this.yPosOfNextLabel);
+	this.cmd("Step");
+
+	if (tree.left != null) {
+		this.cmd("Move", this.highlightID, tree.left.x, tree.left.y);
+		this.preOrder(tree.left);
+		this.cmd("Move", this.highlightID, tree.x, tree.y);
+		this.cmd("Step");
+	}
+
+	this.xPosOfNextLabel += BST.PRINT_HORIZONTAL_GAP;
+	if (this.xPosOfNextLabel > this.print_max) {
+		this.xPosOfNextLabel = BST.FIRST_PRINT_POS_X;
+		this.yPosOfNextLabel += BST.PRINT_VERTICAL_GAP;
+
+	}
+	if (tree.right != null) {
+		this.cmd("Move", this.highlightID, tree.right.x, tree.right.y);
+		this.preOrder(tree.right);
+		this.cmd("Move", this.highlightID, tree.x, tree.y);
+		this.cmd("Step");
+	}
+	return;
+}
+
+
+BST.prototype.inOrder = function (tree) {
+	this.cmd("Step");
+
+	if (tree.left != null) {
+		this.cmd("Move", this.highlightID, tree.left.x, tree.left.y);
+		this.inOrder(tree.left);
+		this.cmd("Move", this.highlightID, tree.x, tree.y);
+		this.cmd("Step");
+	}
+
+	var nextLabelID = this.nextIndex++;
+	this.cmd("CreateLabel", nextLabelID, tree.data, tree.x, tree.y);
+	this.order.push(tree.data);
+	this.cmd("SetForegroundColor", nextLabelID, BST.PRINT_COLOR);
+	this.cmd("Move", nextLabelID, this.xPosOfNextLabel, this.yPosOfNextLabel);
+	this.cmd("Step");
+
+	this.xPosOfNextLabel += BST.PRINT_HORIZONTAL_GAP;
+	if (this.xPosOfNextLabel > this.print_max) {
+		this.xPosOfNextLabel = BST.FIRST_PRINT_POS_X;
+		this.yPosOfNextLabel += BST.PRINT_VERTICAL_GAP;
+
+	}
+
+
+	if (tree.right != null) {
+		this.cmd("Move", this.highlightID, tree.right.x, tree.right.y);
+		this.inOrder(tree.right);
+		this.cmd("Move", this.highlightID, tree.x, tree.y);
+		this.cmd("Step");
+	}
+
+	return;
+}
+
+BST.prototype.postOrder = function (tree) {
+	this.cmd("Step");
+	if (tree.left != null) {
+		this.cmd("Move", this.highlightID, tree.left.x, tree.left.y);
+		this.postOrder(tree.left);
+		this.cmd("Move", this.highlightID, tree.x, tree.y);
+		this.cmd("Step");
+	}
+
+	if (tree.right != null) {
+		this.cmd("Move", this.highlightID, tree.right.x, tree.right.y);
+		this.postOrder(tree.right);
+		this.cmd("Move", this.highlightID, tree.x, tree.y);
+		this.cmd("Step");
+	}
+
+	var nextLabelID = this.nextIndex++;
+	this.cmd("CreateLabel", nextLabelID, tree.data, tree.x, tree.y);
+	this.order.push(tree.data);
+	this.cmd("SetForegroundColor", nextLabelID, BST.PRINT_COLOR);
+	this.cmd("Move", nextLabelID, this.xPosOfNextLabel, this.yPosOfNextLabel);
+	this.cmd("Step");
+
+	this.xPosOfNextLabel += BST.PRINT_HORIZONTAL_GAP;
+	if (this.xPosOfNextLabel > this.print_max) {
+		this.xPosOfNextLabel = BST.FIRST_PRINT_POS_X;
+		this.yPosOfNextLabel += BST.PRINT_VERTICAL_GAP;
+
+	}
+
+	return;
+}
+
+
 BST.prototype.findCallback = function(event)
-{
-	var findValue;
-	findValue = this.normalizeNumber(this.findField.value, 4);
+{	
+
+	$("#dialog-find-node-bst").dialog('close');
+
+	var findValue = this.findField.value;
+	// findValue = this.normalizeNumber(this.findField.value, 4);
 	this.findField.value = "";
 	this.implementAction(this.findElement.bind(this),findValue);						
 }
@@ -667,7 +947,7 @@ BST.prototype.disableUI = function(event)
 	this.deleteButton.disabled = true;
 	this.findField.disabled = true;
 	this.findButton.disabled = true;
-	this.printButton.disabled = true;
+	//this.printButton.disabled = true;
 }
 
 BST.prototype.enableUI = function(event)
@@ -678,15 +958,82 @@ BST.prototype.enableUI = function(event)
 	this.deleteButton.disabled = false;
 	this.findField.disabled = false;
 	this.findButton.disabled = false;
-	this.printButton.disabled = false;
+	//this.printButton.disabled = false;
 }
 
 
-var currentAlg;
+var currentAlgBST;
 
-function init()
+function initBST()
 {
-	var animManag = initCanvas();
-	currentAlg = new BST(animManag, canvas.width, canvas.height);
+	var animManag = initCanvasBST();
+	currentAlgBST = new BST(animManag, canvas.width, canvas.height);
 	
+}
+
+function initDialogBST() {
+	console.log("initDialog")
+	$("#dialog-insert-node-bst").dialog({
+		modal: true,
+		autoOpen: false,
+		width: 300,
+		height: 200,
+		open: function () {
+
+		},
+		position: { my: 'center', at: 'center', of: window, using: function(pos) {
+			$(this).css({
+				top: '270px', // Đặt vị trí theo chiều dọc
+				left: '230px' // Đặt vị trí theo chiều ngang
+			});
+		}},
+	});
+
+	$("#dialog-delete-node-bst").dialog({
+		modal: true,
+		autoOpen: false,
+		width: 300,
+		height: 150,
+		open: function () {
+
+		},
+		position: { my: 'center', at: 'center', of: window, using: function(pos) {
+			$(this).css({
+				top: '270px', // Đặt vị trí theo chiều dọc
+				left: '230px' // Đặt vị trí theo chiều ngang
+			});
+		}}
+	});
+
+	$("#dialog-setting-bst").dialog({
+		modal: true,
+		autoOpen: false,
+		// width: 300,
+		// height: 150,
+		open: function () {
+
+		},
+		position: { my: 'center', at: 'center', of: window, using: function(pos) {
+			$(this).css({
+				top: '270px', // Đặt vị trí theo chiều dọc
+				left: '230px' // Đặt vị trí theo chiều ngang
+			});
+		}}
+	});
+
+	$("#dialog-find-node-bst").dialog({
+		modal: true,
+		autoOpen: false,
+		width: 300,
+		height: 150,
+		open: function () {
+
+		},
+		position: { my: 'center', at: 'center', of: window, using: function(pos) {
+			$(this).css({
+				top: '270px', // Đặt vị trí theo chiều dọc
+				left: '230px' // Đặt vị trí theo chiều ngang
+			});
+		}}
+	});
 }

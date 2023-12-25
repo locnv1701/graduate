@@ -56,6 +56,7 @@ function ObjectManager() {
 	this.statusReport.x = 30;
 
 	this.draw = function () {
+		console.log("drawing", this)
 		this.framenum++;			// tăng biến framenum, đánh dấu số khung hình hiện tại
 		if (this.framenum > 1000)	// dặt lại framenum = 0 khi framenum = 1000, tránh việc tràn số nguyên
 			this.framenum = 0;
@@ -459,7 +460,7 @@ function ObjectManager() {
 
 	this.getNodeX = function (nodeID) {
 		if (this.Nodes[nodeID] == null || this.Nodes[nodeID] == undefined) {
-			throw "getting x position of an object that does not exit";
+			throw "getting x position of an object that does not exit| nodeId = " + nodeID + "this.Nodes = " + this.Nodes;
 		}
 		return this.Nodes[nodeID].x;
 	}

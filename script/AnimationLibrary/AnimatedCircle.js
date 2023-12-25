@@ -92,7 +92,7 @@ AnimatedCircle.prototype.draw = function (ctx) {
 
 
 	ctx.fillStyle = this.backgroundColor;	// bên trong hình tròn
-	ctx.strokeStyle = this.foregroundColor;	// viền hình tròn
+	ctx.strokeStyle ="#c7b7c7";// this.foregroundColor;	// viền hình tròn
 	ctx.lineWidth = 1;
 	ctx.beginPath();
 	ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2, true);
@@ -100,7 +100,7 @@ AnimatedCircle.prototype.draw = function (ctx) {
 	ctx.fill();
 	ctx.stroke();
 	ctx.textAlign = 'center';
-	ctx.font = '16px sans-serif';
+	ctx.font = '18px Helvetica';// Arial'; // sans-serif';
 	ctx.textBaseline = 'middle';
 	ctx.lineWidth = 1;
 	ctx.fillStyle = this.foregroundColor;	// 
@@ -121,8 +121,8 @@ AnimatedCircle.prototype.draw = function (ctx) {
 			var highlightStr = this.label.substring(this.highlightIndex, this.highlightIndex + 1)
 			var rightStr = this.label.substring(this.highlightIndex + 1)
 			ctx.fillText(leftStr, startingXForHighlight, this.y)
-			ctx.strokeStyle = "#FF0000";
-			ctx.fillStyle = "#FF0000";
+			ctx.strokeStyle = "#c7b7c7"; //"#FF0000";
+			ctx.fillStyle = "#c7b7c7"; //"#FF0000";
 			ctx.fillText(highlightStr, startingXForHighlight + this.leftWidth, this.y)
 
 
